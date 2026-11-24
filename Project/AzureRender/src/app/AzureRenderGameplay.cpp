@@ -1,8 +1,12 @@
 #include "app/AzureRenderApp.hpp"
 #include "app/AzureRenderInternal.hpp"
+#include "ecs/GameComponents.hpp"
+#include "runtime/EngineSettings.hpp"
 #include "extensions/ISceneRenderer.hpp"
 #include "scenes/BuiltinRendererCatalog.hpp"
 #include "platform/GlfwFrontend.hpp"
+#include <algorithm>
+#include <utility>
 #if AZURE_WITH_EDITOR
 #include "editor/EditorSession.hpp"
 #include "app/EditorSceneReload.hpp"
@@ -11,6 +15,17 @@
 #include "editor/ImGuiEditorLayer.hpp"
 #endif
 using namespace azurerender::internal;
+namespace {
+const azurerender::game::WindowPresentation* windowPresentation(azurerender::RuntimeLifecycle* runtime) {
+    const auto* windows = runtime ? runtime->world().findComponentArray<azurerender::game::WindowPresentation>() : nullptr;
+    return windows && !windows->dense().empty() ? &windows->dense().front() : nullptr;
+}
+bool hasGlitchCamera(const azurerender::Level& level) {
+    return std::any_of(level.components.begin(),level.components.end(),[](const auto& node) {
+        return node.second.contains("azure.screen-glitch");
+    });
+}
+}
 azurerender::RuntimeLifecycle* AzureRenderApp::activeRuntime(){
 #if AZURE_WITH_EDITOR
     if(runOptions_.editorSession)return runOptions_.editorSession->runtime();
@@ -41,9 +56,49 @@ azurerender::AssetDatabase* AzureRenderApp::activeAssets(){
 #endif
     return levelSession_?&levelSession_->assets():nullptr;
 }
+std::unique_ptr<azurerender::RenderViewService> AzureRenderApp::createRoomGlitchView(
+    const azurerender::RenderContext& context,const std::string& rendererId,
+    azurerender::RenderViewHandle& handle,bool deferLoad) {
+    azurerender::RenderViewDescriptor descriptor;
+    descriptor.rendererId=rendererId;
+    descriptor.extent={512,288};
+    descriptor.scene=context.scene;
+    descriptor.sceneWorldCoordinates=context.sceneWorldCoordinates;
+    descriptor.useFrameScene=true;
+    descriptor.settings=*context.renderSettings;
+    descriptor.settings.antiAliasing=1;
+    descriptor.transfer=azurerender::ViewColorTransfer::Linear;
+    VkPhysicalDeviceProperties properties{};
+    vkGetPhysicalDeviceProperties(physicalDevice_,&properties);
+    glitchVendorId_=properties.vendorID;
+    auto base=context;base.preparedMeshes=nullptr;base.renderSettings=nullptr;base.scene={};
+    auto views=std::make_unique<azurerender::RenderViewService>(std::move(base),
+        [](const auto& id){return azurerender::BuiltinRendererCatalog::createRegistry().create(id);},
+        [this]{vkCheck(vkDeviceWaitIdle(device_),"vkDeviceWaitIdle(room glitch camera)");},1);
+    handle=deferLoad?views->createDeferred(descriptor):views->create(descriptor);
+    return views;
+}
+bool AzureRenderApp::preloadRoomGlitchView(const azurerender::Level& level,double budgetMs) {
+    if(!hasGlitchCamera(level))return true;
+    const auto key=std::make_pair(level.resourceKey,level.reloadKey());
+    if(preparedGlitchKey_!=key)releasePreparedGlitchView();
+    try{
+        if(!preparedGlitchViews_){
+            azurerender::RenderContext context;buildRenderContext(context);
+            context.scene=level.scene.renderDescription();context.sceneWorldCoordinates=true;
+            const auto settings=azurerender::resolveRenderSettings(*engineSettings_,level.scene.renderSettings);
+            context.renderSettings=&settings;
+            preparedGlitchViews_=createRoomGlitchView(context,
+                azurerender::BuiltinRendererCatalog::documentRendererId(level.scene.renderSettings.sceneType,!context.scene.resources.empty()),
+                preparedGlitchView_,true);
+            preparedGlitchKey_=key;
+        }
+        return preparedGlitchViews_->prepare(preparedGlitchView_,&level.preparedMeshes,budgetMs);
+    }catch(...){releasePreparedGlitchView();throw;}
+}
 bool AzureRenderApp::preloadLevelRenderer(const azurerender::Level& level,bool allowActiveReuse){
     if(allowActiveReuse && rendererResourceKey_==level.resourceKey && renderSettings_.sceneType==level.scene.renderSettings.sceneType && sceneRenderer_ && sceneRenderer_->name()==azurerender::BuiltinRendererCatalog::documentRendererId(level.scene.renderSettings.sceneType,!level.scene.resources.empty())){
-        return true;
+        return preloadRoomGlitchView(level,4.0);
     }
     azurerender::RenderContext context;buildRenderContext(context);context.scene=level.scene.renderDescription();context.preparedMeshes=&level.preparedMeshes;
     if(!preparedRenderer_ || preparedResourceKey_!=level.resourceKey || preparedRenderSettings_.sceneType!=level.scene.renderSettings.sceneType){
@@ -52,18 +107,31 @@ bool AzureRenderApp::preloadLevelRenderer(const azurerender::Level& level,bool a
         preparedRenderer_=registry.create(azurerender::BuiltinRendererCatalog::documentRendererId(level.scene.renderSettings.sceneType,!context.scene.resources.empty()));
         preparedRenderSettings_=azurerender::resolveRenderSettings(*engineSettings_,level.scene.renderSettings);preparedResourceKey_=level.resourceKey;preparedRendererReady_=false;
     }
-    if(preparedRendererReady_)return true;
-    context.renderSettings=&preparedRenderSettings_;
-    try{preparedRendererReady_=preparedRenderer_->prepareLoad(context,4.0);return preparedRendererReady_;}
-    catch(...){preparedRenderer_->onUnload(context);preparedRenderer_.reset();preparedResourceKey_.clear();throw;}
+    if(!preparedRendererReady_){
+        context.renderSettings=&preparedRenderSettings_;
+        try{preparedRendererReady_=preparedRenderer_->prepareLoad(context,4.0);}
+        catch(...){preparedRenderer_->onUnload(context);preparedRenderer_.reset();preparedResourceKey_.clear();throw;}
+    }
+    return preparedRendererReady_ && preloadRoomGlitchView(level,4.0);
 }
 void AzureRenderApp::prepareLevelRenderer(const azurerender::Level& level){
+    const auto publishGlitch=[&] {
+        const bool camera=hasGlitchCamera(level);
+        if(camera)while(!preloadRoomGlitchView(level,4.0)){}
+        clearRoomGlitch();
+        if(camera){
+            roomGlitchViews_=std::move(preparedGlitchViews_);
+            roomGlitchView_=std::exchange(preparedGlitchView_,0);
+            preparedGlitchKey_={};
+        }
+    };
 #if AZURE_WITH_EDITOR
     invalidatePreviews();
 #endif
     azurerender::RenderContext context;buildRenderContext(context);context.scene=level.scene.renderDescription();
     auto targetSettings=azurerender::resolveRenderSettings(*engineSettings_,level.scene.renderSettings);context.renderSettings=&targetSettings;
     if(rendererResourceKey_==level.resourceKey && sceneRenderer_ && sceneRenderer_->name()==azurerender::BuiltinRendererCatalog::documentRendererId(level.scene.renderSettings.sceneType,!context.scene.resources.empty()) && sceneRenderer_->reuseScene(context)){
+        publishGlitch();
         renderSettings_=level.scene.renderSettings;return;
     }
     if(preparedResourceKey_!=level.resourceKey || !preparedRendererReady_){
@@ -73,10 +141,13 @@ void AzureRenderApp::prepareLevelRenderer(const azurerender::Level& level){
     // The previous scene remains cached. Only reusing a renderer with work
     // still in flight needs GPU retirement; ordinary alternating loads reuse
     // a renderer whose last submission completed many frames earlier.
-    if(preparedRendererLastSubmission_>graphicsCompleted_){
+    if(preparedRendererLastSubmission_>graphicsCompleted_ ||
+        (screenBlackout_ && graphicsSubmission_>graphicsCompleted_)){
         vkCheck(vkDeviceWaitIdle(device_),"vkDeviceWaitIdle(renderer reuse)");
         graphicsCompleted_=graphicsSubmission_;
     }
+    publishGlitch();
+    screenBlackout_.reset();
     static_cast<void>(preparedRenderer_->reuseScene(context));
     sceneRenderer_.swap(preparedRenderer_);
     preparedResourceKey_=rendererResourceKey_;rendererResourceKey_=level.resourceKey;
@@ -85,6 +156,7 @@ void AzureRenderApp::prepareLevelRenderer(const azurerender::Level& level){
     preparedRendererLastSubmission_=graphicsSubmission_;
 }
 void AzureRenderApp::releasePreparedRenderer(){
+    releasePreparedGlitchView();
     if(preparedRenderer_){
         if(preparedRendererLastSubmission_>graphicsCompleted_){
             vkCheck(vkDeviceWaitIdle(device_),"vkDeviceWaitIdle(renderer eviction)");
@@ -94,6 +166,11 @@ void AzureRenderApp::releasePreparedRenderer(){
         preparedRenderer_->onUnload(context);preparedRenderer_.reset();
     }
     preparedResourceKey_.clear();preparedRendererReady_=false;preparedRendererLastSubmission_=0;
+}
+void AzureRenderApp::releasePreparedGlitchView(){
+    preparedGlitchViews_.reset();
+    preparedGlitchView_=0;
+    preparedGlitchKey_={};
 }
 #if AZURE_WITH_EDITOR
 void AzureRenderApp::requestEditorSceneReload(bool retainCompatiblePreviews) {
@@ -118,6 +195,7 @@ void AzureRenderApp::rebuildEditorSceneRenderer() {
     graphicsCompleted_=graphicsSubmission_;
     releasePreparedRenderer();
     if (renderViews_)renderViews_->complete(graphicsCompleted_);
+    screenBlackout_.reset();
     if (sceneRenderer_) {
         azurerender::RenderContext old;
         buildRenderContext(old,nullptr,nullptr,false);
@@ -176,6 +254,8 @@ void AzureRenderApp::advanceEditorSceneReload() {
         graphicsCompleted_=graphicsSubmission_;
         releasePreparedRenderer();
         if (renderViews_)renderViews_->complete(graphicsCompleted_);
+        clearRoomGlitch();
+        screenBlackout_.reset();
         if (sceneRenderer_)sceneRenderer_->onUnload(pending.context);
         sceneRenderer_=std::move(pending.renderer);
         editorRenderResources_=std::move(pending.resources);
@@ -217,6 +297,7 @@ void AzureRenderApp::synchronizeEditorRuntime(){
         vkCheck(vkDeviceWaitIdle(device_),"vkDeviceWaitIdle(editor runtime)");gameUi_.reset();gameUiPath_.clear();
         invalidatePreviews();graphicsCompleted_=graphicsSubmission_;renderViews_->complete(graphicsCompleted_);
         releasePreparedRenderer();
+        screenBlackout_.reset();
         azurerender::RenderContext context;buildRenderContext(context);if(sceneRenderer_){sceneRenderer_->onUnload(context);sceneRenderer_.reset();}
         applyProjectReferenceViews(session.referenceViews());
         renderSettings_=session.viewScene().renderSettings;createSceneRenderer();
@@ -231,7 +312,55 @@ void AzureRenderApp::synchronizeEditorRuntime(){
     if(!session.playing())session.context().attachRenderSettings(renderSettings_);
 #endif
 }
+unsigned AzureRenderApp::effectiveFrameRateLimit() {
+    constexpr auto key = "runtime.maxFrameRate";
+    if (!fixedSimulation_ && engineSettings_->source(key) == azurerender::SettingSource::Default) {
+        if (const auto* window = windowPresentation(activeRuntime())) {
+            if (effectiveVsync()) return 0;
+            const auto rate = frontend_->isForeground() ? window->activeFrameRate : window->inactiveFrameRate;
+            return std::clamp(rate, 10U, 250U);
+        }
+    }
+    return engineSettings_->get(key).get<unsigned>();
+}
+bool AzureRenderApp::effectiveVsync() {
+    constexpr auto key = "runtime.vsync";
+    if (!fixedSimulation_ && engineSettings_->source(key) == azurerender::SettingSource::Default) {
+        if (const auto* window = windowPresentation(activeRuntime())) return window->vsync;
+    }
+    return engineSettings_->get(key).get<bool>();
+}
 void AzureRenderApp::synchronizeGameUi(){
+    if (!fixedSimulation_) {
+        constexpr auto menuAction = "display-topmost-menu";
+        auto* game = activeGame();
+        bool menuEnabled = false;
+        bool keepDisplayAwake = false;
+        std::string_view menuCaption;
+        if (auto* runtime = activeRuntime()) {
+            auto& world = runtime->world();
+            const auto* windows = world.findComponentArray<azurerender::game::WindowPresentation>();
+            if (windows && !windows->dense().empty()) {
+                auto& state = *world.tryGet<azurerender::game::WindowPresentation>(windows->entities().front());
+                if (state.pending) {
+                    frontend_->applyWindowPresentation(static_cast<azurerender::WindowMode>(state.mode),
+                        static_cast<azurerender::WindowResolution>(state.resolution), state.alwaysOnTop);
+                    state.pending = false;
+                }
+                const auto applied = frontend_->windowPresentation();
+                state.mode = static_cast<std::uint32_t>(applied.mode);
+                state.resolution = static_cast<std::uint32_t>(applied.resolution);
+                state.alwaysOnTop = applied.alwaysOnTop;
+                menuEnabled = game && game->input().hasAction(menuAction);
+                menuCaption = state.menuCaption;
+                keepDisplayAwake = state.screenSleepMode == 1;
+            }
+        }
+        frontend_->setTopmostMenu(menuEnabled, menuCaption);
+        if (menuEnabled && frontend_->consumeTopmostMenuToggle()) game->input().activate(menuAction);
+        frontend_->setDisplayAwake(keepDisplayAwake);
+        if (frontend_->updatePresentationSync(effectiveVsync())) framebufferResized_ = true;
+    }
     auto* presentation=activePresentation();auto* assets=activeAssets();const auto reference=presentation?presentation->uiDocument():std::string();
     const auto path=assets&&!reference.empty()?assets->resolveReference(reference).generic_u8string():std::string();
     if(path!=gameUiPath_){
@@ -251,11 +380,16 @@ void AzureRenderApp::synchronizeGameUi(){
 #endif
                     if(levels){levels->request(levels->currentReference());
                         if(runtime->state()==azurerender::RuntimeLifecycle::State::Paused)runtime->resume();}
+                }else if(auto* game=activeGame()){
+                    game->input().activate(action);
                 }
             });
         }
     }
-    if(auto* scripts=activeScripts())scripts->setUiHandler([this](std::string id,std::string text){if(gameUi_)gameUi_->setText(id,text);});
+    if(auto* scripts=activeScripts()){
+        scripts->setUiHandler([this](std::string id,std::string text){if(gameUi_)gameUi_->setText(id,text);});
+        scripts->setUiProvider([this]{return gameUi_.get();});
+    }
 #if AZURE_WITH_EDITOR
     if(editorLayer_)editorLayer_->setGameUi(gameUi_.get());
 #endif

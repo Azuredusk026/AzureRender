@@ -39,6 +39,8 @@ struct View {
     VkSampler sampler=VK_NULL_HANDLE;
     std::uint64_t lastUse=0,renderCount=0;
     std::uint64_t lastRenderSubmission=0,submittedRenderCount=0;
+    std::uint64_t outputSubmission=0;
+    RenderGraph::ResourceId outputResource=UINT32_MAX;
     bool requested=false,loaded=false;
     VkExtent2D pendingExtent{};
     ~View(){
@@ -76,7 +78,7 @@ struct RenderViewService::State {
             throw std::invalid_argument("Expired render view handle");
         return slots[index];
     }
-    std::shared_ptr<View> make(const RenderViewDescriptor& descriptor){
+    std::shared_ptr<View> make(const RenderViewDescriptor& descriptor,bool deferLoad=false){
         validateExtent(descriptor.extent);validateCamera(descriptor.cameraPosition,descriptor.cameraTarget);
         validateRenderSettings(descriptor.settings);
         auto view=std::make_shared<View>();view->descriptor=descriptor;view->context=base;
@@ -117,6 +119,7 @@ struct RenderViewService::State {
         view->sampler=rhi.createSampler({VK_FILTER_LINEAR,VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE,VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE,VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE,0,false});
         context.sceneRenderPass=view->scenePass;context.sceneFramebuffer=view->framebuffer;
         context.shadowRenderPass=view->shadowPass;context.shadowFramebuffer=view->shadowFramebuffer;
+        context.shadowImage=view->images[3].image;
         context.shadowImageView=view->views[3];context.shadowSampler=view->sampler;
         view->renderer=factory(descriptor.rendererId);
         if(!view->renderer)throw std::invalid_argument("Render view factory returned no renderer");
@@ -145,7 +148,7 @@ struct RenderViewService::State {
         const std::array<VkImageView,2> displayHistory=view->temporal
             ?std::array<VkImageView,2>{view->temporal->displayMaskView(0),view->temporal->displayMaskView(1)}:std::array<VkImageView,2>{};
         view->output=std::make_unique<RenderViewOutput>(context,view->views[0],view->sampler,descriptor.transfer,view->views[4],displayHistory);
-        view->renderer->onLoad(context);view->loaded=true;
+        if(!deferLoad){view->renderer->onLoad(context);view->loaded=true;}
         return view;
     }
 };
@@ -160,6 +163,12 @@ RenderViewService::~RenderViewService(){
     if(state_){try{state_->waitIdle();state_->retired.clear();for(auto& slot:state_->slots)slot.view.reset();}catch(...){std::terminate();}}
 }
 RenderViewHandle RenderViewService::create(const RenderViewDescriptor& descriptor){
+    return createView(descriptor,false);
+}
+RenderViewHandle RenderViewService::createDeferred(const RenderViewDescriptor& descriptor){
+    return createView(descriptor,true);
+}
+RenderViewHandle RenderViewService::createView(const RenderViewDescriptor& descriptor,bool deferLoad){
     state_->check();
     const auto active=std::count_if(state_->slots.begin(),state_->slots.end(),[](const auto& slot){return static_cast<bool>(slot.view);});
     if(static_cast<std::size_t>(active)+state_->retired.size()>=state_->slots.size())throw std::runtime_error("Render view budget awaits GPU retirement");
@@ -167,8 +176,15 @@ RenderViewHandle RenderViewService::create(const RenderViewDescriptor& descripto
         const auto generation=viewGeneration.fetch_add(1);
         if(generation>std::numeric_limits<std::uint32_t>::max())throw std::overflow_error("Render view generation exhausted");
         slot.generation=static_cast<std::uint32_t>(generation);
-        slot.view=state_->make(descriptor);return (static_cast<std::uint64_t>(slot.generation)<<32)|i;
+        slot.view=state_->make(descriptor,deferLoad);return (static_cast<std::uint64_t>(slot.generation)<<32)|i;
     }}throw std::runtime_error("Render view capacity exhausted");
+}
+bool RenderViewService::prepare(RenderViewHandle handle,decltype(RenderContext::preparedMeshes) meshes,double budgetMs){
+    auto& view=*state_->slot(handle).view;
+    if(view.loaded)return true;
+    auto context=view.context;
+    context.preparedMeshes=meshes;
+    return view.loaded=view.renderer->prepareLoad(context,budgetMs);
 }
 void RenderViewService::request(RenderViewHandle handle){state_->slot(handle).view->requested=true;}
 void RenderViewService::resize(RenderViewHandle handle,VkExtent2D extent){
@@ -180,6 +196,13 @@ void RenderViewService::setCamera(RenderViewHandle handle,const std::array<float
     validateCamera(position,target);auto& view=*state_->slot(handle).view;
     view.descriptor.cameraPosition=position;view.descriptor.cameraTarget=target;view.requested=true;
 }
+void RenderViewService::setCamera(RenderViewHandle handle,const CameraViewDescriptor& camera){
+    setCamera(handle,camera.position,camera.target);
+    auto& settings=state_->slot(handle).view->descriptor.settings;
+    settings.cameraView=camera;
+    settings.cameraNear=camera.nearPlane;
+    settings.cameraFar=camera.farPlane;
+}
 void RenderViewService::schedule(RenderGraph& graph,const SceneFrameData& frame,const RenderContext& recording,std::uint64_t submission){
     state_->check();
     if(!state_->pending.empty())throw std::logic_error("Render views await submission or cancellation");
@@ -187,7 +210,7 @@ void RenderViewService::schedule(RenderGraph& graph,const SceneFrameData& frame,
         throw std::invalid_argument("Render view scheduling requires an increasing pending submission");
     state_->lastScheduled=submission;
     for(std::size_t index=0;index<state_->slots.size();++index){
-        auto& slot=state_->slots[index];auto view=slot.view;if(!view || !view->requested)continue;
+        auto& slot=state_->slots[index];auto view=slot.view;if(!view || !view->loaded || !view->requested)continue;
         if(view->pendingExtent.width){
             if(view->lastUse>state_->completed)continue;
             auto descriptor=view->descriptor;descriptor.extent=view->pendingExtent;
@@ -211,7 +234,8 @@ void RenderViewService::schedule(RenderGraph& graph,const SceneFrameData& frame,
             authored->position=view->descriptor.cameraPosition;authored->target=view->descriptor.cameraTarget;
             view->frame.camera.view=*authored;
         }
-        view->frame.sceneSnapshot=std::make_shared<const scene::SceneDescription>(view->descriptor.scene);
+        view->frame.sceneSnapshot=view->descriptor.useFrameScene && frame.sceneSnapshot
+            ? frame.sceneSnapshot : std::make_shared<const scene::SceneDescription>(view->descriptor.scene);
         std::copy(view->descriptor.cameraPosition.begin(),view->descriptor.cameraPosition.end(),view->frame.cameraPosition);
         std::copy(view->descriptor.cameraTarget.begin(),view->descriptor.cameraTarget.end(),view->frame.cameraTarget);
         view->frame.swapchainWidth=view->context.renderExtent.width;view->frame.swapchainHeight=view->context.renderExtent.height;
@@ -237,7 +261,9 @@ void RenderViewService::schedule(RenderGraph& graph,const SceneFrameData& frame,
         auto displayMaskForGrade=resources.displayMask;unsigned displayHistorySelector=0;
         if(temporalReady){const auto resolved=view->temporal->schedule(graph,resources.color,resources.depth,motion,"view-"+std::to_string(index),resources.displayMask);
             if(resolved){displayMaskForGrade=*resolved;displayHistorySelector=1+view->temporal->preparedDisplayMaskIndex();}}
-        view->output->schedule(graph,resources.color,"view-"+std::to_string(index),temporalReady,displayMaskForGrade,displayHistorySelector);
+        view->outputResource=view->output->schedule(graph,resources.color,"view-"+std::to_string(index),
+            temporalReady,displayMaskForGrade,displayHistorySelector);
+        view->outputSubmission=submission;
         // The one-shot graph retains the owner through recording and worker joins.
         const auto lease=std::make_shared<std::shared_ptr<View>>(view);
         const auto recorded=std::make_shared<bool>(false);
@@ -278,6 +304,25 @@ VkImageView RenderViewService::sample(RenderViewHandle handle,std::uint64_t subm
     if(!view.renderCount || submission==0 || submission<=state_->completed)throw std::invalid_argument("Render view sampling requires a rendered output and pending submission");
     if(view.pendingExtent.width)return VK_NULL_HANDLE;
     view.lastUse=std::max(view.lastUse,submission);return view.output->view();
+}
+std::optional<RenderViewSample> RenderViewService::sampleForGraph(
+        RenderViewHandle handle,RenderGraph& graph,std::uint64_t submission){
+    auto& view=*state_->slot(handle).view;
+    if(!view.renderCount)return std::nullopt;
+    const auto sampled=sample(handle,submission);
+    if(!sampled)return std::nullopt;
+    const auto image=view.output->image().image;
+    if(view.outputSubmission==submission){
+        if(graph.resources().at(view.outputResource).initial.image!=image)
+            throw std::invalid_argument("Render view output belongs to a different graph");
+        return RenderViewSample{sampled,view.outputResource};
+    }
+    rhi::ImageBarrierDesc initial{};
+    initial.image=image;initial.aspectMask=VK_IMAGE_ASPECT_COLOR_BIT;
+    initial.newLayout=VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+    initial.dstStageMask=VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;
+    initial.dstAccessMask=VK_ACCESS_SHADER_READ_BIT;
+    return RenderViewSample{sampled,graph.importImage("view-cached-"+std::to_string(handle),initial)};
 }
 void RenderViewService::release(RenderViewHandle handle){
     auto& slot=state_->slot(handle);if(slot.generation==std::numeric_limits<std::uint32_t>::max())throw std::overflow_error("Render view generation exhausted");

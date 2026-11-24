@@ -2,6 +2,7 @@
 #include "AzureRenderApp.hpp"
 #include "AzureRenderInternal.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
+#include "ecs/GameComponents.hpp"
 #include "render/CameraProjection.hpp"
 #if AZURE_WITH_EDITOR
 #include "editor/EditorCameraController.hpp"
@@ -23,6 +24,8 @@
 #include "render/RenderGraph.hpp"
 #include "render/RenderFrameSnapshot.hpp"
 #include "render/FrameTaskScheduler.hpp"
+#include "runtime/AssetDatabase.hpp"
+#include "scenes/BuiltinRendererCatalog.hpp"
 
 #include <stb_easy_font.h>
 
@@ -247,6 +250,7 @@ void AzureRenderApp::drawFrame() {
     vkCheck(vkResetFences(device_, 1, &inFlightFences_[currentFrame_]), "vkResetFences");
     vkCheck(vkResetCommandBuffer(commandBuffers_[currentFrame_], 0), "vkResetCommandBuffer");
     const auto abandonRecording=[this]{
+        if(roomGlitchViews_)roomGlitchViews_->cancel(graphicsSubmission_+1);
 #if AZURE_WITH_EDITOR
         if(renderViews_)renderViews_->cancel(graphicsSubmission_+1);
 #endif
@@ -283,6 +287,7 @@ void AzureRenderApp::drawFrame() {
     if(submitResult!=VK_SUCCESS)abandonRecording();
     vkCheck(submitResult,"vkQueueSubmit");
     graphicsFrameSubmissions_[currentFrame_]=++graphicsSubmission_;
+    if(roomGlitchViews_)roomGlitchViews_->submitted(graphicsSubmission_);
     if(sceneRenderer_)sceneRenderer_->onFrameSubmitted(graphicsSubmission_);
     if(temporalReconstruction_)temporalReconstruction_->commit(graphicsSubmission_);
 #if AZURE_WITH_EDITOR
@@ -1054,11 +1059,62 @@ void AzureRenderApp::recordCommandBuffer(
         else temporalReconstruction_->cancel();
     }
     auto sceneResources=resources;
+    const azurerender::game::ScreenBlackout* blackout = nullptr;
+    const azurerender::game::ScreenChromatic* chromatic = nullptr;
+    const azurerender::game::ScreenMove* screenMove = nullptr;
+    const azurerender::game::ScreenGlitch* glitch = nullptr;
+    std::optional<azurerender::RenderGraph::ResourceId> opaqueColor;
+    if (effectiveRenderSettings_.diagnosticView == 0) {
+        if (const auto* runtime = activeRuntime()) {
+            if (const auto* effects = runtime->world().findComponentArray<azurerender::game::ScreenBlackout>()) {
+                for (const auto& effect : effects->dense())
+                    if (effect.ratio > 0 && (!blackout || effect.ratio > blackout->ratio)) blackout = &effect;
+            }
+            if (const auto* effects = runtime->world().findComponentArray<azurerender::game::ScreenChromatic>()) {
+                for (const auto& effect : effects->dense())
+                    if (effect.ratio > 0 && (!chromatic || effect.ratio > chromatic->ratio)) chromatic = &effect;
+            }
+            if (const auto* effects = runtime->world().findComponentArray<azurerender::game::ScreenMove>()) {
+                for (const auto& effect : effects->dense())
+                    if (effect.ratio > 0 && (!screenMove || effect.ratio > screenMove->ratio)) screenMove = &effect;
+            }
+            if (const auto* effects = runtime->world().findComponentArray<azurerender::game::ScreenGlitch>()) {
+                for (const auto& effect : effects->dense())
+                    if ((effect.ratio > 0 || effect.cameraActive) && (!glitch || effect.ratio > glitch->ratio))
+                        glitch = &effect;
+            }
+        }
+    }
     std::array<azurerender::RenderGraph::ResourceId,3> multisampleSources{};
     if(sceneMultisampling_){multisampleSources=sceneMultisampling_->importSources(graph,sceneContext.currentFrame,"main-samples");
         sceneResources.color=multisampleSources[0];sceneResources.depth=multisampleSources[1];sceneResources.normal=multisampleSources[2];
         sceneResources.displayMask=sceneMultisampling_->importDisplayMaskSource(graph,sceneContext.currentFrame,"main-samples");}
     if (sceneRenderer_ != nullptr) sceneRenderer_->registerPasses(graph, sceneResources, sceneContext);
+    if (blackout) {
+        const auto& registered = graph.resources();
+        const auto found = std::find_if(registered.begin(), registered.end(), [](const auto& resource) {
+            return resource.name == azurerender::kCameraOpaqueColorResource && resource.initial.image;
+        });
+        if (found != registered.end())
+            opaqueColor = static_cast<azurerender::RenderGraph::ResourceId>(found - registered.begin());
+    }
+    if (opaqueColor) {
+        auto* assets = activeAssets();
+        if (!assets) throw std::logic_error("Blackout requires the active room asset database");
+        const auto ramp = assets->resolveReference(blackout->ramp);
+        const auto timeline = assets->resolveReference(blackout->timeline);
+        if (!screenBlackout_ || !screenBlackout_->matches(ramp, timeline)) {
+            VkPhysicalDeviceProperties properties{};
+            vkGetPhysicalDeviceProperties(physicalDevice_, &properties);
+            auto candidate = std::make_unique<azurerender::ScreenBlackoutGpu>(*rhi_, postProcessRenderPass_,
+                static_cast<std::uint32_t>(kMaxFramesInFlight), resourceLocator_.shaderDirectory(), ramp, timeline,
+                properties.vendorID == 0x10DE);
+            if (screenBlackout_) vkCheck(vkDeviceWaitIdle(device_), "vkDeviceWaitIdle(replace screen blackout)");
+            screenBlackout_ = std::move(candidate);
+        }
+        screenBlackout_->bindOpaqueColor(sceneContext.currentFrame, graph.resources().at(*opaqueColor).initial.image,
+            sceneContext.sceneColorFormat, screenAttachmentSampler_);
+    }
     if(sceneMultisampling_)sceneMultisampling_->schedule(graph,sceneContext.currentFrame,imageIndex,multisampleSources,{resources.color,resources.depth,resources.normal},"main-multisample-resolve",
         std::array<azurerender::RenderGraph::ResourceId,2>{sceneResources.displayMask,resources.displayMask});
     auto displayMaskForGrade=resources.displayMask;
@@ -1071,6 +1127,47 @@ void AzureRenderApp::recordCommandBuffer(
     // All views consume the same snapshot after the host advances simulation.
     if(renderViews_)renderViews_->schedule(graph,frame,sceneContext,graphicsSubmission_+1);
 #endif
+    std::optional<azurerender::RenderViewSample> glitchInput;
+    if (glitch && glitch->cameraActive) {
+        if (!sceneRenderer_ || !frame.sceneSnapshot)
+            throw std::logic_error("Screen glitch requires an active scene view");
+        auto camera = frame.camera.view;
+        camera.referenceCalibration.reset();
+        camera.projection = azurerender::CameraProjectionKind::Perspective;
+        camera.projectionOffsetX = camera.projectionOffsetY = 0.F;
+        camera.fov = glitch->fieldOfView * .017453292519943295F;
+        camera.nearPlane = glitch->nearPlane;
+        camera.farPlane = glitch->farPlane;
+        if (!(camera.fov > 0.F && camera.fov < 3.141592654F && camera.nearPlane > 0.F
+              && std::isfinite(camera.farPlane) && camera.farPlane > camera.nearPlane))
+            throw std::invalid_argument("Screen glitch camera projection is invalid");
+        if (!roomGlitchViews_) {
+            auto context=sceneContext;
+            context.scene=*frame.sceneSnapshot;
+            roomGlitchViews_=createRoomGlitchView(context,std::string(sceneRenderer_->name()),roomGlitchView_,false);
+        }
+        roomGlitchViews_->setCamera(roomGlitchView_, camera);
+    }
+    if (roomGlitchViews_) {
+        roomGlitchViews_->complete(graphicsCompleted_);
+        roomGlitchViews_->schedule(graph, frame, sceneContext, graphicsSubmission_ + 1);
+        if (glitch && glitch->ratio > 0)
+            glitchInput = roomGlitchViews_->sampleForGraph(roomGlitchView_, graph, graphicsSubmission_ + 1);
+    }
+    if (glitchInput) {
+        auto* assets = activeAssets();
+        if (!assets) throw std::logic_error("Screen glitch requires the active room asset database");
+        const auto timeline = assets->resolveReference(glitch->timeline);
+        const std::initializer_list<azurerender::ScreenEffectTexture> textures{{timeline, {64, 1}, VK_FILTER_LINEAR}};
+        if (!screenGlitch_ || !screenGlitch_->matches(textures)) {
+            auto effect = std::make_unique<azurerender::ScreenEffectGpu>(*rhi_, postProcessRenderPass_,
+                swapchainFormat_, renderExtent_, static_cast<std::uint32_t>(kMaxFramesInFlight), screenAttachmentSampler_,
+                resourceLocator_.shaderDirectory() / "opening_glitch.frag.spv", textures, true);
+            if (screenGlitch_) vkCheck(vkDeviceWaitIdle(device_), "vkDeviceWaitIdle(replace screen glitch)");
+            screenGlitch_ = std::move(effect);
+        }
+        screenGlitch_->bindInput(sceneContext.currentFrame, glitchInput->view);
+    }
     const auto scenePassCount = graph.passes().size();
     const bool showcaseDisplay=runOptions_.qaShowcasePresentation;
     const bool encodeSrgb=swapchainFormat_!=VK_FORMAT_B8G8R8A8_SRGB && swapchainFormat_!=VK_FORMAT_R8G8B8A8_SRGB;
@@ -1144,6 +1241,16 @@ void AzureRenderApp::recordCommandBuffer(
         graph.use(pass,resources.shadow,azurerender::RenderGraphUsage::Sampled,false);
     };
     auto* spatial=showcaseDisplay ? nullptr : spatialAntiAliasing_.at(imageIndex).get();
+    float noiseOpacity = 0;
+    if (effectiveRenderSettings_.diagnosticView == 0) {
+        if (const auto* runtime = activeRuntime()) {
+            const auto* noise = runtime->world().findComponentArray<azurerender::game::ScreenNoise>();
+            if (noise) {
+                for (const auto& value : noise->dense())
+                    noiseOpacity = std::max(noiseOpacity, value.opacity);
+            }
+        }
+    }
     std::optional<std::uint32_t> linearDisplay;
     if (spatial) {
         linearDisplay=importAttachment("linear-display",spatial->inputImage().image,VK_IMAGE_ASPECT_COLOR_BIT);
@@ -1163,18 +1270,147 @@ void AzureRenderApp::recordCommandBuffer(
         gradeInputs(gradePass);
         graph.attachment(gradePass,*linearDisplay,azurerender::RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
     }
+    const auto beginDisplayPass = [&] {
+        VkRenderPassBeginInfo finalPass{VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO};
+        finalPass.renderPass = postProcessRenderPass_;
+        finalPass.framebuffer = postProcessFramebuffers_[imageIndex];
+        finalPass.renderArea.extent = renderExtent_;
+        vkCmdBeginRenderPass(commandBuffer, &finalPass, VK_SUBPASS_CONTENTS_INLINE);
+        commandRecorder.setViewport(static_cast<float>(renderExtent_.width), static_cast<float>(renderExtent_.height));
+        commandRecorder.setScissor(renderExtent_);
+    };
+    const auto drawDisplay = [&] {
+        if (spatial) {
+            spatial->resolve(commandRecorder, azurerender::spatialAntiAliasingMode(
+                effectiveRenderSettings_.antiAliasing, temporalReady, sceneMultisampling_ != nullptr),
+                encodeSrgb, effectiveRenderSettings_.diagnosticView != 0);
+        } else {
+            drawGrade();
+        }
+    };
+    const auto displayInputs = [&](auto pass) {
+        if (linearDisplay) graph.use(pass, *linearDisplay, azurerender::RenderGraphUsage::Sampled, false);
+        else gradeInputs(pass);
+    };
+    auto displayTarget = output;
+    const auto displayLayout = editorUiEnabled_ ? VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL : VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
+    std::optional<azurerender::RenderGraph::ResourceId> chromaticInput;
+    std::optional<azurerender::RenderGraph::ResourceId> movementInput;
+    const float seconds = static_cast<float>(frame.timeSeconds);
+    const float width = static_cast<float>(renderExtent_.width);
+    const float height = static_cast<float>(renderExtent_.height);
+    const auto drawChromatic = [&] {
+        screenChromatic_->record(commandRecorder, sceneContext.currentFrame, {seconds, chromatic->ratio,
+            chromatic->unstable, chromatic->filamentScale, chromatic->rage, width, height, encodeSrgb ? 1.F : 0.F});
+    };
+    if (chromatic || screenMove) {
+        auto* assets = activeAssets();
+        if (!assets) throw std::logic_error("Opening effects require the active room asset database");
+        const auto source = editorUiEnabled_ ? editorViewportImages_[imageIndex].image : swapchainImages_[imageIndex];
+        if (editorUiEnabled_)
+            displayTarget = importAttachment("viewport-display-color", source, VK_IMAGE_ASPECT_COLOR_BIT);
+        const auto prepareColor = graph.addPass("post-process-display-color", [&] {
+            beginDisplayPass();
+            drawDisplay();
+            vkCmdEndRenderPass(commandBuffer);
+        });
+        displayInputs(prepareColor);
+        graph.attachment(prepareColor, displayTarget, azurerender::RenderGraphUsage::ColorAttachment, displayLayout);
+
+        const auto captureInput = [&](auto& gpu, const char* shader,
+                                      std::initializer_list<azurerender::ScreenEffectTexture> textures,
+                                      const char* imageName, const char* copyName, const char* targetName) {
+            if (!gpu || !gpu->matches(textures)) {
+                auto candidate = std::make_unique<azurerender::ScreenEffectGpu>(*rhi_, postProcessRenderPass_,
+                    swapchainFormat_, renderExtent_, static_cast<std::uint32_t>(kMaxFramesInFlight),
+                    screenAttachmentSampler_, resourceLocator_.shaderDirectory() / shader, textures);
+                if (gpu) vkCheck(vkDeviceWaitIdle(device_), "vkDeviceWaitIdle(replace screen effect)");
+                gpu = std::move(candidate);
+            }
+            const auto destination = gpu->inputImage(sceneContext.currentFrame);
+            const auto input = importAttachment(imageName, destination, VK_IMAGE_ASPECT_COLOR_BIT);
+            const auto copyColor = graph.addPass(copyName, [&, source, destination] {
+                VkImageCopy copy{};
+                copy.srcSubresource = copy.dstSubresource = {VK_IMAGE_ASPECT_COLOR_BIT, 0, 0, 1};
+                copy.extent = {renderExtent_.width, renderExtent_.height, 1};
+                vkCmdCopyImage(commandBuffer, source, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,
+                    destination, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1, &copy);
+            });
+            graph.use(copyColor, displayTarget, azurerender::RenderGraphUsage::TransferSrc, false);
+            graph.use(copyColor, input, azurerender::RenderGraphUsage::TransferDst, true);
+            const auto reuseTarget = graph.addPass(targetName);
+            graph.use(reuseTarget, displayTarget, azurerender::RenderGraphUsage::ColorAttachment, true);
+            return input;
+        };
+        if (chromatic) {
+            const std::initializer_list<azurerender::ScreenEffectTexture> textures{
+                {assets->resolveReference(chromatic->noise), {256, 256}, VK_FILTER_LINEAR},
+                {assets->resolveReference(chromatic->timeline), {64, 1}, VK_FILTER_LINEAR}};
+            chromaticInput = captureInput(screenChromatic_, "opening_chromatic.frag.spv", textures,
+                "chromatic-screen-source", "post-process-chromatic-source", "post-process-chromatic-target");
+        }
+        if (screenMove) {
+            if (chromaticInput) {
+                const auto tint = graph.addPass("post-process-chromatic", [&] {
+                    beginDisplayPass();
+                    drawChromatic();
+                    vkCmdEndRenderPass(commandBuffer);
+                });
+                graph.use(tint, *chromaticInput, azurerender::RenderGraphUsage::Sampled, false);
+                graph.attachment(tint, displayTarget, azurerender::RenderGraphUsage::ColorAttachment, displayLayout);
+            }
+            if (!screenMove_) {
+                VkPhysicalDeviceProperties properties{};
+                vkGetPhysicalDeviceProperties(physicalDevice_, &properties);
+                screenMovePrecedingBand_ = properties.vendorID == 0x10DE;
+            }
+            const std::initializer_list<azurerender::ScreenEffectTexture> textures{
+                {assets->resolveReference(screenMove->bands), {1, 32}, VK_FILTER_NEAREST, VK_FORMAT_R8G8B8A8_UNORM},
+                {assets->resolveReference(screenMove->instability), {64, 1}, VK_FILTER_LINEAR},
+                {assets->resolveReference(screenMove->flow), {32, 18}, VK_FILTER_NEAREST, VK_FORMAT_R8G8B8A8_SRGB, true},
+                {assets->resolveReference(screenMove->timeline), {32, 1}, VK_FILTER_NEAREST}};
+            movementInput = captureInput(screenMove_, "opening_screen_move.frag.spv", textures,
+                "movement-screen-source", "post-process-movement-source", "post-process-movement-target");
+        }
+    }
     const auto composite=graph.addPass("post-process-hud",[&]{
-    VkRenderPassBeginInfo finalPass{VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO};
-    finalPass.renderPass=postProcessRenderPass_;finalPass.framebuffer=postProcessFramebuffers_[imageIndex];
-    finalPass.renderArea.extent=renderExtent_;vkCmdBeginRenderPass(commandBuffer,&finalPass,VK_SUBPASS_CONTENTS_INLINE);
-    VkViewport finalViewport{};finalViewport.width=float(renderExtent_.width);finalViewport.height=float(renderExtent_.height);finalViewport.maxDepth=1;
-    VkRect2D finalScissor{};finalScissor.extent=renderExtent_;vkCmdSetViewport(commandBuffer,0,1,&finalViewport);vkCmdSetScissor(commandBuffer,0,1,&finalScissor);
-    if (spatial) {
-        spatial->resolve(commandRecorder,azurerender::spatialAntiAliasingMode(
-            effectiveRenderSettings_.antiAliasing,temporalReady,sceneMultisampling_!=nullptr),
-            encodeSrgb,effectiveRenderSettings_.diagnosticView!=0);
+    beginDisplayPass();
+    if (movementInput) {
+        screenMove_->record(commandRecorder, sceneContext.currentFrame, {seconds, screenMove->ratio,
+            screenMove->speed, screenMove->unstable, width, height, screenMovePrecedingBand_ ? 1.F : 0.F});
+    } else if (chromaticInput) {
+        drawChromatic();
     } else {
-        drawGrade();
+        drawDisplay();
+    }
+    if (glitchInput) {
+        std::array<float,12> values{seconds,glitch->ratio,glitch->length,glitch->dotScale,glitch->speed,glitch->unstable};
+        if (glitchVendorId_ == 0x8086) {
+            const float step = std::floor(seconds * glitch->speed);
+            values[6] = step * 12.9898F + step * 78.233002F;
+            values[7] = 1.F;
+        }
+        const std::array<std::uint32_t,4> sampling{renderExtent_.width,renderExtent_.height,0,
+            glitchVendorId_ == 0x10DE ? 1u : 0u};
+        std::memcpy(values.data()+8,sampling.data(),sizeof(sampling));
+        screenGlitch_->record(commandRecorder,sceneContext.currentFrame,values);
+    }
+    if (opaqueColor) {
+        const azurerender::ScreenBlackoutParameters values{
+            blackout->ratio, blackout->blind, blackout->unstable, blackout->length, blackout->dotScale,
+            blackout->speed, blackout->blindTop, blackout->blindBottom,
+        };
+        screenBlackout_->record(commandRecorder, sceneContext.currentFrame, renderExtent_,
+            static_cast<float>(frame.timeSeconds), values);
+    }
+    if (noiseOpacity > 0) {
+        const std::array<float, 4> noise{
+            noiseOpacity, static_cast<float>(frame.timeSeconds),
+            static_cast<float>(renderExtent_.width), static_cast<float>(renderExtent_.height)};
+        vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, screenNoisePipeline_);
+        vkCmdPushConstants(commandBuffer, postProcessPipelineLayout_, VK_SHADER_STAGE_FRAGMENT_BIT,
+            0, sizeof(noise), noise.data());
+        vkCmdDraw(commandBuffer, 3, 1, 0, 0);
     }
     if ((hudEnabled_ || runOptions_.technicalSequence) &&
         hudVertexCounts_[currentFrame_] > 0) {
@@ -1199,9 +1435,16 @@ void AzureRenderApp::recordCommandBuffer(
     if(gameUiRenderer_ && gameUi_){const auto before=gameUiRenderer_->drawCalls();gameUiRenderer_->record(commandRecorder);uiDrawCalls_+=gameUiRenderer_->drawCalls()-before;}
     vkCmdEndRenderPass(commandBuffer);
     });
-    if (linearDisplay) graph.use(composite,*linearDisplay,azurerender::RenderGraphUsage::Sampled,false);
-    else gradeInputs(composite);
-    graph.write(composite, output);
+    const auto effectInput = movementInput ? movementInput : chromaticInput;
+    if (effectInput) {
+        graph.use(composite, *effectInput, azurerender::RenderGraphUsage::Sampled, false);
+        graph.attachment(composite, displayTarget, azurerender::RenderGraphUsage::ColorAttachment, displayLayout);
+    } else {
+        displayInputs(composite);
+        graph.write(composite, output);
+    }
+    if (opaqueColor) graph.use(composite,*opaqueColor,azurerender::RenderGraphUsage::Sampled,false);
+    if (glitchInput) graph.use(composite,glitchInput->resource,azurerender::RenderGraphUsage::Sampled,false);
     const auto editor = graph.addPass("editor-ui", [&] {
 #if AZURE_WITH_EDITOR
     if (editorUiEnabled_ && editorLayer_ != nullptr) {
@@ -1232,6 +1475,8 @@ void AzureRenderApp::recordCommandBuffer(
     }
 #endif
     });
+    if (effectInput && editorUiEnabled_)
+        graph.use(editor, displayTarget, azurerender::RenderGraphUsage::Sampled, false);
     graph.write(editor, output);
     const auto capture = graph.addPass("capture", [&] {
     if (runOptions_.gpuTimingEnabled) {

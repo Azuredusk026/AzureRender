@@ -1,0 +1,13 @@
+{
+  "command": [
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureMediaLibraryTests.exe",
+    "--import",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-042102-runtime-media-service-903258\\m4a-profile",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\docs\\acceptance\\g23\\evidence\\2026-10-12\\audio-fixtures\\reference.m4a"
+  ],
+  "exitCode": 1,
+  "stdout": "",
+  "stderr": "Windows audio decoder failed: 2147942453\r\n",
+  "exeSHA256": "168f14331e547f6bdf40281cd61c918535acd31ab0232b70dba4bafc2e2d41b4",
+  "sourceSHA256": "5c1c876a8eae7f210e89af58a3ec44e3f7c2927d60616670be5e6d52bd6f96b4"
+}

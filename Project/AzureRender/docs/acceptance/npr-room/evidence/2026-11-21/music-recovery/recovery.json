@@ -1,0 +1,18 @@
+{
+  "playerSHA256": "1d37e2abe17d4c598fa29ff0abbea09f5024abb390866ad3550492ce796b5b12",
+  "controllerSHA256": "f27fac4160bd3246f9021c7246b6375583219f3b90e7e2e0608a7e7b661f74bc",
+  "originalToneSHA256": "330b36d5cc19a2dae1142561ce5f2bda6e893ef2525db827a03ca76b838fca7d",
+  "expectedDiagnostic": "Truncated WAV container",
+  "recoveredAudioStarts": 1,
+  "independentPlayers": 2,
+  "scriptErrors": [],
+  "liveAllocationsAfterExit": 0,
+  "preferences": [
+    1,
+    false,
+    45,
+    false,
+    false,
+    false
+  ]
+}

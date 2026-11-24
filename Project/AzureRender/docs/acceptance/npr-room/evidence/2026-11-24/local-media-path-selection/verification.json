@@ -1,0 +1,50 @@
+{
+  "sourceBase": "0821890",
+  "sourceSHA256": {
+    "src/platform/PathSelection.hpp": "4d69c6e00953a5ea9fe91da4ecf2a436baab372432504d47dd3ae128b3db31ec",
+    "src/platform/PathSelection.cpp": "760a55f1ca82b31d62eec4c024769614179c26e3ba4248b0ef45f56ddba3e30a",
+    "tests/PathSelectionTests.cpp": "2933d8ee9746915b8dd3d97cba12660d067b7f292e11524b67032a6d113ba06c",
+    "CMakeLists.txt": "e4863fdaca92ec0bb95014d52a203c01faf0acb908bc7bfeb4ed1efdfebbe8f8"
+  },
+  "binarySHA256": {
+    "AzurePlatform.lib": "a2fa5345c8460914e6e3d557a5c41756b5a95c870ba61c2a127d2c9432a05cc0",
+    "AzureEditor.lib": "bc73c83114cb7afa785f80c64e0e7d6841bcbd05d091df5a2c9a5920c690024c",
+    "AzurePlayer.exe": "15fe5c0ced1254b6d13c62200a78cba0227baeb026925607ccc96a0195cfdf22",
+    "AzurePathSelectionTests.exe": "531d28f1812a02642d7daa43dbec3d4b8168b8fd67dac64edb3d89a46e6f554e"
+  },
+  "dialogCases": {
+    "single": 1,
+    "multiple": 2,
+    "directory": 1,
+    "cancelled": 0
+  },
+  "dialogQueue": 2447,
+  "buildQueues": [
+    2443,
+    2444,
+    2446,
+    2448,
+    2450,
+    2451
+  ],
+  "playerSmokeQueue": 2449,
+  "playerSmoke": {
+    "playerSHA256": "15fe5c0ced1254b6d13c62200a78cba0227baeb026925607ccc96a0195cfdf22",
+    "scriptErrors": [],
+    "presentationErrors": [],
+    "savedTitle": "Current Player",
+    "liveAllocationsAfterExit": 0
+  },
+  "ctestProperties": {
+    "LABELS": [
+      "gpu",
+      "native-ui"
+    ],
+    "RUN_SERIAL": true,
+    "TIMEOUT": 60.0,
+    "WORKING_DIRECTORY": "D:/Projects/FYP/Project/AzureRender/build/runs/20261120-010632-asset-parse-source-diagnostic-d884c7/player-release"
+  },
+  "frozenPlayer": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-024734-local-media-path-selection-085393\\frozen-player\\AzurePlayer.exe",
+  "resourceBuild": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release",
+  "resourceFonts": "D:/Projects/FYP/Project/AzureRender/build/runs/20261121-024547-original-music-update-resume-052501/resources"
+}

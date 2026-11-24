@@ -1,0 +1,40 @@
+{
+  "baseCommit": "278d28e",
+  "run": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-033508-local-media-library-3b96aa",
+  "buildQueues": [
+    2471,
+    2472,
+    2474
+  ],
+  "initialMissingContractQueue": 2470,
+  "configuration": "MSVC Release",
+  "sourceSHA256": {
+    "CMakeLists.txt": "49124cde123c5179d7f65ba09dbec8d85cb7bd84297156281132deb05829002f",
+    "src/runtime/MediaLibrary.hpp": "ba8f861916a2f144949798ac096581f87d306d060196f14266da0b28fd8389b4",
+    "src/runtime/MediaLibrary.cpp": "0a9c54f4ba7b9a71d44356af0aeac337401ed835e53d36ec04deff210f3f4b93",
+    "tests/MediaLibraryTests.cpp": "062d4a8c124cdc8656a564521487d37b873412f78361ee6e56b584e3c80055f2"
+  },
+  "checks": [
+    "audio and image decoding and committed reopening",
+    "byte equality deduplication",
+    "source deletion preserves imported copy",
+    "missing cache repair preserves entry identity",
+    "project and media slot isolation",
+    "source, cache, entry and scan budgets",
+    "malformed metadata traversal rejection",
+    "future payload and outer version preservation",
+    "late version changes during preparation",
+    "cancellation after publication rollback",
+    "stale conditional commit rollback",
+    "two simultaneous library instances",
+    "two independent import processes",
+    "WAV, MP3, FLAC and OGG imports",
+    "PNG, JPG and JPEG imports"
+  ],
+  "remaining": [
+    "Player selection, media use and replay integration",
+    "M4A library import verification",
+    "Physical actions and subjective observations pending manual retest",
+    "Formal room and Steam runs paused"
+  ]
+}

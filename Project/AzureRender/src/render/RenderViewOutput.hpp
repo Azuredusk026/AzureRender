@@ -8,7 +8,8 @@ class RenderViewOutput final {
 public:
     RenderViewOutput(const RenderContext&,VkImageView hdr,VkSampler sampler,ViewColorTransfer,VkImageView displayMask=VK_NULL_HANDLE,std::array<VkImageView,2> displayHistory={});
     ~RenderViewOutput();
-    void schedule(RenderGraph&,RenderGraph::ResourceId hdr,const std::string& name,bool temporalReady=false,RenderGraph::ResourceId displayMask=UINT32_MAX,unsigned displayHistorySelector=0);
+    RenderGraph::ResourceId schedule(RenderGraph&,RenderGraph::ResourceId hdr,const std::string& name,
+        bool temporalReady=false,RenderGraph::ResourceId displayMask=UINT32_MAX,unsigned displayHistorySelector=0);
     const rhi::GpuImage& image() const{return image_;}
     VkImageView view() const{return view_;}
 private:

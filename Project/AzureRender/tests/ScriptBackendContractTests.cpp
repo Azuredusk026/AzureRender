@@ -1,6 +1,7 @@
 #include "scripting/ScriptBindingHost.hpp"
 #include "app/ProjectRuntimeAssembly.hpp"
 #include "runtime/ComponentCodec.hpp"
+#include "runtime/IMediaLibraryService.hpp"
 #include <iostream>
 #include <stdexcept>
 using namespace azurerender;
@@ -30,8 +31,33 @@ void bindings() {
     runtime.loadScene(scene);runtime.start();
     GameRuntime game(runtime,application::systems(),application::explorationConfiguration());
     ScriptBindingHost host(runtime,game);
+    struct Media final : IMediaLibraryService {
+        bool selected=false, cancelled=false, unavailable=false;
+        bool select(const std::string& kind,bool directory) override { selected=kind=="music"&&!directory;return selected; }
+        Json entries(const std::string&) const override {if(unavailable)throw std::runtime_error("Newer media version");return Json::array({Json::array({"id","title","media:/music/id",true})});}
+        Json status() override {return Json::array({"idle",0,0,0,""});}
+        void cancel() override {cancelled=true;}
+    };
+    auto media=std::make_shared<Media>();host.setMediaService(media);
     const auto hero=host.object("hero"),target=host.object("target");
     check(host.invoke(hero,"id",Json::array())=="hero","Object identity must be readable");
+    check(host.invoke(hero,"media_entries",{"music"})[0][2]=="media:/music/id","Media queries must use the injected shared service");
+    check(host.invoke(hero,"try_media_entries",{"music"})[0]==true,"Recoverable media queries must retain the shared snapshot");
+    media->unavailable=true;
+    check(host.invoke(hero,"try_media_entries",{"music"})==Json::array({false,Json::array(),"Newer media version"}),"Media query failures must preserve a typed result and diagnostic");
+    media->unavailable=false;
+    host.beginCallback();
+    check(host.invoke(hero,"try_ui_image",{"preview","media:/images/missing"})==false,"Unavailable image services must return a recoverable result");
+    host.endCallback(true);
+    rejects([&]{host.invoke(hero,"media_import",{"music",false});},"Media import requires an active runtime callback");
+    host.beginCallback(true);
+    rejects([&]{host.invoke(hero,"try_ui_image",{"preview","media:/images/missing"});},"Image retry cannot escape a staged initialization");
+    rejects([&]{host.invoke(hero,"media_import",{"music",false});},"Media selection cannot escape a staged initialization");
+    host.endCallback(false);host.beginCallback();
+    check(host.invoke(hero,"media_import",{"music",false})==true&&media->selected,"Media selection must use the injected production operation");
+    host.invoke(hero,"media_cancel",Json::array());
+    check(media->cancelled&&host.invoke(hero,"media_status",Json::array())[0]=="idle","Media cancellation and status must share one service");
+    host.endCallback(true);
     rejects([&]{host.invoke(hero,"set",{"azure.transform","translation",{1,2,3}});},"Mutation outside a callback must fail");
     rejects([&]{host.invoke(hero,"find",{true});},"Wrong binding parameter type must fail");
     rejects([&]{host.invoke(hero,"id",{"other"});},"Object identity must be read only");
@@ -43,6 +69,17 @@ void bindings() {
     host.beginCallback(true);host.invoke(target,"set",{"azure.transform","translation",{2,3,4}});
     host.endCallback(true);host.commitInitialization();
     check(runtime.world().tryGet<ecs::TransformComponent>(runtime.entity("target"))->translation[0]==2,"Successful initialization must commit staged properties");
+    rejects([&]{host.invoke(hero,"try_audio_play",Json::array());},"Audio retry requires a callback");
+    host.beginCallback(true);
+    rejects([&]{host.invoke(hero,"try_audio_play",Json::array());},"Synchronous audio retry rejects staged initialization");
+    host.endCallback(false);
+    host.beginCallback();
+    check(host.invoke(hero,"try_audio_play",Json::array())==false,"Unavailable audio returns a recoverable result");
+    host.setAudioHandler([](ecs::Entity){throw std::runtime_error("Audio unavailable");});
+    check(host.invoke(hero,"try_audio_play",Json::array())==false,"Playback errors remain recoverable");
+    host.setAudioHandler([](ecs::Entity){});
+    check(host.invoke(hero,"try_audio_play",Json::array())==true,"Available playback reports success");
+    host.endCallback(true);
     unsigned deliveries=0;host.setUiHandler([&](std::string,std::string){++deliveries;throw std::runtime_error("Host delivery failed");});
     host.beginCallback(true);host.invoke(hero,"ui_text",{"status","初始化消息"});host.endCallback(true);
     host.commitInitialization();

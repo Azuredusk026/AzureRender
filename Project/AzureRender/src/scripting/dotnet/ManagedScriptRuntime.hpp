@@ -16,11 +16,16 @@ public:
     void shutdown() noexcept override;
     void setLevelHandler(std::function<void(std::string)>) override;
     void setAudioHandler(std::function<void(ecs::Entity)>) override;
+    void setAudioTransport(PresentationRuntime&) override;
     void setUiHandler(std::function<void(std::string,std::string)>) override;
     std::size_t activeCount() const override;
     const std::vector<std::string>& errors() const override;
     const std::vector<StructuredDiagnostic>& diagnostics() const override;
     ScriptRuntimeCapabilities capabilities() const override;
+    void setSaveStore(std::shared_ptr<ProjectSaveStore>) override;
+    void setMediaService(std::shared_ptr<IMediaLibraryService>) override;
+    void setLevelSession(LevelSession&) override;
+    void setUiProvider(std::function<GameUi*()>) override;
 private:
     struct Impl;
     std::unique_ptr<Impl> impl_;

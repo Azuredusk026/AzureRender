@@ -1,0 +1,12 @@
+#version 450
+#extension GL_GOOGLE_include_directive : require
+layout(local_size_x=1) in;
+layout(std430,binding=0) readonly buffer Inputs { vec4 inputs[]; };
+layout(std430,binding=1) writeonly buffer Outputs { vec4 outputs[]; };
+layout(std430,binding=24) readonly buffer IrradianceCells { vec4 irradianceCells[]; };
+#include "irradiance_grid.glsl"
+void main() {
+    uint index=gl_GlobalInvocationID.x,base=index*5;
+    outputs[index]=evaluateIrradianceGrid(inputs[base].xyz,inputs[base+1].xyz,
+        inputs[base+2],ivec3(inputs[base+3].xyz),inputs[base+4].x,inputs[base+3].w>0);
+}

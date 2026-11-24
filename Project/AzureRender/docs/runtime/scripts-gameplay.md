@@ -48,10 +48,21 @@ ScriptRuntime 将 Lua 5.4.8 与 sol2 3.5.0 接入固定步运行时。脚本控�
 | `self:spawn(id, resource, position)` | 下一固定步使用现有资源创建节点 |
 | `self:remove_component(type)` | 下一固定步移除可选组件 |
 | `self:load_level(reference)` | 将资源引用交给宿主的关卡请求处理器 |
+| `self:preload_level(reference)` | 后台准备目标关卡，当前关卡继续运行 |
+| `self:level_ready(reference)` | 查询目标关卡的资源与渲染准备状态 |
+| `self:cancel_level_load()` | 取消待处理的预加载或切换请求 |
+| `self:level_load_error()` | 读取关卡会话的最后一条加载错误，空字符串表示当前无错误 |
 | `self:audio_play()` | 播放当前实体的音频源 |
+| `self:try_audio_play()` | 在运行回调中尝试播放，成功返回 `true`，资源或设备失败返回 `false` |
+| `self:audio_stop()` | 停止当前实体音源的播放 |
+| `self:audio_pause(paused)` | 暂停或继续当前实体音源，保留播放位置 |
+| `self:audio_playing()` | 查询当前实体音源是否正在播放 |
+| `self:audio_position()` | 获取当前实体音源的播放位置，单位为秒 |
 | `self:ui_text(id, text)` | 设置游戏界面的纯文本 |
 
 关卡请求处理器负责排队，主循环在固定步之外准备和提交关卡。修改接口在顶层代码中调用产生错误。数组需稠密，最多 1024 项，嵌套深度最多 16。
+
+项目 Player 和编辑器播放会话使用同一关卡准备接口。Lua 和托管脚本均可先请求预加载，逐帧检查就绪或错误，再调用关卡切换。初始化回调中的切换、预加载和取消随初始化事务提交。
 
 ## 线程与同步
 
@@ -102,3 +113,8 @@ ScriptRuntime 覆盖错误、死循环、反射、初始化事务、重载和句
 适配使用 sol2 的 `state`、`environment`、`protected_function` 和 Lua 指令钩子。参考安装头 `sol/environment.hpp` 与 `sol/protected_function.hpp` 的公开接口。绑定代码由项目实现。
 
 MSVC 对 sol2 表情符号字面量产生 C5321。包含 sol2 头时局部关闭此警告，项目代码继续使用严格警告。对应验证为 Debug、Release 构建和真实 Player 测试。
+
+
+已装配呈现服务时，停止和暂停可用于尚未加载的音源。
+这两种操作保持无活动音源状态。
+加载失败诊断继续保留，显式播放可重试资源。

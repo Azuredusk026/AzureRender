@@ -1,0 +1,11 @@
+{
+  "command": [
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureGameUiTests.exe",
+    "D:/Projects/FYP/Project/AzureRender/assets_public/gameplay/assets/hud.rml",
+    "D:/Projects/FYP/Project/AzureRender/assets_public/fonts/LatoLatin-Regular.ttf"
+  ],
+  "exitCode": 1,
+  "stdout": "button: 28,61.6,90,37\r\n",
+  "stderr": "[1795466054827][warning][game-ui][code=0] Could not load texture: /?/D:/Projects/FYP/Project/AzureRender/build/runs/20261124-042102-runtime-media-service-903258/tmp/image-final/azure-ui \u4e2d\u6587 \ud83c\udf1f relative-image/\u672c\u673a \u56fe\u7247.svg\r\nDynamic images must resolve native Unicode paths\r\n",
+  "exeSHA256": "16b33c613f97872d3e9440836f68c70f7ab603ccac14a498e1f15053cd81f82d"
+}

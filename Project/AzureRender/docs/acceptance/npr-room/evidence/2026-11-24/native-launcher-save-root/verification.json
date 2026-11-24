@@ -1,0 +1,39 @@
+{
+  "baseCommit": "b1a0154",
+  "buildQueue": 2509,
+  "redQueue": 2508,
+  "verificationQueue": 2510,
+  "preparationQueue": 2507,
+  "run": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-052507-local-media-native-package-cb945d",
+  "sourceSHA256": {
+    "CMakeLists.txt": "2ee924111030188accf4696b5ad2e68964717e69fe83f2994d02d6328bd161e7",
+    "src/launcher/main.cpp": "f67337ba9f774f1d90831993bd7ae60dcb555ba79034ff691f763a311f32cfdc",
+    "tools/test_game_launcher_save_root.py": "0bbd44cefd02df404bc24f8ecc168b4245784d0cb99425eaa326b855859592d4"
+  },
+  "playerSHA256": "818c745b88e9d049d206bac5318cf85b2f27bf39006df86ce9ac9ee621803147",
+  "launcherSHA256": "1e2626d5abc7096eb46d70aa7e71a8fd179ff3e20be98ebb2350f33ecbbefb9d",
+  "configuration": "MSVC Release x64; native launcher; static CRT; Lua Player; system-only PATH",
+  "checks": [
+    "environment root restores persistent media",
+    "explicit save-root takes priority over environment",
+    "Chinese and space save-root path",
+    "default LocalAppData branch preserves missing project folder on readonly startup",
+    "relative environment root rejected before Player startup",
+    "three successful launcher child Players pass Vulkan validation and release all resources"
+  ],
+  "primaryReferences": [
+    "https://learn.microsoft.com/en-us/windows/win32/api/shlobj_core/nf-shlobj_core-shgetknownfolderpath"
+  ],
+  "remaining": [
+    "Movable directory package verification follows independently",
+    "Physical input and listening pending manual retest",
+    "Formal source-room and Steam runs paused"
+  ],
+  "invalidLogCorrection": {
+    "toolSHA256": "6462c9b71a4b25ceca1b07af7658b92b791a0c5fcc71a9c30f484ef9d1caa106",
+    "report": "invalid-green-verification.json",
+    "startupLogChanged": false,
+    "staleStartupLogRemoved": true,
+    "positiveCases": "Unchanged existing queue 2510 evidence"
+  }
+}

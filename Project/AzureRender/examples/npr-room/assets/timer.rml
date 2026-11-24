@@ -1,0 +1,242 @@
+<rml>
+<head>
+<title>Timer</title>
+<style>
+body { width: 100%; height: 100%; margin: 0; color: white; font-family: LatoLatin; }
+#timer { position: absolute; right: 16dp; top: 16dp; padding: 10dp 14dp; background-color: #19232c; }
+#timer-value { display: block; font-size: 26dp; }
+#timer-phase { display: block; font-size: 16dp; }
+#timer-settings { display: block; font-size: 14dp; }
+#timer-controls { display: block; margin-top: 8dp; font-size: 13dp; }
+#timer-controls button { display: inline-block; padding: 4dp 7dp; margin-right: 3dp; color: white; background-color: #34434f; }
+#timer-controls button:hover { background-color: #506472; }
+#work-stats { position: absolute; right: 100%; top: 0; margin-right: 8dp; width: 246dp; padding: 10dp; background-color: #19232c; font-size: 13dp; }
+#work-calendar, #calendar-navigation, #calendar-picker { display: block; }
+#work-calendar { margin-top: 8dp; }
+#calendar-month { display: inline-block; width: 76dp; text-align: center; font-size: 15dp; }
+.calendar-row { display: flex; height: 18dp; }
+.calendar-row span { display: block; width: 32dp; height: 18dp; text-align: center; }
+.calendar-row button { display: inline-block; width: 28dp; height: 18dp; text-align: center; color: white; }
+.calendar-row button:hover { background-color: #506472; }
+#calendar-picker button, #calendar-navigation button { display: inline-block; padding: 3dp; margin-right: 2dp; color: white; background-color: #34434f; }
+#calendar-picker button:hover, #calendar-navigation button:hover { background-color: #506472; }
+#calendar-selected { display: block; margin: 4dp 0; }
+#calendar-selected-time { margin-left: 3dp; }
+#calendar-edit-time { display: inline-block; padding: 3dp 6dp; color: white; background-color: #34434f; }
+#calendar-work-time-editor { display: block; margin: 4dp 0; }
+#calendar-work-time-editor input { width: 28dp; padding: 3dp; color: white; background-color: #273541; }
+#calendar-week-settings { display: block; margin-top: 5dp; }
+#calendar-completions { display: block; margin-top: 8dp; }
+#calendar-completed-tasks { display: block; max-height: 96dp; overflow-y: auto; white-space: pre-wrap; word-break: break-word; }
+#calendar-diary-toggle, #calendar-diary-cancel { display: inline-block; padding: 3dp 6dp; color: white; background-color: #34434f; }
+#calendar-diary { display: block; margin-top: 8dp; }
+#calendar-diary-editor { display: block; margin-top: 4dp; }
+#calendar-diary-text { display: block; width: 226dp; height: 56dp; padding: 4dp; color: white; background-color: #273541; }
+#calendar-diary-status { display: block; color: #f0c58e; }
+#calendar-habit, #calendar-habit-current, #calendar-habit-actions, #calendar-habit-confirm, #calendar-habit-history { display: block; margin-top: 4dp; }
+#calendar-habit-editor { display: block; position: absolute; left: 100%; top: 122dp; width: 244dp; padding: 10dp; margin-left: 8dp; background-color: #19232c; }
+#calendar-habits-toggle, #calendar-habit-editor button { display: inline-block; padding: 3dp; margin-right: 2dp; margin-bottom: 3dp; color: white; background-color: #34434f; }
+#calendar-habit-title { display: block; width: 224dp; padding: 4dp; margin: 4dp 0; color: white; background-color: #273541; }
+#calendar-habit-history-list { display: block; max-height: 72dp; overflow-y: auto; white-space: pre-wrap; word-break: break-word; }
+#calendar-habit-status { display: block; color: #f0c58e; }
+#calendar-status { display: block; color: #f0c58e; }
+#notes-toggle { position: absolute; left: 16dp; top: 16dp; padding: 6dp 10dp; color: white; background-color: #34434f; }
+#notes-panel { position: absolute; left: 16dp; top: 52dp; width: 310dp; padding: 14dp; background-color: #19232c; }
+#notes-panel button { display: inline-block; padding: 4dp 6dp; margin-right: 4dp; margin-bottom: 7dp; color: white; background-color: #34434f; }
+#notes-panel input, #notes-panel textarea { display: block; width: 290dp; padding: 5dp; margin-bottom: 8dp; color: white; background-color: #273541; }
+#notes-panel textarea { height: 135dp; }
+#note-page { display: block; margin-bottom: 6dp; }
+#note-status { display: block; color: #f0c58e; }
+#todo-toggle { position: absolute; left: 82dp; top: 16dp; padding: 6dp 10dp; color: white; background-color: #34434f; }
+#todo-panel { position: absolute; right: 16dp; top: 168dp; width: 316dp; max-height: 70%; overflow-y: auto; padding: 12dp; background-color: #19232c; }
+#todo-panel button { display: inline-block; padding: 4dp 6dp; margin-right: 3dp; margin-bottom: 6dp; color: white; background-color: #34434f; }
+#todo-panel input { display: block; width: 288dp; padding: 4dp; margin-bottom: 6dp; color: white; background-color: #273541; }
+.todo-caption { display: block; margin-bottom: 4dp; }
+#todo-status { display: block; color: #f0c58e; }
+</style>
+</head>
+<body>
+<div id="timer">
+<span id="timer-value">25:00</span>
+<span id="timer-phase">idle</span>
+<span id="timer-settings">25m work · 5m break · 2 rounds</span>
+<div id="timer-controls">
+<button id="timer-mode-button" data-action="timer-mode">Mode · M</button>
+<button id="timer-toggle-button" data-action="timer-toggle">Start/Pause · T</button>
+<button id="timer-end-button" data-action="timer-reset">End · R</button>
+<button id="timer-stats" data-action="timer-stats" style="display: none;">Statistics</button>
+</div>
+<div id="work-stats" style="display: none;">Today <span id="work-today"></span> · Total <span id="work-total"></span>
+<span id="work-progression" style="display: none;"></span>
+<!-- work-calendar-start -->
+<div id="work-calendar">
+<div id="calendar-navigation">
+<button id="calendar-prev-month" data-action="calendar-prev-month">‹</button>
+<span id="calendar-month"></span>
+<button id="calendar-next-month" data-action="calendar-next-month">›</button>
+</div>
+<div class="calendar-row"><span id="calendar-weekday-1"></span><span id="calendar-weekday-2"></span><span id="calendar-weekday-3"></span><span id="calendar-weekday-4"></span><span id="calendar-weekday-5"></span><span id="calendar-weekday-6"></span><span id="calendar-weekday-7"></span></div>
+<div class="calendar-row">
+<span><button id="calendar-date-1" data-action="calendar-day-1" style="display: none;"></button></span>
+<span><button id="calendar-date-2" data-action="calendar-day-2" style="display: none;"></button></span>
+<span><button id="calendar-date-3" data-action="calendar-day-3" style="display: none;"></button></span>
+<span><button id="calendar-date-4" data-action="calendar-day-4" style="display: none;"></button></span>
+<span><button id="calendar-date-5" data-action="calendar-day-5" style="display: none;"></button></span>
+<span><button id="calendar-date-6" data-action="calendar-day-6" style="display: none;"></button></span>
+<span><button id="calendar-date-7" data-action="calendar-day-7" style="display: none;"></button></span>
+</div>
+<div class="calendar-row">
+<span><button id="calendar-date-8" data-action="calendar-day-8" style="display: none;"></button></span>
+<span><button id="calendar-date-9" data-action="calendar-day-9" style="display: none;"></button></span>
+<span><button id="calendar-date-10" data-action="calendar-day-10" style="display: none;"></button></span>
+<span><button id="calendar-date-11" data-action="calendar-day-11" style="display: none;"></button></span>
+<span><button id="calendar-date-12" data-action="calendar-day-12" style="display: none;"></button></span>
+<span><button id="calendar-date-13" data-action="calendar-day-13" style="display: none;"></button></span>
+<span><button id="calendar-date-14" data-action="calendar-day-14" style="display: none;"></button></span>
+</div>
+<div class="calendar-row">
+<span><button id="calendar-date-15" data-action="calendar-day-15" style="display: none;"></button></span>
+<span><button id="calendar-date-16" data-action="calendar-day-16" style="display: none;"></button></span>
+<span><button id="calendar-date-17" data-action="calendar-day-17" style="display: none;"></button></span>
+<span><button id="calendar-date-18" data-action="calendar-day-18" style="display: none;"></button></span>
+<span><button id="calendar-date-19" data-action="calendar-day-19" style="display: none;"></button></span>
+<span><button id="calendar-date-20" data-action="calendar-day-20" style="display: none;"></button></span>
+<span><button id="calendar-date-21" data-action="calendar-day-21" style="display: none;"></button></span>
+</div>
+<div class="calendar-row">
+<span><button id="calendar-date-22" data-action="calendar-day-22" style="display: none;"></button></span>
+<span><button id="calendar-date-23" data-action="calendar-day-23" style="display: none;"></button></span>
+<span><button id="calendar-date-24" data-action="calendar-day-24" style="display: none;"></button></span>
+<span><button id="calendar-date-25" data-action="calendar-day-25" style="display: none;"></button></span>
+<span><button id="calendar-date-26" data-action="calendar-day-26" style="display: none;"></button></span>
+<span><button id="calendar-date-27" data-action="calendar-day-27" style="display: none;"></button></span>
+<span><button id="calendar-date-28" data-action="calendar-day-28" style="display: none;"></button></span>
+</div>
+<div class="calendar-row">
+<span><button id="calendar-date-29" data-action="calendar-day-29" style="display: none;"></button></span>
+<span><button id="calendar-date-30" data-action="calendar-day-30" style="display: none;"></button></span>
+<span><button id="calendar-date-31" data-action="calendar-day-31" style="display: none;"></button></span>
+<span><button id="calendar-date-32" data-action="calendar-day-32" style="display: none;"></button></span>
+<span><button id="calendar-date-33" data-action="calendar-day-33" style="display: none;"></button></span>
+<span><button id="calendar-date-34" data-action="calendar-day-34" style="display: none;"></button></span>
+<span><button id="calendar-date-35" data-action="calendar-day-35" style="display: none;"></button></span>
+</div>
+<div class="calendar-row">
+<span><button id="calendar-date-36" data-action="calendar-day-36" style="display: none;"></button></span>
+<span><button id="calendar-date-37" data-action="calendar-day-37" style="display: none;"></button></span>
+<span><button id="calendar-date-38" data-action="calendar-day-38" style="display: none;"></button></span>
+<span><button id="calendar-date-39" data-action="calendar-day-39" style="display: none;"></button></span>
+<span><button id="calendar-date-40" data-action="calendar-day-40" style="display: none;"></button></span>
+<span><button id="calendar-date-41" data-action="calendar-day-41" style="display: none;"></button></span>
+<span><button id="calendar-date-42" data-action="calendar-day-42" style="display: none;"></button></span>
+</div>
+<div id="calendar-selected"><span id="calendar-selected-date"></span> · <span id="calendar-work-label"></span> <span id="calendar-selected-time"></span></div>
+<button id="calendar-edit-time" data-action="calendar-edit-time">Edit Work Time</button>
+<div id="calendar-work-time-editor" style="display: none;">
+<input id="calendar-edit-hours" data-action-on-blur="calendar-submit-time" type="text" maxlength="3" placeholder="hh" /> :
+<input id="calendar-edit-minutes" data-action-on-blur="calendar-submit-time" type="text" maxlength="3" placeholder="mm" /> :
+<input id="calendar-edit-seconds" data-action-on-blur="calendar-submit-time" type="text" maxlength="3" placeholder="ss" />
+</div>
+<div id="calendar-week-settings"><span id="calendar-first-day-label"></span> · <span id="calendar-first-day"></span></div>
+<div id="calendar-picker">
+<button id="calendar-first-0" data-action="calendar-first-0">Sun</button>
+<button id="calendar-first-1" data-action="calendar-first-1">Mon</button>
+<button id="calendar-first-2" data-action="calendar-first-2">Tue</button>
+<button id="calendar-first-3" data-action="calendar-first-3">Wed</button>
+<button id="calendar-first-4" data-action="calendar-first-4">Thu</button>
+<button id="calendar-first-5" data-action="calendar-first-5">Fri</button>
+<button id="calendar-first-6" data-action="calendar-first-6">Sat</button>
+</div>
+<span id="calendar-status"></span>
+<div id="calendar-completions" style="display: none;">
+<span id="calendar-completed-tasks-label">Completed Tasks</span>
+<div id="calendar-completed-tasks"></div>
+</div>
+<div id="calendar-diary">
+<button id="calendar-diary-toggle" data-action="calendar-diary-toggle">Enter Diary</button>
+<div id="calendar-diary-editor" style="display: none;" data-action-on-blur="calendar-diary-save">
+<textarea id="calendar-diary-text" maxlength="5000"></textarea>
+<button id="calendar-diary-cancel" data-action="calendar-diary-cancel">Cancel</button>
+<span id="calendar-diary-status"></span>
+</div>
+</div>
+<div id="calendar-habit">
+<button id="calendar-habits-toggle" data-action="calendar-habits-toggle">Habit Tracker</button>
+<div id="calendar-habit-editor" style="display: none;">
+<button id="calendar-habit-new" data-action="calendar-habit-new">New Habit</button>
+<span id="calendar-habit-position"></span>
+<div id="calendar-habit-current" style="display: none;">
+<button id="calendar-habit-prev" data-action="calendar-habit-prev">‹</button>
+<button id="calendar-habit-next" data-action="calendar-habit-next">›</button>
+<button id="calendar-habit-move-up" data-action="calendar-habit-move-up">^</button>
+<button id="calendar-habit-move-down" data-action="calendar-habit-move-down">v</button>
+<input id="calendar-habit-title" data-action-on-blur="calendar-habit-save" type="text" />
+<button id="calendar-habit-day-0" data-action="calendar-habit-day-0">Sun</button>
+<button id="calendar-habit-day-1" data-action="calendar-habit-day-1">Mon</button>
+<button id="calendar-habit-day-2" data-action="calendar-habit-day-2">Tue</button>
+<button id="calendar-habit-day-3" data-action="calendar-habit-day-3">Wed</button>
+<button id="calendar-habit-day-4" data-action="calendar-habit-day-4">Thu</button>
+<button id="calendar-habit-day-5" data-action="calendar-habit-day-5">Fri</button>
+<button id="calendar-habit-day-6" data-action="calendar-habit-day-6">Sat</button>
+<div id="calendar-habit-actions">
+<button id="calendar-habit-complete" data-action="calendar-habit-complete">Completed · Off</button>
+<button id="calendar-habit-pause" data-action="calendar-habit-pause">Pause</button>
+<button id="calendar-habit-archive" data-action="calendar-habit-archive">Delete</button>
+</div>
+<div id="calendar-habit-confirm" style="display: none;">
+<button id="calendar-habit-archive-confirm" data-action="calendar-habit-archive-confirm">Delete</button>
+<button id="calendar-habit-archive-cancel" data-action="calendar-habit-archive-cancel">Cancel</button>
+</div>
+</div>
+<span id="calendar-habit-status"></span>
+</div>
+<div id="calendar-habit-history" style="display: none;">
+<div id="calendar-habit-history-list"></div>
+</div>
+</div>
+</div>
+<!-- work-calendar-end -->
+</div>
+</div>
+<button id="notes-toggle" data-action="notes-toggle" style="display: none;">Notes</button>
+<div id="notes-panel" style="display: none;">
+<span id="note-page"></span>
+<button id="note-prev" data-action="notes-prev">Previous</button>
+<button id="note-next" data-action="notes-next">Next</button>
+<button id="note-new" data-action="notes-new">New Page</button>
+<div id="note-fields">
+<input id="note-title" value="" />
+<textarea id="note-text"></textarea>
+<button id="note-save" data-action="notes-save">Save</button>
+<button id="note-up" data-action="notes-up">Move up</button>
+<button id="note-down" data-action="notes-down">Move down</button>
+<button id="note-delete" data-action="notes-delete">Delete</button>
+</div>
+<span id="note-status"></span>
+</div>
+<button id="todo-toggle" data-action="todo-toggle" style="display: none;">Tasks</button>
+<div id="todo-panel" style="display: none;">
+<span class="todo-caption">List <span id="todo-list-position"></span></span>
+<input id="todo-list-title" placeholder="List title" />
+<button id="todo-list-prev" data-action="todo-list-prev">Previous list</button>
+<button id="todo-list-next" data-action="todo-list-next">Next list</button>
+<button id="todo-list-new" data-action="todo-list-new">New list</button>
+<button id="todo-list-delete" data-action="todo-list-delete">Delete list</button>
+<span class="todo-caption">Completed <span id="todo-progress"></span></span>
+<button id="todo-task-new" data-action="todo-task-new">Add task</button>
+<button id="todo-save" data-action="todo-save">Save</button>
+<div id="todo-task-details">
+<span class="todo-caption">Task <span id="todo-task-position"></span> · <span id="todo-task-state"></span></span>
+<input id="todo-task-text" placeholder="Task name" />
+<input id="todo-task-due" placeholder="Due date YYYY-MM-DD" />
+<button id="todo-task-prev" data-action="todo-task-prev">Previous</button>
+<button id="todo-task-next" data-action="todo-task-next">Next</button>
+<button id="todo-task-complete" data-action="todo-task-complete">Complete</button>
+<button id="todo-task-up" data-action="todo-task-up">Up</button>
+<button id="todo-task-down" data-action="todo-task-down">Down</button>
+<button id="todo-task-delete" data-action="todo-task-delete">Delete</button>
+</div>
+<span id="todo-status"></span>
+</div>
+</body>
+</rml>

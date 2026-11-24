@@ -68,5 +68,38 @@ int main()try{
   const auto p=frame(fog,0);check(p.rows[3][2]==0&&p.rows[3][3]==1,"World media remain active independently of volume mismatch");
  }
  check(backend.allocator().statistics().liveImages==0&&backend.allocator().statistics().liveBuffers==0,"Analytic-only resources retire through the shared owner");
+ {
+  ViewFogBinding generated;generated.enabled=true;generated.analytic=AnalyticFogSettings{};
+  generated.analytic->height=LayeredHeightFog{{{.19F,.13F,1,{.19F,.29F,.48F}}}};
+  generated.generatedHeightVolume=GeneratedHeightFogSettings{{48,32,48},8};
+  reject([&]{ViewFogGpu missingProgram(backend,generated,data,2);});
+  const std::vector<char> program{0};
+  ViewFogGpu fog(backend,generated,data,2,program);
+  check(backend.allocator().statistics().liveImages==2&&backend.allocator().statistics().liveBuffers==2,
+      "Generated height fog owns one image and parameter buffer per frame");
+  check(fog.updateFrame(0,CameraViewDescriptor{},{128,128})==FogViewMatch::GeneratedHeight,"Generation follows the current frame");
+  check(frame(fog,0).rows[13][2]==1&&frame(fog,0).rows[13][3]==8&&frame(fog,1).rows[13][2]==0,
+      "Only the updated slot carries generated fog parameters");
+  const auto& buffer=fog.parameters(0);
+  RenderGraph graph;
+  const auto parameters=graph.importBuffer("view-fog",{buffer.buffer,0,buffer.size,0,VK_PIPELINE_STAGE_HOST_BIT,0,VK_ACCESS_HOST_WRITE_BIT});
+  const auto volume=fog.addGenerationPass(graph,0,parameters);
+  check(volume.has_value(),"Generation registers its output image");
+  const auto surface=graph.addPass("surface");
+  graph.use(surface,parameters,RenderGraphUsage::FragmentStorage,false);
+  graph.use(surface,*volume,RenderGraphUsage::Sampled,false);
+  std::string error;
+  check(graph.compile(error),"Generated fog render graph compiles");
+  const auto& upload=graph.bufferBarriers().at(0).buffer;
+  check(upload.srcAccessMask==VK_ACCESS_HOST_WRITE_BIT
+      &&upload.dstStageMask==(VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT|VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT),
+      "Frame parameters are visible to compute and fragment readers");
+  const auto& publish=graph.barriers().at(1).image;
+  check(publish.srcAccessMask==VK_ACCESS_SHADER_WRITE_BIT&&publish.dstAccessMask==VK_ACCESS_SHADER_READ_BIT
+      &&publish.dstStageMask==VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
+      "Generated volume is visible to the fragment reader");
+ }
+ check(backend.allocator().statistics().liveImages==0&&backend.allocator().statistics().liveBuffers==0,"Generated fog releases both slots");
+ std::cout<<"Generated height fog frame ownership and fragment synchronization passed\n";
  return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}

@@ -1,0 +1,26 @@
+{
+  "formats": [
+    {
+      "format": "opus",
+      "frames": 48000,
+      "snrDb": 43.6022008095148
+    },
+    {
+      "format": "mp3",
+      "frames": 48000,
+      "snrDb": 25.996802732237757
+    },
+    {
+      "format": "aac",
+      "frames": 48128
+    },
+    {
+      "format": "m4a",
+      "frames": 48128
+    }
+  ],
+  "manualListening": "P8",
+  "nativeAacAuthoringFrames": 48000,
+  "nativeAacPacketFrames": 48128,
+  "passed": true
+}

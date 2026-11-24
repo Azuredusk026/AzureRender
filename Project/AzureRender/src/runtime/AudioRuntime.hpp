@@ -13,6 +13,9 @@ public:
     Handle load(const std::filesystem::path& path, bool loop, float volume);
     void play(Handle handle);
     void stop(Handle handle);
+    void setPaused(Handle handle, bool paused);
+    void setVolume(Handle handle, float volume);
+    std::uint64_t position(Handle handle) const;
     void release(Handle handle);
     bool playing(Handle handle) const;
     AudioDescription description(Handle handle) const;

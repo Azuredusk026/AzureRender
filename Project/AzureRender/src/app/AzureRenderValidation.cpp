@@ -1,5 +1,6 @@
 #include "AzureRenderApp.hpp"
 #include "extensions/ISceneRenderer.hpp"
+#include "platform/GlfwFrontend.hpp"
 #include "runtime/LevelRenderSettings.hpp"
 #if AZURE_WITH_EDITOR
 #include "editor/ImGuiEditorLayer.hpp"
@@ -32,7 +33,19 @@ void AzureRenderApp::initializeValidation() {
             {"uiBuffers",ui.buffers},{"uiBufferBytes",ui.bufferBytes}}.dump());
     });
     observations_->add("engine.frameCount",[this]{return ObservationValue(static_cast<std::int64_t>(gameplayFrame_));});
+    observations_->add("engine.framePacing",[this]{
+        return ObservationValue(nlohmann::json{
+            {"maximumRate",effectiveFrameRateLimit()},
+            {"focused",frontend_->isForeground()},
+            {"waitFrames",framePacingWaitFrames_}}.dump());
+    });
     observations_->add("engine.screenshots",[this]{return ObservationValue(static_cast<std::int64_t>(validationScreenshots_));});
+    observations_->add("window.displayWakeRequested",[this]{return ObservationValue(frontend_->displayWakeRequested());});
+    observations_->add("window.surfacePresentation",[this]{
+        return ObservationValue(nlohmann::json{
+            {"vsync",effectiveVsync()},
+            {"mode",selectedPresentMode_==VK_PRESENT_MODE_MAILBOX_KHR ? "MAILBOX" : "FIFO"}}.dump());
+    });
     observations_->add("engine.gameInputSource",[this]{return ObservationValue(std::string(gameInputReplay_?"replay":"window"));});
     observations_->add("scene.nodeCount",[this]{
 #if AZURE_WITH_EDITOR
@@ -101,6 +114,37 @@ void AzureRenderApp::initializeValidation() {
             if(editorLayer_){editorLayer_->queueInputEvent(event);return nlohmann::json{{"queued",true},{"domain",domain}};}
 #endif
             throw std::logic_error("Editor input requires an editor host");
+        }
+        if(domain=="game-ui"){
+            if(!gameUi_)throw std::logic_error("Game UI input requires an active document");
+            if(event.at("action")=="character"){
+                if(!gameUi_->wantsKeyboard())throw std::logic_error("Game UI field requires focus");
+                const auto value=event.at("value").get<std::int64_t>();
+                if(value<0 || value>0x10ffff || (value>=0xd800 && value<=0xdfff))
+                    throw std::invalid_argument("Invalid game UI character");
+                gameUi_->character(static_cast<char32_t>(value));
+                return nlohmann::json{{"domain",domain},{"typed",true}};
+            }
+            if(event.at("action")=="key"){
+                if(!gameUi_->wantsKeyboard())throw std::logic_error("Game UI field requires focus");
+                const auto key=event.at("key").get<int>();
+                if(!isGameplayKey(key))throw std::invalid_argument("Invalid game UI key");
+                gameUi_->key(key,event.at("down").get<bool>());
+                return nlohmann::json{{"domain",domain},{"typed",true}};
+            }
+            if(event.at("action")!="click")throw std::invalid_argument("Unsupported game UI input");
+            const auto id=event.at("target").get<std::string>();
+            const auto bounds=gameUi_->bounds(id);
+            const auto x=bounds[0]+bounds[2]/2, y=bounds[1]+bounds[3]/2;
+            if(!(bounds[2]>0 && bounds[3]>0 && x>=0 && y>=0
+                && x<static_cast<float>(renderExtent_.width) && y<static_cast<float>(renderExtent_.height)))
+                throw std::invalid_argument("Game UI target is outside the viewport");
+            const auto pixelX=static_cast<int>(x),pixelY=static_cast<int>(y);
+            if(!gameUi_->wantsPointer(pixelX,pixelY))
+                throw std::invalid_argument("Game UI target has no pointer interaction");
+            gameUi_->pointer(pixelX,pixelY,true);
+            gameUi_->pointer(pixelX,pixelY,false);
+            return nlohmann::json{{"clicked",id},{"domain",domain}};
         }
         if(domain!="game")throw std::invalid_argument("Unknown input domain");
         if(!activeGame())throw std::logic_error("Input requires an active project");

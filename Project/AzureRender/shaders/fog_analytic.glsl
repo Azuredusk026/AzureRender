@@ -17,11 +17,38 @@ float azureFogTransmission(float logarithm){
     if(logarithm< -20)return 1;
     return exp(-exp(logarithm));
 }
-bool azureFogRay(vec3 start,vec3 end,out vec3 direction,out float logLength){
-    vec3 halfDelta=end*.5-start*.5;
-    float scale=max(max(abs(halfDelta.x),abs(halfDelta.y)),abs(halfDelta.z));
-    direction=vec3(0);logLength=0;if(scale==0)return false;
-    vec3 scaled=halfDelta/scale;float n=length(scaled);direction=scaled/n;logLength=log(scale)+log(n)+.6931471805599453;return true;
+struct AzureFogRayLength {
+    float dominant;
+    float normalized;
+    float coordinateScale;
+    float logUnscale;
+};
+float azureFogDominantComponent(vec3 delta){
+    vec3 magnitude=abs(delta);
+    return max(max(magnitude.x,magnitude.y),magnitude.z);
+}
+bool azureFogRay(vec3 start,vec3 end,out vec3 direction,out float logLength,out AzureFogRayLength ray){
+    // Keep both the difference and its dominant component's reciprocal finite
+    // when the endpoints span the float coordinate range.
+    precise vec3 eighthDelta=end*.125-start*.125;
+    vec3 delta=eighthDelta;
+    ray=AzureFogRayLength(azureFogDominantComponent(delta),0,.125,2.0794415416798357);
+    if(ray.dominant<1e-37){
+        // Scale before subtraction so differences between nearby endpoints
+        // survive. Equal axes may hold unrelated large world coordinates.
+        bvec3 moving=notEqual(start,end);
+        ray.coordinateScale=256;
+        ray.logUnscale=-5.545177444479562;
+        precise vec3 scaledDelta=mix(vec3(0),end,moving)*256-mix(vec3(0),start,moving)*256;
+        delta=scaledDelta;
+        ray.dominant=azureFogDominantComponent(delta);
+    }
+    direction=vec3(0);logLength=0;if(ray.dominant==0)return false;
+    vec3 scaled=delta/ray.dominant;
+    ray.normalized=length(scaled);
+    direction=scaled/ray.normalized;
+    logLength=log(ray.dominant)+log(ray.normalized)+ray.logUnscale;
+    return true;
 }
 float azureFogHeightAverage(float falloff,float reference,float start,float end){
     if(falloff==0)return 0;
@@ -31,15 +58,20 @@ float azureFogHeightAverage(float falloff,float reference,float start,float end)
     return height+(logQ>3.912023005428146?-logQ:azureFogLogExprel(-exp(logQ)));
 }
 AzureFogTransport azureEvaluateHeightFog(vec3 parameters,vec3 color,vec3 start,vec3 end){
-    vec3 direction;float logLength;
-    if(parameters.x==0||!azureFogRay(start,end,direction,logLength))return azureIdentityFog();
+    vec3 direction;float logLength;AzureFogRayLength ray;
+    if(parameters.x==0||!azureFogRay(start,end,direction,logLength,ray))return azureIdentityFog();
     float optical=log(parameters.x)+logLength+azureFogHeightAverage(parameters.y,parameters.z,start.y,end.y);
     float t=azureFogTransmission(optical);return AzureFogTransport(color*(1-t),vec3(t));
 }
 AzureFogTransport azureEvaluateAerialFog(AzureAerialFog p,vec3 start,vec3 end){
-    vec3 direction;float logLength;
-    if(p.rows[0].w==0||!azureFogRay(start,end,direction,logLength))return azureIdentityFog();
-    if(p.rows[3].w>0){float difference=log(p.rows[3].w)-logLength;if(difference>=0)return azureIdentityFog();logLength+=log(1-exp(difference));}
+    vec3 direction;float logLength;AzureFogRayLength ray;
+    if(p.rows[0].w==0||!azureFogRay(start,end,direction,logLength,ray))return azureIdentityFog();
+    if(p.rows[3].w>0){
+        // Subtract in linear space before taking the logarithm.
+        precise float remaining=fma(ray.dominant,ray.normalized,-p.rows[3].w*ray.coordinateScale);
+        if(remaining<=0)return azureIdentityFog();
+        logLength=log(remaining)+ray.logUnscale;
+    }
     float average=azureFogHeightAverage(p.rows[1].w,p.rows[2].w,start.y,end.y);
     if(p.rows[5].w>.5){
         float signedQ=-(p.rows[1].w*(end.y*.5-start.y*.5))*2;

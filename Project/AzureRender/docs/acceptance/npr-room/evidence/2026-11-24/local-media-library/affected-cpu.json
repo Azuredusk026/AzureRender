@@ -1,0 +1,42 @@
+[
+  {
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureMediaLibraryTests.exe",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-033508-local-media-library-3b96aa\\library-final"
+    ],
+    "exitCode": 0,
+    "stdout": "Media library audio/image decode, persistence, deduplication, budgets, versions, rollback and concurrency passed\n",
+    "stderr": "",
+    "exeSHA256": "33d8f4852c1108b11497b0a10f817cf9ef23fe67513f8a1bbb91acebda170d59"
+  },
+  {
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureProjectSaveStoreTests.exe",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-033508-local-media-library-3b96aa\\store-after-library"
+    ],
+    "exitCode": 0,
+    "stdout": "Project save scope, replacement, fallback and repeat open passed\n",
+    "stderr": "",
+    "exeSHA256": "c4cb91a363751f40694487527938172edd8cbf9508086c71f6e6bc94be667212"
+  },
+  {
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureFileLockTests.exe",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-033508-local-media-library-3b96aa\\lock-after-library"
+    ],
+    "exitCode": 0,
+    "stdout": "File lock exclusion, deadline, cancellation and native handle release passed\n",
+    "stderr": "",
+    "exeSHA256": "182b96d668cdcace2f43bcc278d08b93338685f67e93057cd337303718cf42d4"
+  },
+  {
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureImageCodecTests.exe",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-033508-local-media-library-3b96aa\\image-codecs"
+    ],
+    "exitCode": 0,
+    "stdout": "Image readers, precision, orientation, transfer, material and environment passed\n",
+    "stderr": "",
+    "exeSHA256": "c030faa8743756fe9a0555dcccf55f73409530ebfdc9585419d6e32be37ad1c8"
+  }
+]

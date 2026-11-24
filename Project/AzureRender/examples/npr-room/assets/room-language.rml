@@ -1,0 +1,12 @@
+#room-language-toggle { position: absolute; left: 140dp; top: 16dp; padding: 6dp 10dp; color: white; background-color: #34434f; }
+#room-language-panel { position: absolute; left: 140dp; top: 54dp; width: 172dp; padding: 8dp; background-color: #19232c; }
+#room-language-panel button { display: block; width: 150dp; margin: 0 0 3dp; padding: 4dp 8dp; color: white; background-color: #34434f; }
+#room-language-panel button:hover { background-color: #506472; }
+#room-language-1 { font-family: "Room UI Japanese"; }
+#room-language-4 { font-family: "Room UI Traditional Chinese"; }
+#room-language-6 { font-family: "Room UI Korean"; }
+</style>
+<button id="room-language-toggle" data-action="room-language-toggle"></button>
+<div id="room-language-panel" style="display: none;">
+<!-- room-language-options -->
+</div>

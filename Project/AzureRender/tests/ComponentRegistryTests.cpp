@@ -30,6 +30,14 @@ int main() {
         registry.addMigration("tool.counter", 1, [](auto data) { data["value"] = data.at("count"); data.erase("count"); return data; });
         ecs::World world;
         auto entity = world.createEntity();
+        constexpr auto noiseType = "azure.screen-noise";
+        auto noise = registry.defaults(noiseType);
+        require(noise["data"]["opacity"] == 0, "Screen noise must be inactive by default");
+        noise["data"]["opacity"] = .375;
+        registry.install(noiseType, world, entity, noise);
+        require(registry.contains(noiseType, world, entity), "Screen noise data was not installed");
+        require(registry.encode(noiseType, world, entity) == noise, "Screen noise data did not roundtrip");
+        rejects([&] { registry.validateWrite(noiseType, "opacity", 1.1); });
         auto label = registry.defaults("tool.label"); label["data"]["text"] = "asset inspector";
         registry.install("tool.label", world, entity, label);
         require(world.tryGet<ToolLabel>(entity)->text == "asset inspector", "External component was not installed");

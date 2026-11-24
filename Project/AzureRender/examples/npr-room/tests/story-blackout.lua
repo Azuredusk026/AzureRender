@@ -1,0 +1,52 @@
+local ratio, blind = 0, false
+local effect = new_story_blackout(function(value, useBlind) ratio, blind = value, useBlind end)
+
+local function command(row, value, hold, useBlind)
+    return {row = row, command = "DirectionBlackOut", arguments = {value, hold, useBlind}}
+end
+
+local full = command(4, "1", "-1", "0")
+local half = command(17, ".5", "-1", "0")
+local clear = command(19, "0", "-1", "0")
+local tutorial = {category = 18, commands = {full, {command = "WaitForSeconds"}, half, clear}}
+
+effect:begin(tutorial, false)
+assert(ratio == 0)
+effect:effect(full, 0)
+effect:update(0)
+assert(ratio == 1 and not blind)
+effect:effect(half, .7)
+effect:update(.6)
+assert(ratio == 1)
+effect:update(.1)
+assert(ratio == .5)
+effect:effect(clear, 0)
+effect:update(0)
+assert(ratio == 0)
+effect:finish()
+
+effect:begin(tutorial, true)
+assert(ratio == 1)
+effect:effect(full, 0)
+effect:effect(command(20, ".3", ".8", "1"), .2)
+effect:update(.1)
+assert(ratio == 1 and not blind)
+effect:update(.1)
+assert(ratio == .3 and blind)
+effect:effect(command(21, ".6", "-1", ""), 0)
+effect:update(.7)
+assert(ratio == .6 and not blind)
+effect:update(.1)
+assert(ratio == 0 and not blind)
+
+local finite = command(22, ".4", "2", "1")
+effect:begin({category = 1, commands = {full, finite, {command = "Text"}}}, false)
+assert(ratio == 0 and blind)
+effect:effect(full, 0)
+effect:effect(finite, 0)
+effect:update(1)
+assert(ratio == 0 and blind)
+effect:effect(command(23, ".8", "2", "1"), 4)
+effect:finish()
+effect:update(10)
+assert(ratio == 0 and not blind)

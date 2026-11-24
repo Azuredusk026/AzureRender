@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "382b3ce5-b0d8-4fda-968b-a219e4fa4d63",
+  "name": "NPR Room",
+  "mounts": [{"name": "assets", "path": "assets"}],
+  "startupScene": "assets:/boot.azurelevel",
+  "runtime": {
+    "schemaVersion": 1,
+    "input": {
+      "timer-toggle": [84],
+      "timer-skip": [75],
+      "timer-reset": [82],
+      "timer-mode": [77],
+      "timer-work-up": [87],
+      "timer-work-down": [88],
+      "timer-break-up": [66],
+      "timer-break-down": [78],
+      "timer-rounds-up": [67],
+      "timer-rounds-down": [86]
+    },
+    "systems": []
+  }
+}

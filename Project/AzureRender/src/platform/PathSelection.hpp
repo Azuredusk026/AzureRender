@@ -11,8 +11,15 @@ struct PathSelectionRequest {
     std::filesystem::path initialDirectory;
     std::vector<std::string> extensions;
     void* owner=nullptr;
+    bool multiple=false;
 };
-struct PathSelectionResult {std::filesystem::path path;bool cancelled=false;std::string diagnostic;};
+struct PathSelectionResult {
+    std::filesystem::path path;
+    bool cancelled=false;
+    std::string diagnostic;
+    // Successful selections include every path; path is the first item.
+    std::vector<std::filesystem::path> paths;
+};
 PathSelectionResult choosePath(const PathSelectionRequest&);
 void revealPath(const std::filesystem::path&);
 class PathHistory {

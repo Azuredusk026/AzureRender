@@ -160,7 +160,7 @@ bool AzureRenderApp::recreateSwapchain() {
         editorLayer_->shutdownVulkan();
     }
 #endif
-    gameUi_.reset();gameUiRenderer_.reset();gameUiPath_.clear();
+    const auto previousFormat = swapchainFormat_;
     cleanupSwapchain();
     createSwapchain();
     createImageViews();
@@ -170,6 +170,9 @@ bool AzureRenderApp::recreateSwapchain() {
     createNormalResources();
     createRenderPass();
     createPostProcessRenderPass();
+    if (gameUiRenderer_ && previousFormat != swapchainFormat_) {
+        gameUiRenderer_->recreatePipeline(postProcessRenderPass_, resourceLocator_.shaderDirectory());
+    }
     createEditorUiRenderPass();
     createGraphicsPipeline();
     createFramebuffers();
@@ -254,8 +257,17 @@ void AzureRenderApp::recreateEditorViewportResources() {
             + std::to_string(renderExtent_.height));
 }
 
+void AzureRenderApp::clearRoomGlitch() {
+    roomGlitchViews_.reset();
+    roomGlitchView_ = 0;
+    screenGlitch_.reset();
+}
+
 void AzureRenderApp::cleanupEditorViewportResources(
     const bool destroySampler) {
+    screenGlitch_.reset();
+    screenChromatic_.reset();
+    screenMove_.reset();
     if (postProcessDescriptorPool_ != VK_NULL_HANDLE) {
         vkDestroyDescriptorPool(device_, postProcessDescriptorPool_, nullptr);
         postProcessDescriptorPool_ = VK_NULL_HANDLE;
@@ -307,6 +319,7 @@ void AzureRenderApp::cleanupEditorViewportResources(
 }
 
 void AzureRenderApp::cleanupSwapchain() {
+    screenBlackout_.reset();
     for (const auto semaphore : renderFinishedSemaphores_) {
         vkDestroySemaphore(device_, semaphore, nullptr);
     }
@@ -325,6 +338,10 @@ void AzureRenderApp::cleanupSwapchain() {
     if (hudPipeline_ != VK_NULL_HANDLE) {
         vkDestroyPipeline(device_, hudPipeline_, nullptr);
         hudPipeline_ = VK_NULL_HANDLE;
+    }
+    if (screenNoisePipeline_ != VK_NULL_HANDLE) {
+        vkDestroyPipeline(device_, screenNoisePipeline_, nullptr);
+        screenNoisePipeline_ = VK_NULL_HANDLE;
     }
     if (postProcessPipelineLayout_ != VK_NULL_HANDLE) {
         vkDestroyPipelineLayout(

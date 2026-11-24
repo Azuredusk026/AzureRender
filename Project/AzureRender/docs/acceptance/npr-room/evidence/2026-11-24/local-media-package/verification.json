@@ -1,0 +1,88 @@
+{
+  "package": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-052507-local-media-native-package-cb945d\\独立媒体工作间",
+  "profile": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-052507-local-media-native-package-cb945d\\launcher-probe\\档案 空间",
+  "sourceProject": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-052507-local-media-native-package-cb945d\\runtime-view\\probe-game\\project.azureproject",
+  "sourceInstall": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-052507-local-media-native-package-cb945d\\runtime-view",
+  "sourceProjectUnavailable": true,
+  "sourceInstallUnavailable": true,
+  "sourceMediaUnavailable": true,
+  "mediaSourceSHA256": "df6eb3777cb4180fc209a5d9f8154c7744188c578b5305c2c11bf8ada2571aed",
+  "systemOnlyPath": "C:\\WINDOWS\\System32;C:\\WINDOWS",
+  "projectId": "4ce1b480-bb3d-4048-8f2c-67ce1b6c51f9",
+  "manifestSHA256": "efc8277a6499c890ba60762475c4c72315255a44e5d36bfe6289ec8f408339b2",
+  "playerSHA256": "818c745b88e9d049d206bac5318cf85b2f27bf39006df86ce9ac9ee621803147",
+  "launcherSHA256": "1e2626d5abc7096eb46d70aa7e71a8fd179ff3e20be98ebb2350f33ecbbefb9d",
+  "fileCount": 1022,
+  "musicEntries": 3,
+  "imageEntries": 1,
+  "independentPlayers": 3,
+  "nativeDialogs": 1,
+  "imageColors": {
+    "redPixels": 38720,
+    "greenPixels": 38720
+  },
+  "entries": [
+    {
+      "entry": "本地媒体工作间.exe",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-052507-local-media-native-package-cb945d\\独立媒体工作间\\本地媒体工作间.exe",
+        "--no-error-dialog",
+        "--fixed-frame-step",
+        "--smoke-frames",
+        "30",
+        "--game-actions",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-052507-local-media-native-package-cb945d\\package-replay-verified\\native\\actions.json",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-052507-local-media-native-package-cb945d\\package-replay-verified\\native\\runtime.json"
+      ],
+      "exitCode": 0,
+      "audioStarts": 1,
+      "uiDrawCalls": 1109
+    },
+    {
+      "entry": "start-game.cmd",
+      "command": [
+        "C:\\WINDOWS\\system32\\cmd.exe",
+        "/d",
+        "/c",
+        "start-game.cmd",
+        "--no-error-dialog",
+        "--fixed-frame-step",
+        "--smoke-frames",
+        "30",
+        "--game-actions",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-052507-local-media-native-package-cb945d\\package-replay-verified\\command\\actions.json",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-052507-local-media-native-package-cb945d\\package-replay-verified\\command\\runtime.json"
+      ],
+      "exitCode": 0,
+      "audioStarts": 1,
+      "uiDrawCalls": 1109
+    }
+  ],
+  "manifestAfterReplay": "passed",
+  "vulkanValidation": "passed",
+  "resourcesAfterExit": "buffers=0 images=0",
+  "baseCommit": "252479e",
+  "buildQueue": 2511,
+  "verificationQueue": 2514,
+  "failedHarnessQueue": 2513,
+  "failedDispatchQueue": 2512,
+  "inputMapSHA256": "bf9872b1e0836160023ab8aa15d79be18017883a52f2cba5f6eeeff635efe60d",
+  "runtimeInputFiles": 1009,
+  "runtimeInputsUnchanged": true,
+  "sourceSHA256": {
+    "tools/build_game.py": "50ad116d48bd1da34fe8dc4a509325d34344c00ce8f52f80f179475ab01ccc79",
+    "tools/test_game_package_rules.py": "1f5873c082ed66e05a25c075b3ac0a821bf9e5a1ce624958ef59234504f684c9",
+    "tools/test_local_media_package.py": "423eeaec38d4a147cdf8538c22bdb9b7739f25e4bc75b5e315abe7293dea0542"
+  },
+  "reusedEvidence": {
+    "fullMediaSelection": "../local-media-player/verification.json",
+    "activeImportLifecycle": "../local-media-import-lifecycle/verification.json",
+    "nativeDefaultRoots": "../native-launcher-save-root/verification.json"
+  },
+  "remaining": [
+    "Physical media controls and listening pending user-requested manual retest",
+    "Formal source-room and Steam runs paused"
+  ]
+}

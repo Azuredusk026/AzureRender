@@ -69,7 +69,18 @@ int main(){try{
     check(registry.set("runtime.vsync",false,SettingSource::CommandLine).passed,"Startup presentation override");
     registry.applyPending();check(registry.get("runtime.vsync")==false,"Startup override reaches the shared setting");
     check(!registry.set("runtime.vsync",1,SettingSource::Console).passed,"Presentation setting requires a boolean");
+    check(registry.get("runtime.windowMode")==0 && registry.get("runtime.windowResolution")==3
+        && registry.get("runtime.alwaysOnTop")==false,"Default window preferences preserve the supplied client size");
+    check(registry.replaceLayer({{"runtime.windowMode",1},{"runtime.windowResolution",2},{"runtime.alwaysOnTop",true}},
+        SettingSource::UserFile).passed,"Window preferences accept the original modes and presets");
+    check(!registry.set("runtime.windowMode",2,SettingSource::Console).passed,"Unknown window mode is rejected");
+    check(!registry.set("runtime.windowResolution",4,SettingSource::Console).passed,"Unknown window preset is rejected");
+    check(!registry.set("runtime.alwaysOnTop",1,SettingSource::Console).passed,"Topmost requires a boolean");
+    registry.applyPending();
+    check(registry.get("runtime.windowMode")==1 && registry.get("runtime.windowResolution")==2
+        && registry.get("runtime.alwaysOnTop")==true,"User window preferences reach the startup settings");
     registry.start();
+    check(!registry.set("runtime.windowResolution",0,SettingSource::Console).passed,"Startup window presets require a new host session");
     check(!registry.set("runtime.vsync",true,SettingSource::Console).passed,"Presentation changes require a new host session");
     check(registry.set("runtime.maxFrameRate",100,SettingSource::Console).passed,"Frame rate is a shared runtime setting");
     registry.applyPending();

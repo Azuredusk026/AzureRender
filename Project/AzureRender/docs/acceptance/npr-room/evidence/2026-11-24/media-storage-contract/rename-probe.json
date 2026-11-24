@@ -1,0 +1,14 @@
+[
+  {
+    "api": "move",
+    "passed": false,
+    "error": 5,
+    "value": "old"
+  },
+  {
+    "api": "replace",
+    "passed": true,
+    "error": 0,
+    "value": "new"
+  }
+]

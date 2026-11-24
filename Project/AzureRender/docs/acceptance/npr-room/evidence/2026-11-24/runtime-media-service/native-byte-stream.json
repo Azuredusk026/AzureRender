@@ -1,0 +1,28 @@
+[
+  {
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureMediaLibraryTests.exe",
+      "--import",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-042102-runtime-media-service-903258\\m4a-fixed-profile\\deep-dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\docs\\acceptance\\g23\\evidence\\2026-10-12\\audio-fixtures\\reference.m4a"
+    ],
+    "exitCode": 0,
+    "stdout": "m4a: 1 committed entries\r\n",
+    "stderr": "",
+    "sourceSHA256": "5c1c876a8eae7f210e89af58a3ec44e3f7c2927d60616670be5e6d52bd6f96b4",
+    "exeSHA256": "3c0fb47cee277bd79a95f6cc51e9771827fc7fc8d1c88e3a1c1eefad8ed8c962"
+  },
+  {
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureMediaLibraryTests.exe",
+      "--import",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-042102-runtime-media-service-903258\\m4a-fixed-profile\\deep-dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\docs\\acceptance\\g23\\evidence\\2026-10-12\\audio-fixtures\\reference.aac"
+    ],
+    "exitCode": 0,
+    "stdout": "aac: 2 committed entries\r\n",
+    "stderr": "",
+    "sourceSHA256": "dffa66108db947694b6f6d60192d7f2e37cfa954777c740c825f0e32dac5e1fd",
+    "exeSHA256": "3c0fb47cee277bd79a95f6cc51e9771827fc7fc8d1c88e3a1c1eefad8ed8c962"
+  }
+]

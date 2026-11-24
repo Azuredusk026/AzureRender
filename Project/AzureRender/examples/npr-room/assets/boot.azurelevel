@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "boot",
+  "sceneType": "sample",
+  "resources": [],
+  "lights": [],
+  "nodes": [
+    {
+      "id": "startup",
+      "components": {
+        "azure.script": {
+          "type": "azure.script",
+          "version": 1,
+          "data": {"asset": "assets:/boot.lua", "enabled": true}
+        }
+      }
+    }
+  ]
+}

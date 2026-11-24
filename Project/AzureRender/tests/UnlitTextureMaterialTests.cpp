@@ -215,10 +215,14 @@ int main(int argc,char** argv){try{
  require(packMaterialSurfaceProfile(bound.materials[0]).rows==packed.rows&&bound.materials[0].name==boundName,"Public slot binding preserves complete layers and source identity");
  auto reduced=document;auto& reducedProfile=reduced.surface["materials"][0]["extras"]["azureRenderMaterial"];
  reducedProfile["features"]={"unlit-surface"};reducedProfile["surface"]={{"schemaVersion",1},{"lighting","unlit"}};
- std::ofstream(materialPath)<<reduced.encode().dump();const auto messages=RuntimeDiagnostics::instance().messages().size();
+ std::ofstream(materialPath)<<reduced.encode().dump();
+ std::size_t previousMessageCount=0;
+ RuntimeDiagnostics::instance().visitMessages([&](const auto& messages){previousMessageCount=messages.size();});
  applyMaterialBindings(bound,{{slot,binding}});
- require(RuntimeDiagnostics::instance().messages().size()==messages+1
-  &&RuntimeDiagnostics::instance().messages().back().find("unlit-texture-layers")!=std::string::npos,"Full replacement reports lost layer semantics");
+ RuntimeDiagnostics::instance().visitMessages([&](const auto& messages){
+  require(messages.size()==previousMessageCount+1&&messages.back().find("unlit-texture-layers")!=std::string::npos,
+   "Full replacement reports lost layer semantics");
+ });
  RenderSettings settings;
  const Json frame={{"schemaVersion",1},{"exposureGain",2},{"saturation",.5},{"colorGain",{.5,1,2}}};
  decodeLevelRenderSettings(settings,{{"schemaVersion",20},{"unlitEffects",frame}});

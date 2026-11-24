@@ -1,0 +1,40 @@
+[
+  {
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureFileLockTests.exe",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-033508-local-media-library-3b96aa\\file-lock-final"
+    ],
+    "exitCode": 0,
+    "stdout": "File lock exclusion, deadline, cancellation and native handle release passed\n",
+    "stderr": "",
+    "exeSHA256": "182b96d668cdcace2f43bcc278d08b93338685f67e93057cd337303718cf42d4"
+  },
+  {
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureProjectSaveStoreTests.exe",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-033508-local-media-library-3b96aa\\save-store-final"
+    ],
+    "exitCode": 0,
+    "stdout": "Project save scope, replacement, fallback and repeat open passed\n",
+    "stderr": "",
+    "exeSHA256": "a0e4ca6fc50b1d071e73ac7cbcadaa37aac8c78c12e75233bedf533f693aa36e"
+  },
+  {
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureScriptBackendContractTests.exe"
+    ],
+    "exitCode": 0,
+    "stdout": "Script entity identities, binding permissions and shared initialization transactions passed\n",
+    "stderr": "",
+    "exeSHA256": "43cf40c3795dfce3a7ea20613a78300f9e26bad4c3b276d000cd62fed3e07eb2"
+  },
+  {
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureScriptInteropTests.exe"
+    ],
+    "exitCode": 0,
+    "stdout": "Real script interop, output ownership, version, owner thread and expired session passed\n",
+    "stderr": "",
+    "exeSHA256": "019ffb85b0e85dea3b8e8144b5043a65dfa37f75b8e07f8fa70a993980def57d"
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "command": [
+      "D:\\Tools\\Python311\\python.exe",
+      "-B",
+      "D:\\Projects\\FYP-worktrees\\npr-room-reproduction\\Project\\AzureRender\\tools\\test_project_save_player.py",
+      "--player",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzurePlayer.exe",
+      "--resources",
+      "D:/Projects/FYP/Project/AzureRender/build/runs/20261121-024547-original-music-update-resume-052501/resources",
+      "--template",
+      "D:/Projects/FYP/Project/AzureRender/assets_public/gameplay",
+      "--output",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-043955-local-media-player-2a34ae\\exploration-regression"
+    ],
+    "exitCode": 0,
+    "stdout": "Exploration Player save, reload and native release passed\r\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "D:\\Tools\\Python311\\python.exe",
+      "-B",
+      "D:\\Projects\\FYP-worktrees\\npr-room-reproduction\\Project\\AzureRender\\tools\\npr_room\\test_todo_exit_player.py",
+      "--player",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzurePlayer.exe",
+      "--resources",
+      "D:/Projects/FYP/Project/AzureRender/build/runs/20261121-024547-original-music-update-resume-052501/resources",
+      "--source",
+      "D:\\Projects\\FYP-worktrees\\npr-room-reproduction\\Project\\AzureRender\\examples\\npr-room\\assets\\todo.lua",
+      "--output",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-043955-local-media-player-2a34ae\\todo-regression"
+    ],
+    "exitCode": 0,
+    "stdout": "{\"playerSHA256\": \"818c745b88e9d049d206bac5318cf85b2f27bf39006df86ce9ac9ee621803147\", \"controllerSHA256\": \"3211b1c37be909634f19c5d322e95b31f4db21c62af2f0241035c014cd91dde4\", \"fixtureSHA256\": {\"assets/music.lua\": \"f925d9ba24c8a20ef7f772369d84d17e8c74a1eaad4f6383b2f2d080263b20aa\", \"assets/music.lua.azmeta\": \"b08d5969366fc254b572d5eb310b4417c19f0c478f089561536e9d71b861bfd8\", \"assets/music.rml\": \"1ada7e8104aef6c2cfd13c8c4314f345d43546e3717201fc3d45ad5cfbfeca53\", \"assets/music.rml.azmeta\": \"94985b1b54826fc1d67ae59f7386914040b6658c75b5fc3be42012c10fe6fe7c\", \"assets/room.azurelevel\": \"6beb27165da1278c04c484640f821392199941346fd2f2f166ca69e6a3487ee9\", \"assets/room.azurelevel.azmeta\": \"f9a759f7c2abe4ad4f2212d05b302ff3dfb25e9bf413d54684f3557857a7345d\", \"assets/todo.lua\": \"3211b1c37be909634f19c5d322e95b31f4db21c62af2f0241035c014cd91dde4\", \"assets/todo.lua.azmeta\": \"c5ab0f3994c91954dde45ec7a907aca6cda460f99fd79e67b4cf940fe43114c5\", \"assets/todo.rml\": \"cb7faf1c786cd1f60703cb16370897c16eba1bb3dee983ebce2251aba65927e4\", \"assets/todo.rml.azmeta\": \"e5402218e7bdab189a0c8b4e59e5959ee0096e5cd07e88838f9d58c7dda9895c\", \"assets/tone-1.wav\": \"330b36d5cc19a2dae1142561ce5f2bda6e893ef2525db827a03ca76b838fca7d\", \"assets/tone-1.wav.azmeta\": \"2bab9c464c86930ef48b7b9875fb55c48c82ceb947e380ce49bcef10e7edf569\", \"assets/tone-2.wav\": \"81245a073b0c8a6c86a80da39a4451a5a343a245436241448286f871bbd76f38\", \"assets/tone-2.wav.azmeta\": \"ca90dee16a8bfe1d322b12a3d1398520cc08d78409b5348c0c3e3c5c52b0f08c\", \"project.azureproject\": \"f91af11d771efe97ec475b5299b7f492b64acc8eb00c64fc61e6db559473e5a0\"}, \"firstExit\": [1, 3, [[1, \"Original list\", [[2, \"First line\\nSecond line\", \"\", \"2028-02-29\"]]]]], \"secondExit\": [1, 3, [[1, \"Original list\", [[2, \"First line\\nSecond line restored\", \"\", \"2028-02-29\"]]]]], \"invalidDatePreserved\": true, \"futurePayloadPreserved\": true, \"futureEnvelopePreserved\": true, \"independentPlayers\": 5, \"liveAllocationsAfterExit\": 0}\r\n",
+    "stderr": ""
+  }
+]

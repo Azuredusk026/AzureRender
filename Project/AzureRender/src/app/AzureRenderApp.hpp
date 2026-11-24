@@ -1,5 +1,6 @@
 #pragma once
 #include <deque>
+#include <filesystem>
 
 #ifndef AZURE_WITH_EDITOR
 #define AZURE_WITH_EDITOR 1
@@ -21,6 +22,9 @@
 #include "assets/GltfLoader.hpp"
 #include "render/RenderSettings.hpp"
 #include "render/ColorGradingLutGpu.hpp"
+#include "render/ScreenBlackoutGpu.hpp"
+#include "render/ScreenEffectGpu.hpp"
+#include "render/RenderViewService.hpp"
 #include "render/SpatialAntiAliasing.hpp"
 #include "render/TemporalReconstruction.hpp"
 #include "render/SceneMultisampling.hpp"
@@ -34,7 +38,6 @@
 #include "render/RecordingWorkerPool.hpp"
 #if AZURE_WITH_EDITOR
 #include "devtools/ShaderHotReloader.hpp"
-#include "render/RenderViewService.hpp"
 #include "editor/preview/AssetThumbnailService.hpp"
 #include "editor/EditorRenderResourceState.hpp"
 #endif
@@ -72,6 +75,7 @@ public:
     ~AzureRenderApp();
 
     void run(const AzureRenderOptions& options = {});
+    void run(const AzureRenderOptions& options, const std::filesystem::path& saveRoot);
 #if AZURE_WITH_EDITOR
     std::shared_ptr<azurerender::EditorContext> showProjectCenter(const AzureRenderOptions& options, const std::string& initialProject = {});
 #endif
@@ -434,6 +438,8 @@ private:
     void initVulkan(const std::string& assetPath);
     void initEditorUi();
     void mainLoop(std::uint64_t smokeFrameLimit);
+    unsigned effectiveFrameRateLimit();
+    bool effectiveVsync();
     void activatePortfolioOrbit();
     void configureQaHarness();
     void updateTechnicalSequenceState(std::uint64_t frameIndex);
@@ -572,4 +578,22 @@ private:
         const VkDebugUtilsMessengerCallbackDataEXT* callbackData,
         void* userData);
     static void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
+    VkPipeline screenNoisePipeline_ = VK_NULL_HANDLE;
+    std::unique_ptr<azurerender::ScreenBlackoutGpu> screenBlackout_;
+    std::unique_ptr<azurerender::ScreenEffectGpu> screenChromatic_;
+    std::unique_ptr<azurerender::ScreenEffectGpu> screenMove_;
+    bool screenMovePrecedingBand_ = false;
+    std::unique_ptr<azurerender::RenderViewService> roomGlitchViews_;
+    azurerender::RenderViewHandle roomGlitchView_ = 0;
+    std::unique_ptr<azurerender::RenderViewService> preparedGlitchViews_;
+    azurerender::RenderViewHandle preparedGlitchView_ = 0;
+    std::pair<std::string,std::string> preparedGlitchKey_;
+    std::unique_ptr<azurerender::ScreenEffectGpu> screenGlitch_;
+    std::uint32_t glitchVendorId_ = 0;
+    std::unique_ptr<azurerender::RenderViewService> createRoomGlitchView(
+        const azurerender::RenderContext&, const std::string& rendererId, azurerender::RenderViewHandle&,
+        bool deferLoad);
+    bool preloadRoomGlitchView(const azurerender::Level&, double budgetMs);
+    void releasePreparedGlitchView();
+    void clearRoomGlitch();
 };

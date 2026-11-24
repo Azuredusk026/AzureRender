@@ -1,0 +1,24 @@
+Traceback (most recent call last):
+  File "D:\Projects\FYP-worktrees\npr-room-reproduction\Project\AzureRender\tools\test_local_media_player.py", line 238, in <module>
+    verify(args.player, args.resources, args.audio_fixtures, args.image_fixtures, args.native_fixtures, args.output)
+  File "D:\Projects\FYP-worktrees\npr-room-reproduction\Project\AzureRender\tools\test_local_media_player.py", line 156, in verify
+    wait_for(lambda: len(entries("music")) == 5)
+  File "D:\Projects\FYP-worktrees\npr-room-reproduction\Project\AzureRender\tools\test_local_media_player.py", line 131, in wait_for
+    while not check():
+              ^^^^^^^
+  File "D:\Projects\FYP-worktrees\npr-room-reproduction\Project\AzureRender\tools\test_local_media_player.py", line 156, in <lambda>
+    wait_for(lambda: len(entries("music")) == 5)
+                         ^^^^^^^^^^^^^^^^
+  File "D:\Projects\FYP-worktrees\npr-room-reproduction\Project\AzureRender\tools\test_local_media_player.py", line 127, in entries
+    value = payload("local-media-" + kind)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\FYP-worktrees\npr-room-reproduction\Project\AzureRender\tools\test_local_media_player.py", line 125, in payload
+    return json.loads(file.read_bytes())["payload"] if file else None
+                      ^^^^^^^^^^^^^^^^^
+  File "D:\Tools\Python311\Lib\pathlib.py", line 1050, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Tools\Python311\Lib\pathlib.py", line 1044, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-043955-local-media-player-2a34ae\\block-layout-replay\\profile\\project-61333839613365632d373033642d346462302d623362352d613463346533363439636231\\save-local-media-music.json'

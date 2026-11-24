@@ -1,0 +1,86 @@
+{
+  "commands": [
+    {
+      "command": [
+        "D:\\Tools\\Python311\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/npr_room",
+        "-p",
+        "test_*.py"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "..........................................................................................................................................................................\r\n----------------------------------------------------------------------\r\nRan 170 tests in 1.799s\r\n\r\nOK\r\n"
+    },
+    {
+      "command": [
+        "D:\\Tools\\Python311\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools",
+        "-p",
+        "test_game_package_rules.py"
+      ],
+      "exitCode": 0,
+      "stdout": "[stage] Validating project and installed runtime (timeout 1800 s)\r\n[stage] Copying runtime and project resources\r\n[stage] Validating packaged project (timeout 1800 s)\r\n[stage] Checking hashes and committing package\r\n[stage] Validating project and installed runtime (timeout 1800 s)\r\n[stage] Copying runtime and project resources\r\n[stage] Validating project and installed runtime (timeout 1800 s)\r\n[stage] Copying runtime and project resources\r\n[stage] Validating packaged project (timeout 1800 s)\r\n[stage] Checking hashes and committing package\r\n[stage] Validating project and installed runtime (timeout 1800 s)\r\n[stage] Copying runtime and project resources\r\n[stage] Validating project and installed runtime (timeout 1800 s)\r\n[stage] Copying runtime and project resources\r\n[stage] Validating project and installed runtime (timeout 61.25 s)\r\n[stage] Copying runtime and project resources\r\n[stage] Validating packaged project (timeout 61.25 s)\r\n[stage] Checking hashes and committing package\r\n[stage] Validating project and installed runtime (timeout 1800 s)\r\n[stage] Copying runtime and project resources\r\n[stage] Validating packaged project (timeout 1800 s)\r\n[stage] Checking hashes and committing package\r\n[stage] Validating project and installed runtime (timeout 1800 s)\r\n[stage] Copying runtime and project resources\r\n[stage] Validating packaged project (timeout 1800 s)\r\n[stage] Validating project and installed runtime (timeout 1800 s)\r\n[stage] Copying runtime and project resources\r\n[stage] Validating packaged project (timeout 1800 s)\r\n[stage] Checking hashes and committing package\r\n[stage] Validating project and installed runtime (timeout 1800 s)\r\n[stage] Copying runtime and project resources\r\n[stage] Validating packaged project (timeout 1800 s)\r\n[stage] Checking hashes and committing package\r\n[stage] Validating project and installed runtime (timeout 1800 s)\r\n[stage] Copying runtime and project resources\r\n[stage] Validating packaged project (timeout 1800 s)\r\n[stage] Checking hashes and committing package\r\n[stage] Validating project and installed runtime (timeout 1800 s)\r\n[stage] Copying runtime and project resources\r\n[stage] Validating packaged project (timeout 1800 s)\r\n[stage] Checking hashes and committing package\r\n[stage] Validating project and installed runtime (timeout 1800 s)\r\n[stage] Copying runtime and project resources\r\n[stage] Validating packaged project (timeout 1800 s)\r\n[stage] Checking hashes and committing package\r\n[stage] Validating project and installed runtime (timeout 1800 s)\r\n[stage] Copying runtime and project resources\r\n[stage] Validating packaged project (timeout 1800 s)\r\n[stage] Checking hashes and committing package\r\n[stage] Validating project and installed runtime (timeout 1800 s)\r\n[stage] Copying runtime and project resources\r\n[stage] Validating packaged project (timeout 1800 s)\r\n[stage] Checking hashes and committing package\r\n[stage] Validating project and installed runtime (timeout 1800 s)\r\n[stage] Copying runtime and project resources\r\n[stage] Validating project and installed runtime (timeout 1800 s)\r\n[stage] Copying runtime and project resources\r\n[stage] Validating project and installed runtime (timeout 1800 s)\r\n[stage] Copying runtime and project resources\r\n[stage] Validating packaged project (timeout 1800 s)\r\n[stage] Checking hashes and committing package\r\n[stage] Validating project and installed runtime (timeout 1800 s)\r\n[stage] Copying runtime and project resources\r\n[stage] Validating packaged project (timeout 1800 s)\r\n[stage] Checking hashes and committing package\r\n[stage] Validating project and installed runtime (timeout 1800 s)\r\n[stage] Copying runtime and project resources\r\n[stage] Validating packaged project (timeout 1800 s)\r\n[stage] Checking hashes and committing package\r\n[stage] Validating project and installed runtime (timeout 0.01 s)\r\n[stage] Copying runtime and project resources\r\n[stage] Validating packaged project (timeout 0.01 s)\r\n",
+      "stderr": ".........................\r\n----------------------------------------------------------------------\r\nRan 25 tests in 3.992s\r\n\r\nOK\r\n"
+    },
+    {
+      "command": [
+        "D:\\Tools\\Python311\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools",
+        "-p",
+        "test_script_bindings.py"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "...\r\n----------------------------------------------------------------------\r\nRan 3 tests in 0.778s\r\n\r\nOK\r\n"
+    },
+    {
+      "command": [
+        "D:\\Tools\\Python311\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "tools/npr_room/test_pomodoro_runtime.py",
+        "--lua",
+        "D:/Projects/FYP/Project/AzureRender/build/runs/20261120-010632-asset-parse-source-diagnostic-d884c7/player-release/lua.dll"
+      ],
+      "exitCode": 0,
+      "stdout": "Optional purchase cue failure preserves purchase, ambient activation and recovery\nTimer, room startup, tools, progression, story and platform fixture checks passed\r\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "D:\\Tools\\Python311\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "tools/test_local_media_controller.py",
+        "--lua",
+        "D:/Projects/FYP/Project/AzureRender/build/runs/20261120-010632-asset-parse-source-diagnostic-d884c7/player-release/lua.dll"
+      ],
+      "exitCode": 0,
+      "stdout": "Local media controller selection, playback, partial failure, preferences and empty lists passed\n",
+      "stderr": ""
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "formatVersion": 1,
+  "status": "staged",
+  "textures": 570,
+  "fonts": 7,
+  "slots": 577,
+  "uniquePayloads": 574,
+  "payloadBytes": 250805857,
+  "manifestSHA256": "bf7f2b728c5ca5396efc5bff8386578ec7e2ebbc5227c6c0e369af9177fad17f",
+  "fontCoverage": {
+    "localizationRows": 2111,
+    "fontAssets": 12,
+    "sourceFontOutlines": 7,
+    "characterEntries": 55362,
+    "atlasDimensionsChecked": 12,
+    "invalidGlyphReferences": 0,
+    "missingCodepoints": {"En": 0, "Ja": 0, "Ko": 0, "Pt": 0, "Ru": 0, "ZhHans": 0, "ZhHant": 0},
+    "manifestSHA256": "81799868c725dff3731c596ac1578dfd43e7709e34083a01ef49d85f76f1083c"
+  },
+  "alphaAtlas": {
+    "textures": 2,
+    "sourceAlphaCompared": true,
+    "manifestSHA256": "9494a24ee4e72d304a067aeebbce2abe0126f2289ccc18c4061569c5f1b54e8b"
+  }
+}

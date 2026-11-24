@@ -30,6 +30,23 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 
 ## 当前执行顺序
 
+房间游戏移植按专项计划的 P0 至 P7 实施。
+P0 已锁定 Recovery Windows 产物及静态目录。
+功能可达性、动态资源和画面对照继续核验。
+[移植计划](2026-11-16-npr-room-reproduction.md) · [验收基线](../acceptance/npr-room/baseline.md)
+[房间底色与主纹理](../acceptance/npr-room/room-base-surfaces.md)通过 170 个槽位核对及原生对照。
+[房间语言设置](../acceptance/npr-room/room-language.md)通过七种语言切换、本地存档重开及原语音续播。
+[房间二阶环境光](../acceptance/npr-room/windows-atmosphere.md#原版环境光探针)通过原版方向的双设备求值。
+匹配 Player 的完整房间画面等待受管构建配额。
+[完整程序参数序列](../acceptance/npr-room/windows-atmosphere.md#完整程序参数序列)取得夜晚、多云各十二帧颜色、深度及同帧运行状态。
+[引用模型姿态文件](../acceptance/npr-room/windows-atmosphere.md#引用模型姿态文件)通过七部件加载及同设备逐像素对照。
+[角色姿态序列](../acceptance/npr-room/windows-atmosphere.md#角色姿态序列)通过夜晚、多云十二帧骨骼与表情的原生重复回放。
+[同帧大气合成](../acceptance/npr-room/windows-atmosphere.md#同帧大气合成)取得两种天气首帧的配对天空、云层及原相机雾体积。
+[同帧大气房间装配](../acceptance/npr-room/windows-atmosphere.md#同帧大气房间装配)通过原机位、静态角色、五盏灯及原生雾开关复验。
+[原版刚性附件](../acceptance/npr-room/character-assets.md#原版刚性附件)通过猫耳耳机装配、静态对照及十二帧角色回放。
+[运行时主贴图与底色](../acceptance/npr-room/room-base-surfaces.md#运行时主贴图与底色)通过杯子图案、两种天气的材质变体及原生重复回放。
+[原版变形道具](../acceptance/npr-room/character-assets.md#原版变形道具)通过五关节漫画书、十一关节课本及两种天气的原生回放。
+
 [联合场景热点纹理分配](../acceptance/nr/joint-texture-hot-placement.md)完成 1440p 同驱动逐像素比较与 1080p60 配对计时。候选 GPU P95 高于首轮参考，保留隔离结果。
 
 [三纹理采样与视口选择集成](../acceptance/nr/projected-hair-viewport-integration.md)通过所属构建和双显卡复验。
@@ -1059,6 +1076,12 @@ Windows 安装路径及隔离 Python 通过实测。
 普通无光照表面、附件一致性及 GPU 成本见[预算验收](../acceptance/nr/unlit-opaque-budget.md)。
 光谱大气、远端片元与公共数值见[解析雾验收](../acceptance/nr/analytic-fog.md)。
 场景支持[解析雾配置](../runtime/scene-fog.md)及独立解析介质。
+[大气起始距离](2026-10-28-view-fog-composition.md#大气起始距离数值任务)覆盖相邻浮点边界及极端坐标测试。
+[移动相机雾效](2026-10-28-view-fog-composition.md#移动相机雾效验证任务)覆盖机位恢复与两条描述符路径的十帧对照。
+[短射线雾效](2026-10-28-view-fog-composition.md#短射线雾效数值任务)通过双设备数值及四项场景对照。
+[双机位高度雾体积](2026-10-28-view-fog-composition.md#双机位高度雾体积验证任务)通过原生加载及 72 帧往返。
+[实时高度雾生成](2026-10-28-view-fog-composition.md#实时高度雾体积生成任务)通过双设备体素、同步和槽位复验。
+[实时高度雾 Player 接入](2026-11-19-realtime-height-fog-player.md#player-接入任务)覆盖版本三绑定、画面采样和槽位发布。十帧相机及七十二帧关卡回放使用接入后的 Player 验收。
 
 双配置、真实片元与完整候选见[合成验收](../acceptance/nr/scene-fog.md)。
 阶段截图、机位和待验差异见[画面记录](../acceptance/nr/visual-history.md)。
@@ -1631,3 +1654,60 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 [体表接收法线纹理](../acceptance/nr/native-body-normal-source.md)核对十一层压缩块。NVIDIA 和 Intel 的体表可见量分别有 46 和 77 处超差，后续核对采样后法线重建。
 
 [投影头发主纹理层级](../acceptance/nr/projected-hair-point-mip.md)完成两配置、双设备和原始四帧专项回归。Intel 冻结 RGB 仍有 32 处超差，按原门槛继续验收。
+
+[原创曲库设置恢复](../acceptance/npr-room/music-playlist.md#原创曲库设置恢复)记录循环、音量及静音重开和保存失败重试。
+
+[待办退出恢复](../acceptance/npr-room/todo.md#待办退出恢复)通过五进程原创回放。
+标题、正文及日期沿公共退出生命周期提交，保留版本校验。
+人工音频复验仅在用户主动提出后安排。
+正式房间回归及 Steam 实机维持暂停。
+
+[习惯名称退出恢复](../acceptance/npr-room/work-calendar.md#习惯名称退出恢复)通过四进程原创回放。
+菜单、日历、计时宿主及装配入口共用退出提交。
+
+[整合日历工时退出恢复](../acceptance/npr-room/work-calendar.md#整合日历工时退出恢复)通过五进程原创回放。
+日历生成入口挂接工时退出提交及既有存档校验。
+
+[房间人工复验](../acceptance/npr-room/manual-retest.md)登记设备、实体输入及屏幕待机。
+接续计划 2.5 的本地媒体目录与导入契约。
+
+[本地媒体多文件选择](../acceptance/npr-room/platform-scenarios.md#本地媒体多文件选择)通过四个真实 Windows 对话框。
+平台、编辑器库和 Player 构建通过，当前 Player 的原生启动与退出释放通过。
+继续目录递归筛选及媒体导入。
+
+[本地媒体目录筛选](../acceptance/npr-room/platform-scenarios.md#本地媒体目录筛选)覆盖八种扩展名及十六类输入和状态。
+平台服务共享递归、物理文件去重、取消和预算规则。
+继续媒体解码、导入与重开恢复。
+
+[媒体存档前置契约](../acceptance/npr-room/platform-scenarios.md#媒体存档前置契约)通过条件提交、共享读取及跨进程更新。
+探索与原创待办共七个 Player 验证保存重开及退出释放。
+项目内容目录区分发布与暂存，接续媒体持久库。
+
+[本地媒体持久库](../acceptance/npr-room/platform-scenarios.md#本地媒体持久库)通过音频、图片及多进程导入。
+去重、重开、版本保护、存储预算及提交回滚通过。
+接续 M4A 验证和 Player 的媒体选择与使用入口。
+
+[运行时媒体任务](../acceptance/npr-room/platform-scenarios.md#运行时媒体任务与定位)通过后台导入、取消及受控资产解析。
+M4A、AAC 与中文深目录图片路径通过定向修复及复测。
+接续 Player 的媒体选择、播放、图片展示与重开回放。
+
+[Player 本地媒体](../acceptance/npr-room/platform-scenarios.md#player-本地媒体入口)通过九个原生对话框及三个独立进程。
+五种音乐实际播放，图片像素、缓存修复、工程搬移与重开通过。
+继续导入过程中的取消和退出自动检查。
+
+[活动导入取消与退出](../acceptance/npr-room/platform-scenarios.md#活动媒体导入的取消与退出)通过三个独立 Player。
+96 MiB 输入保持未发布准备，取消与正常关闭均释放暂存。
+源字节、句柄及重开通过，接续原创媒体独立发布。
+
+[原生启动器档案](../acceptance/npr-room/platform-scenarios.md#原生启动器项目档案)通过默认目录、环境配置和显式覆盖。
+三个原生进程及非法相对路径检查通过。
+接续原创媒体目录包的搬移与启动验收。
+
+[原创媒体目录包](../acceptance/npr-room/platform-scenarios.md#原创媒体独立目录包)通过中文路径搬移和三进程回放。
+命名入口与命令脚本共用启动描述及档案定位。
+1022 个包文件、1009 个冻结输入及退出释放核对通过。
+接续当前范围的独立事项核对，人工与暂停条件保持登记。
+
+[独立单元核对](2026-11-18-npr-room-execution.md#当前独立单元核对)记录当前认领范围及剩余依赖。
+工具退出、本地媒体和原创目录包的自动单元已处理。
+人工复验按用户点名安排，正式房间与 Steam 保持暂停。

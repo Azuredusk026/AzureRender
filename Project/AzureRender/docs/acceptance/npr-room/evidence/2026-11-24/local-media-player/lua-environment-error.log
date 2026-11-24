@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "D:\Projects\FYP-worktrees\npr-room-reproduction\Project\AzureRender\tools\test_local_media_player.py", line 226, in <module>
+    verify(args.player, args.resources, args.audio_fixtures, args.image_fixtures, args.native_fixtures, args.output)
+  File "D:\Projects\FYP-worktrees\npr-room-reproduction\Project\AzureRender\tools\test_local_media_player.py", line 141, in verify
+    with playing(player, project, resources, profile, output / "import", on_ready=begin) as (click, _, _, screenshot):
+  File "D:\Tools\Python311\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\Projects\FYP-worktrees\npr-room-reproduction\Project\AzureRender\tools\npr_room\test_notes_player.py", line 62, in playing
+    assert not state["scriptErrors"] and all(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'animations': [], 'audioStarts': 0, 'camera': [0.0, 1.1799999475479126, 3.549999952316284], 'cameraObstructed': False, 'characters': [], 'checkpointActivated': False, 'collectibles': 0, 'doorOpen': False, 'focused': True, 'frame': 2, 'interactionTarget': '', 'levelReference': 'assets:/room.azurelevel', 'levelRevision': 2, 'loadError': '', 'loading': False, 'presentationErrors': [], 'rigidBodies': [], 'scriptErrors': ["assets:/media.lua: ...dia-player-2a34ae/full-replay/workspace/assets/media.lua:44: attempt to call a nil value (global 'pcall')\nstack traceback:\n\t...dia-player-2a34ae/full-replay/workspace/assets/media.lua:44: in upvalue 'refresh'\n\t...dia-player-2a34ae/full-replay/workspace/assets/media.lua:93: in function <...dia-player-2a34ae/full-replay/workspace/assets/media.lua:90>"], 'target': [0.0, 1.1799999475479126, 0.0], 'tasks': []}

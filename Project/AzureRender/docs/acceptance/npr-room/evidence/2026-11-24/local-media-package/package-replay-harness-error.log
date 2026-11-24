@@ -1,0 +1,8 @@
+Native filename control: 1148 directory: False selection: [WindowsPath('D:/Projects/FYP/Project/AzureRender/build/runs/20261124-052507-local-media-native-package-cb945d/package-replay/包内入口导入.wav')]
+Traceback (most recent call last):
+  File "D:\Projects\FYP-worktrees\npr-room-reproduction\Project\AzureRender\tools\test_local_media_package.py", line 115, in <module>
+    verify(args.package.resolve(), args.profile.resolve(), args.output.resolve(),
+  File "D:\Projects\FYP-worktrees\npr-room-reproduction\Project\AzureRender\tools\test_local_media_package.py", line 56, in verify
+    assert state["audioStarts"] >= 1 and state["uiDrawCalls"] > 0, state
+                                         ~~~~~^^^^^^^^^^^^^^^
+KeyError: 'uiDrawCalls'

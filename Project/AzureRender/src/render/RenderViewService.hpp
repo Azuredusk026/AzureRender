@@ -17,6 +17,11 @@ struct RenderViewDescriptor {
     RenderSettings settings;
     bool sceneWorldCoordinates=false;
     ViewColorTransfer transfer=ViewColorTransfer::Linear;
+    bool useFrameScene=false;
+};
+struct RenderViewSample {
+    VkImageView view;
+    RenderGraph::ResourceId resource;
 };
 class RenderViewService final {
 public:
@@ -24,9 +29,13 @@ public:
     RenderViewService(RenderContext,Factory,std::function<void()> waitIdle,std::size_t capacity=3);
     ~RenderViewService();
     RenderViewHandle create(const RenderViewDescriptor&);
+    RenderViewHandle createDeferred(const RenderViewDescriptor&);
+    // The caller's prepared meshes are borrowed for this preparation step.
+    bool prepare(RenderViewHandle, decltype(RenderContext::preparedMeshes), double budgetMs);
     void request(RenderViewHandle);
     void resize(RenderViewHandle,VkExtent2D);
     void setCamera(RenderViewHandle,const std::array<float,3>&,const std::array<float,3>&);
+    void setCamera(RenderViewHandle,const CameraViewDescriptor&);
     void schedule(RenderGraph&,const SceneFrameData&,const RenderContext&,std::uint64_t submission);
     bool submitted(std::uint64_t submission) noexcept;
     // Only cancel work that has not been accepted by the queue.
@@ -35,11 +44,13 @@ public:
     // Every UI/capture read advances lifetime, including cached static output.
     // Pending resize returns no image until previous GPU uses complete.
     VkImageView sample(RenderViewHandle,std::uint64_t submission);
+    std::optional<RenderViewSample> sampleForGraph(RenderViewHandle,RenderGraph&,std::uint64_t submission);
     void release(RenderViewHandle);
     nlohmann::json describe(RenderViewHandle) const;
     std::vector<unsigned char> readPixels(RenderViewHandle);
     void clear();
 private:
+    RenderViewHandle createView(const RenderViewDescriptor&, bool deferLoad);
     struct State;
     std::unique_ptr<State> state_;
 };

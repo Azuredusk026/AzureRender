@@ -1,0 +1,12 @@
+<rml>
+<head>
+<title>Room loading</title>
+<style>
+body { width: 100%; height: 100%; margin: 0; background-color: #19232c; color: white; font-family: LatoLatin; }
+#transition-status { position: absolute; left: 24dp; bottom: 24dp; font-size: 18dp; }
+</style>
+</head>
+<body>
+<div id="transition-status">Loading room. Press Backspace to cancel.</div>
+</body>
+</rml>

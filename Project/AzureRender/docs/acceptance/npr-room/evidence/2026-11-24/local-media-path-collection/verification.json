@@ -1,0 +1,81 @@
+{
+  "sourceBase": "7fe7932",
+  "sourceSHA256": {
+    "src/platform/PathCollection.hpp": "c9b2342f108daed3a98928522b4cd0cdf17552c125bef5ddda47ad105aac7f2a",
+    "src/platform/PathCollection.cpp": "e0a8b689aedc83bff3ce26970b894ffdf2aaf7d638af36f9885b42bc29322421",
+    "tests/PathCollectionTests.cpp": "9634588e17d0d2c909ca73800568e7df0f6f00edb231e13950507951f3ed0c2e",
+    "CMakeLists.txt": "15c35d73dbaf8df1ccd6c7ee3d275c5b45767a229e74a1c8bd5efa4c01e84039"
+  },
+  "binarySHA256": {
+    "AzurePlatform.lib": "a9d9fe6bc5e720f90e9d8585b3bddf6bd9837e9e9c0f116358b9777d9e44b9a7",
+    "AzurePathCollectionTests.exe": "c64fe49b714eabc0e82cdd70c9d79b9b9f64d4ccf184fe0a011ddde60246584d"
+  },
+  "command": [
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzurePathCollectionTests.exe",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-030821-local-media-path-collection-f50bf0\\verified-fixture"
+  ],
+  "exitCode": 0,
+  "stdout": "Audio, images, recursion, Unicode, links, deduplication, missing paths, cancellation and three budgets passed\n",
+  "stderr": "",
+  "audioExtensions": [
+    ".wav",
+    ".mp3",
+    ".flac",
+    ".ogg",
+    ".m4a"
+  ],
+  "imageExtensions": [
+    ".png",
+    ".jpg",
+    ".jpeg"
+  ],
+  "cases": [
+    "recursive",
+    "flat",
+    "case-insensitive-extension",
+    "unicode",
+    "hard-link-deduplication",
+    "explicit-directory-alias",
+    "cyclic-child-link",
+    "stable-input-order",
+    "missing-input-diagnostic",
+    "cancellation",
+    "empty-pre-cancelled-selection",
+    "file-budget",
+    "entry-budget",
+    "depth-budget",
+    "invalid-budget",
+    "invalid-extension"
+  ],
+  "ownedJunctionReleased": true,
+  "targetFilePreserved": true,
+  "postArtifactBudget": {
+    "allowed": true,
+    "reasons": [],
+    "totalBytes": 1024208138240,
+    "freeBytes": 215665086464,
+    "usedBytes": 4044,
+    "plannedBytes": 0,
+    "quotaBytes": null,
+    "reserveBytes": 214748364800,
+    "diagnostic": false,
+    "managedPool": {
+      "allowed": true,
+      "reasons": [],
+      "reservedBytes": 22157033008,
+      "projectedBytes": 22157033008,
+      "limitBytes": null
+    }
+  },
+  "ctestProperties": {
+    "TIMEOUT": 30.0,
+    "WORKING_DIRECTORY": "D:/Projects/FYP/Project/AzureRender/build/runs/20261120-010632-asset-parse-source-diagnostic-d884c7/player-release"
+  },
+  "reusedPathSelectionEvidence": "docs/acceptance/npr-room/evidence/2026-11-24/local-media-path-selection/verification.json",
+  "buildQueues": [
+    2453,
+    2454,
+    2456,
+    2457
+  ]
+}

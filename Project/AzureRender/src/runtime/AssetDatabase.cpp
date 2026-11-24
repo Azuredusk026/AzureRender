@@ -4,6 +4,7 @@
 #include "assets/TextureImportSettings.hpp"
 #include "assets/Scene2D.hpp"
 #include "assets/AssetFormatRegistry.hpp"
+#include "foundation/NativeFilePath.hpp"
 #include "runtime/AnimationStateMachine.hpp"
 #include <algorithm>
 #include <fstream>
@@ -24,14 +25,6 @@
 namespace azurerender {
 namespace {
 using Json = nlohmann::json;
-#ifdef _WIN32
-std::wstring nativeFilePath(const std::filesystem::path& path) {
-    const auto value=std::filesystem::absolute(path).lexically_normal().native();
-    if(value.rfind(L"\\\\?\\",0)==0)return value;
-    if(value.rfind(L"\\\\",0)==0)return L"\\\\?\\UNC\\"+value.substr(2);
-    return L"\\\\?\\"+value;
-}
-#endif
 std::string bytes(const std::filesystem::path& path, const std::function<void()>& check={}) {
     std::ifstream input(path, std::ios::binary|std::ios::ate);
     if (!input) {
@@ -84,6 +77,11 @@ std::uint64_t hash(const std::string& data) {
     std::uint64_t result = 14695981039346656037ULL;
     for (const unsigned char c : data) { result ^= c; result *= 1099511628211ULL; }
     return result;
+}
+bool retainSourceSnapshot(const Json& metadata) {
+    const auto settings = metadata.find("settings");
+    if (settings == metadata.end() || !settings->contains("retainSourceSnapshot")) return true;
+    return settings->at("retainSourceSnapshot").get<bool>();
 }
 void write(const std::filesystem::path& path, const std::string& data) {
     std::filesystem::create_directories(path.parent_path());
@@ -275,7 +273,14 @@ std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<voi
         if (!candidate.emplace(id, AssetRecord{id, virtualPath, path, hash(source + meta.value("settings", Json::object()).dump() + "importer-v1"), hash(source), {}}).second)
             throw std::runtime_error("Duplicate asset UUID: " + id);
         const auto extension=assetExtension(path);Json document;
-        if(extension==".gltf" || extension==".azurelevel" || extension==".azureprefab" || extension==".azscript" || extension==".azurematerial" || extension==".azure2d")document=Json::parse(source);
+        if (extension == ".gltf" || extension == ".azurelevel" || extension == ".azureprefab" ||
+            extension == ".azscript" || extension == ".azurematerial" || extension == ".azure2d") {
+            try {
+                document = Json::parse(source);
+            } catch (const Json::parse_error& error) {
+                throw std::runtime_error("Cannot parse asset " + virtualPath + ": " + error.what());
+            }
+        }
         if(extension==".azure2d")document=Scene2D::parse(document).encode();
         if(extension==".azscene") {
             document={{"resources",Json::array()}};
@@ -422,7 +427,8 @@ std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<voi
         const auto old = records_.find(entry.first);
         if (old != records_.end() && old->second.fingerprint == entry.second.fingerprint && old->second.path == entry.second.path) continue;
         changed.push_back(entry.first);
-        snapshots.emplace_back(cacheDirectory / entry.first / (std::to_string(entry.second.fingerprint) + ".azcache"), &entry.second);
+        if (retainSourceSnapshot(sources.at(entry.second.path).metadata))
+            snapshots.emplace_back(cacheDirectory / entry.first / (std::to_string(entry.second.fingerprint) + ".azcache"), &entry.second);
     }
     // Cancellation belongs to the caller. Small and cancellable publications
     // retain the same owner-thread order and checks.
@@ -469,6 +475,10 @@ std::filesystem::path AssetDatabase::resolve(const std::string& id) const {
     return found->second.path;
 }
 std::filesystem::path AssetDatabase::resolveReference(const std::string& reference) const {
+    if (referenceResolver_) if (const auto resolved = referenceResolver_(reference)) {
+        if (!std::filesystem::is_regular_file(*resolved)) throw std::runtime_error("Runtime asset reference missing: " + reference);
+        return *resolved;
+    }
     const auto result = reference.find(":/") == std::string::npos ? resolve(reference) : project_.resolve(reference);
     if (!std::filesystem::is_regular_file(result)) throw std::runtime_error("Asset reference missing: " + reference);
     return result;
@@ -478,6 +488,12 @@ std::filesystem::path AssetDatabase::cacheFile(const std::string& id) const {
 }
 std::string AssetDatabase::readSource(const std::string& id) const {
     const auto& record = records_.at(id);
+    if (!retainSourceSnapshot(sources_->at(record.path).metadata)) {
+        auto source = bytes(record.path);
+        if (hash(source) != record.contentHash)
+            throw std::runtime_error("Live asset source changed; refresh required: " + record.virtualPath);
+        return source;
+    }
     const auto path = cacheFile(id);
     if (std::filesystem::exists(path)) {
         const auto data = cacheBytes(path);

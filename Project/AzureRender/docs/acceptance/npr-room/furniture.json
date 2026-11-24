@@ -1,0 +1,41 @@
+{
+  "formatVersion": 1,
+  "status": "partial",
+  "queueJob": 1548,
+  "hostConfiguration": "Release",
+  "editorSHA256": "f163492efeec4f8c3d0ad812feb1d02be8d591f09ea9a79811d6fa7dacbfb9c3",
+  "playerSHA256": "f94abf7d3947681216c41c19530702f8050a9233bc73356e08f280e961ad99dd",
+  "sourceReference": "Recovery Windows 1.17.3",
+  "sourceMotionEvidenceSHA256": "bda939c792df4f111128d437c852263810374b8d163d2db446a1ba5c6042a10c",
+  "runtime": {
+    "configuration": "Release",
+    "editorNodes": 7,
+    "resources": 2,
+    "playerRenderedFrames": 16,
+    "scriptErrors": 0,
+    "presentationErrors": 0,
+    "buffersAfterUnload": 0,
+    "imagesAfterUnload": 0
+  },
+  "assets": [
+    {
+      "slot": "desk",
+      "sha256": "f8e9d785154a3e725455d109ba000c965f8a3afb21d4f6539a3027858e2f760c",
+      "vertices": 919,
+      "triangles": 531
+    },
+    {
+      "slot": "chair",
+      "sha256": "b41fab048abdba9593bf888cd04d151d75f6da50dc1937804ec33c88c56066e0",
+      "vertices": 5306,
+      "triangles": 4978
+    }
+  ],
+  "motion": {
+    "samples": 67,
+    "angleErrorDegrees": 4.182619578303746E-06,
+    "positionError": 0,
+    "timeErrorSeconds": 4.76837158203125E-07,
+    "playbackVerified": false
+  }
+}

@@ -1,0 +1,1 @@
+{"playerSHA256": "63c470d2752275f7ed72aa7fc1abb0d4fcfc2aeb550ed3dd3aa2e5bf61b70f58", "controllerSHA256": "cf5f739834fe3d7c2acc3cd1b367167e608f093444fefb9036c5183155c0b0c7", "protectedPayloadVersions": [2, 3], "protectedOriginalBytes": true, "sameSessionRecovery": [1, [3, 50, 0, 1, 50, 0], [1, 50, 0, 1, 50, 0]], "independentPlayers": 2, "liveAllocationsAfterExit": 0}

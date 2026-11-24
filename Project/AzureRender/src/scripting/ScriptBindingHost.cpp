@@ -1,9 +1,19 @@
 #include "scripting/ScriptBindingHost.hpp"
 #include "runtime/ComponentCodec.hpp"
+#include "runtime/GameUi.hpp"
+#include "runtime/LevelSession.hpp"
+#include "runtime/PresentationRuntime.hpp"
+#include "runtime/ProjectSaveStore.hpp"
+#include "runtime/IMediaLibraryService.hpp"
 #include <cmath>
+#include <ctime>
 #include <stdexcept>
+#include <system_error>
 namespace azurerender {
 using Json=nlohmann::json;
+ScriptBindingHost::ScriptBindingHost(RuntimeLifecycle& runtime,GameRuntime& game)
+    : runtime_(runtime),game_(game),saveStore_(std::make_shared<ProjectSaveStore>()) {}
+
 void ScriptBindingHost::checkThread() const {
     if(std::this_thread::get_id()!=owner_)throw std::logic_error("Script host called outside owner thread");
 }
@@ -77,14 +87,29 @@ void ScriptBindingHost::commitInitialization(const std::function<void()>& retire
     }
 }
 void ScriptBindingHost::close() noexcept {
-    cancelInitialization();callback_=false;closed_=true;level_={};audio_={};ui_={};
+    media_.reset();
+    cancelInitialization();callback_=false;closed_=true;levels_=nullptr;level_={};audio_={};transport_=nullptr;ui_={};uiDocument_={};saveStore_.reset();
 }
 void ScriptBindingHost::effect(std::function<void()> action,bool structural) {
     if(staging_)(structural?stagedStructural_:stagedEffects_).push_back(std::move(action));else action();
 }
 void ScriptBindingHost::setLevelHandler(std::function<void(std::string)> handler) {checkThread();level_=std::move(handler);}
+void ScriptBindingHost::setLevelSession(LevelSession& levels) {
+    checkThread();levels_=&levels;
+    level_=[&levels](std::string reference){levels.request(std::move(reference));};
+}
 void ScriptBindingHost::setAudioHandler(std::function<void(ecs::Entity)> handler) {checkThread();audio_=std::move(handler);}
+void ScriptBindingHost::setAudioTransport(PresentationRuntime& presentation) {checkThread();transport_=&presentation;}
 void ScriptBindingHost::setUiHandler(std::function<void(std::string,std::string)> handler) {checkThread();ui_=std::move(handler);}
+void ScriptBindingHost::setUiProvider(std::function<GameUi*()> provider) {checkThread();uiDocument_=std::move(provider);}
+void ScriptBindingHost::setSaveStore(std::shared_ptr<ProjectSaveStore> store) {
+    checkThread();
+    if(!store)throw std::invalid_argument("Project save store must be available");
+    saveStore_=std::move(store);
+}
+void ScriptBindingHost::setMediaService(std::shared_ptr<IMediaLibraryService> service) {
+    checkThread(); media_ = std::move(service);
+}
 Json ScriptBindingHost::encode(const ScriptObject& object) {
     return {{"entity",object.identity.entity},{"generation",object.identity.generation},
             {"node",object.node},{"revision",object.revision}};
@@ -108,6 +133,29 @@ Json ScriptBindingHost::invoke(const ScriptObject& object,const std::string& met
     if(method=="alive")return valid(object);
     guard(object,binding.mutating);
     const auto entity=object.identity.entity;
+    if(method=="media_entries") return media_ ? media_->entries(args[0]) : Json::array();
+    if(method=="try_media_entries") {
+        if(!media_)return Json::array({false,Json::array(),"Media service unavailable"});
+        try{return Json::array({true,media_->entries(args[0]),""});}
+        catch(const std::exception& error){return Json::array({false,Json::array(),error.what()});}
+    }
+    if(method=="try_ui_image") {
+        if(staging_)throw std::logic_error("Image retry requires a running callback");
+        if(!levels_ || !uiDocument_)return false;
+        try {
+            auto* document=uiDocument_();if(!document)return false;
+            const auto reference=args[1].get<std::string>();
+            document->setImage(args[0],reference.empty()?std::filesystem::path{}:levels_->assets().resolveReference(reference));
+            return true;
+        }catch(const std::exception&){return false;}
+    }
+    if(method=="media_status") return media_ ? media_->status() : Json::array({"unavailable",0,0,0,"Media service unavailable"});
+    if(method=="media_import" || method=="media_cancel") {
+        if(staging_)throw std::logic_error("Media tasks require a running callback");
+        if(!media_)return method=="media_import"?Json(false):Json(nullptr);
+        if(method=="media_import")return media_->select(args[0],args[1]);
+        media_->cancel();return nullptr;
+    }
     auto& components=runtimeComponentRegistry();
     if(method=="find") {
         const auto node=args[0].get<std::string>();
@@ -123,6 +171,51 @@ Json ScriptBindingHost::invoke(const ScriptObject& object,const std::string& met
     if(method=="velocity")return game_.physics().velocity(entity);
     if(method=="action")return game_.input().down(args[0].get<std::string>());
     if(method=="pressed")return game_.input().pressed(args[0].get<std::string>());
+    if(method=="audio_playing")return transport_ && transport_->playing(entity);
+    if(method=="audio_position")return transport_ ? transport_->audioPosition(entity) : 0.0;
+    if(method=="try_audio_play") {
+        if(staging_)throw std::logic_error("Audio retry requires a running callback");
+        try {
+            if(audio_)audio_(entity);
+            else if(transport_)transport_->play(entity);
+            else return false;
+            return true;
+        } catch(const std::exception&) { return false; }
+    }
+    if(method=="local_datetime") {
+        const auto now = std::time(nullptr);
+        std::tm local{};
+#ifdef _WIN32
+        if (localtime_s(&local, &now) != 0) throw std::runtime_error("Local date unavailable");
+#else
+        if (!localtime_r(&now, &local)) throw std::runtime_error("Local date unavailable");
+#endif
+        char value[15]{};
+        if (std::strftime(value, sizeof(value), "%Y%m%d%H%M%S", &local) != 14)
+            throw std::runtime_error("Local date cannot be represented");
+        return std::string(value);
+    }
+    if(method=="read_save")
+        return saveStore_ ? saveStore_->read(args[0].get<std::string>()) : Json(nullptr);
+    if(method=="try_write_save") {
+        if(staging_)throw std::logic_error("Use write_save for staged initialization");
+        if(!saveStore_)return false;
+        try {
+            saveStore_->write(args[0].get<std::string>(),args[1]);
+            return true;
+        } catch(const std::invalid_argument&) {
+            return false;
+        } catch(const std::system_error&) {
+            return false;
+        }
+    }
+    if(method=="level_ready")return levels_ && levels_->preloaded(args[0].get<std::string>());
+    if(method=="level_load_error")return levels_ ? levels_->lastError() : std::string();
+    if(method=="ui_value"){
+        const auto* document=uiDocument_ ? uiDocument_() : nullptr;
+        if(!document)throw std::runtime_error("Game UI document unavailable");
+        return document->formValue(args[0].get<std::string>());
+    }
     if(method=="get" || method=="set") {
         const auto type=args[0].get<std::string>(),field=args[1].get<std::string>();
         const Key key{entity,type};
@@ -162,11 +255,44 @@ Json ScriptBindingHost::invoke(const ScriptObject& object,const std::string& met
     } else if(method=="load_level") {
         if(!level_)throw std::runtime_error("Level request handler unavailable");
         const auto reference=args[0].get<std::string>();effect([handler=level_,reference]{handler(reference);});
-    } else if(method=="audio_play") {
-        if(!audio_)throw std::runtime_error("Audio handler unavailable");effect([handler=audio_,entity]{handler(entity);});
+    } else if(method=="preload_level" || method=="cancel_level_load") {
+        if(!levels_)throw std::runtime_error("Level session unavailable");
+        auto* levels=levels_;
+        if(method=="preload_level"){
+            const auto reference=args[0].get<std::string>();
+            effect([levels,reference]{levels->preload(reference);});
+        }else effect([levels]{levels->cancelPending();});
+    } else if(method=="audio_play" && audio_) {
+        effect([handler=audio_,entity]{handler(entity);});
+    } else if(method=="audio_play" || method=="audio_stop" || method=="audio_pause") {
+        if(!transport_)throw std::runtime_error("Audio transport unavailable");
+        const bool paused=method=="audio_pause" && args[0].get<bool>();
+        effect([transport=transport_,entity,method,paused] {
+            if(method=="audio_play")transport->play(entity);
+            else if(method=="audio_stop")transport->stop(entity);
+            else transport->pause(entity,paused);
+        });
+    } else if(method=="ui_image") {
+        if(!levels_ || !uiDocument_)throw std::runtime_error("Image UI services unavailable");
+        const auto id=args[0].get<std::string>(),reference=args[1].get<std::string>();
+        const auto path=reference.empty()?std::filesystem::path{}:levels_->assets().resolveReference(reference);
+        effect([provider=uiDocument_,id,path]{if(auto* document=provider())document->setImage(id,path);});
     } else if(method=="ui_text") {
         if(!ui_)throw std::runtime_error("UI handler unavailable");
         const auto id=args[0].get<std::string>(),text=args[1].get<std::string>();effect([handler=ui_,id,text]{handler(id,text);});
+    } else if(method=="ui_set_value" || method=="ui_visible") {
+        if(!uiDocument_)throw std::runtime_error("Game UI provider unavailable");
+        const auto id=args[0].get<std::string>();
+        effect([provider=uiDocument_,id,value=args[1],method]{
+            if(auto* document=provider()){
+                if(method=="ui_set_value")document->setFormValue(id,value.get<std::string>());
+                else document->setVisible(id,value.get<bool>());
+            }
+        });
+    } else if(method=="write_save") {
+        if(!saveStore_)throw std::runtime_error("Project save store unavailable");
+        const auto slot=args[0].get<std::string>();
+        effect([store=saveStore_,slot,payload=args[1]] {store->write(slot,payload);});
     } else throw std::logic_error("Binding description has no host operation: "+method);
     return nullptr;
 }

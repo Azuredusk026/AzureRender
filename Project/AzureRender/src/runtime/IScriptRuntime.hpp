@@ -2,11 +2,17 @@
 #include "ecs/Entity.hpp"
 #include "diagnostics/StructuredDiagnostic.hpp"
 #include <functional>
+#include <memory>
 #include <string>
 #include <vector>
 namespace azurerender {
 struct PhysicsEvent;
 struct InteractionTarget;
+class ProjectSaveStore;
+class IMediaLibraryService;
+class LevelSession;
+class GameUi;
+class PresentationRuntime;
 struct ScriptRuntimeCapabilities {
     std::string backend;
     bool hotReload=false;
@@ -29,5 +35,10 @@ public:
     virtual const std::vector<std::string>& errors() const=0;
     virtual const std::vector<StructuredDiagnostic>& diagnostics() const {static const std::vector<StructuredDiagnostic> empty;return empty;}
     virtual ScriptRuntimeCapabilities capabilities() const=0;
+    virtual void setSaveStore(std::shared_ptr<ProjectSaveStore>)=0;
+    virtual void setMediaService(std::shared_ptr<IMediaLibraryService>)=0;
+    virtual void setLevelSession(LevelSession&)=0;
+    virtual void setUiProvider(std::function<GameUi*()>)=0;
+    virtual void setAudioTransport(PresentationRuntime&)=0;
 };
 }

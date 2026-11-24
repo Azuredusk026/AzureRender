@@ -226,7 +226,10 @@ function(compile_shader source_file)
     set(shader_lut_dependency)
     get_filename_component(shader_source_base "${source_file}" NAME)
     if(shader_source_base STREQUAL "view_fog_surface.frag" OR "AZURE_VIEW_FOG=1" IN_LIST SHADER_DEFINES)
-        list(APPEND shader_lut_dependency "${SHADER_SOURCE_DIR}/view_fog.glsl" "${SHADER_SOURCE_DIR}/view_fog_material.glsl" "${SHADER_SOURCE_DIR}/fog_transport.glsl" "${SHADER_SOURCE_DIR}/fog_view_projection.glsl" "${SHADER_SOURCE_DIR}/fog_analytic.glsl")
+        list(APPEND shader_lut_dependency "${SHADER_SOURCE_DIR}/view_fog.glsl" "${SHADER_SOURCE_DIR}/view_fog_medium.glsl" "${SHADER_SOURCE_DIR}/view_fog_material.glsl" "${SHADER_SOURCE_DIR}/fog_transport.glsl" "${SHADER_SOURCE_DIR}/fog_view_projection.glsl" "${SHADER_SOURCE_DIR}/fog_analytic.glsl")
+    endif()
+    if(shader_source_base STREQUAL "view_fog_generate.comp")
+        list(APPEND shader_lut_dependency "${SHADER_SOURCE_DIR}/view_fog_medium.glsl" "${SHADER_SOURCE_DIR}/fog_analytic.glsl" "${SHADER_SOURCE_DIR}/fog_transport.glsl")
     endif()
     if(shader_source_base STREQUAL "mesh.frag")
         list(APPEND shader_lut_dependency "${SHADER_SOURCE_DIR}/unlit_surface_sample.glsl" "${SHADER_SOURCE_DIR}/unlit_opaque.glsl" "${SHADER_SOURCE_DIR}/unlit_blend.glsl" "${SHADER_SOURCE_DIR}/surface_radiance.glsl" "${SHADER_SOURCE_DIR}/surface_radiance_identity.glsl" "${SHADER_SOURCE_DIR}/surface_radiance_statistics.glsl")
@@ -262,7 +265,7 @@ function(compile_shader source_file)
         OR shader_source_base STREQUAL "outline.vert" OR shader_source_base STREQUAL "scene_instance_layout_test.comp")
         list(APPEND shader_lut_dependency "${SHADER_SOURCE_DIR}/instance_data.glsl")
     endif()
-    if(shader_source_base STREQUAL "inner_outline.frag" OR shader_source_base STREQUAL "view_resolve.frag" OR shader_source_base STREQUAL "color_grading_lut_test.comp" OR shader_source_base STREQUAL "spatial_antialiasing.frag")
+    if(shader_source_base STREQUAL "inner_outline.frag" OR shader_source_base STREQUAL "view_resolve.frag" OR shader_source_base STREQUAL "color_grading_lut_test.comp" OR shader_source_base STREQUAL "spatial_antialiasing.frag" OR shader_source_base STREQUAL "opening_chromatic.frag")
         set(shader_lut_dependency "${SHADER_SOURCE_DIR}/color_grading_lut.glsl")
     endif()
     if(shader_source_base STREQUAL "spatial_antialiasing.frag")
@@ -471,6 +474,7 @@ compile_shader("${SHADER_SOURCE_DIR}/background.frag" DEFINES AZURE_GEOMETRY_SAM
 compile_shader("${SHADER_SOURCE_DIR}/background.frag" DEFINES AZURE_GEOMETRY_SAMPLES=1 AZURE_BINDLESS=1 OUTPUT_NAME background_bindless_samples.frag)
 compile_shader("${SHADER_SOURCE_DIR}/mesh.frag")
 compile_shader("${SHADER_SOURCE_DIR}/view_fog_surface.frag")
+compile_shader("${SHADER_SOURCE_DIR}/view_fog_generate.comp")
 compile_shader("${SHADER_SOURCE_DIR}/view_fog_surface.frag" DEFINES AZURE_FOG_SAMPLES=1 OUTPUT_NAME view_fog_surface_samples.frag)
 compile_shader("${SHADER_SOURCE_DIR}/mesh.frag" DEFINES AZURE_VIEW_FOG=1 OUTPUT_NAME mesh_fog.frag)
 compile_shader("${SHADER_SOURCE_DIR}/mesh.frag" DEFINES AZURE_VIEW_FOG=1 AZURE_BINDLESS=1 OUTPUT_NAME mesh_fog_bindless.frag)
@@ -581,6 +585,11 @@ compile_shader(
     DEFINES AZURE_BINDLESS=1
     OUTPUT_NAME shadow_bindless.frag)
 compile_shader("${SHADER_SOURCE_DIR}/inner_outline.vert")
+compile_shader("${SHADER_SOURCE_DIR}/monochrome_screen_noise.frag")
+compile_shader("${SHADER_SOURCE_DIR}/opening_blackout.frag")
+compile_shader("${SHADER_SOURCE_DIR}/opening_chromatic.frag")
+compile_shader("${SHADER_SOURCE_DIR}/opening_screen_move.frag")
+compile_shader("${SHADER_SOURCE_DIR}/opening_glitch.frag")
 compile_shader("${SHADER_SOURCE_DIR}/inner_outline.frag")
 compile_shader("${SHADER_SOURCE_DIR}/inner_outline.frag"
     DEFINES AZURE_SHOWCASE_DISPLAY=1
@@ -609,6 +618,7 @@ compile_shader("${SHADER_SOURCE_DIR}/ibl_prefilter.comp")
 compile_shader("${SHADER_SOURCE_DIR}/skin.comp")
 compile_shader("${SHADER_SOURCE_DIR}/specular_ramp_test.comp")
 compile_shader("${SHADER_SOURCE_DIR}/irradiance_query_test.comp")
+compile_shader("${SHADER_SOURCE_DIR}/irradiance_grid_test.comp")
 # Optional scene resources derive from the existing material program matrix.
 get_property(_clipmap_base_programs GLOBAL PROPERTY AZURE_SHADER_DESCRIPTORS)
 foreach(_clipmap_base IN LISTS _clipmap_base_programs)
@@ -932,7 +942,9 @@ if(MSVC)
 else()
     target_compile_options(AzureBuildOptions INTERFACE -Wall -Wextra -Wpedantic -Werror -Wno-missing-field-initializers)
 endif()
+find_package(Threads REQUIRED)
 add_library(AzureFoundation STATIC
+    src/foundation/FileLock.cpp
     src/foundation/ImmutableBytes.cpp
     src/foundation/SettingRegistry.cpp
     src/diagnostics/RuntimeDiagnostics.cpp
@@ -943,6 +955,7 @@ add_library(AzurePlatform STATIC
     src/platform/GlfwFrontend.cpp
     src/platform/ProcessRunner.cpp
     src/platform/PathSelection.cpp
+    src/platform/PathCollection.cpp
 )
 add_library(AzureDevtools STATIC src/devtools/ShaderHotReloader.cpp src/devtools/ShaderCompileJob.cpp src/devtools/GeometryProcessCompiler.cpp)
 target_link_libraries(AzureDevtools PUBLIC AzureRenderCore AzurePlatform AzureProcedural)
@@ -964,6 +977,8 @@ add_library(AzureRenderCore STATIC
     src/render/ReferenceDepth.cpp
     src/render/ColorGradingLut.cpp
     src/render/ColorGradingLutGpu.cpp
+    src/render/ScreenBlackoutGpu.cpp
+    src/render/ScreenEffectGpu.cpp
     src/render/ReflectionSpatialFilter.cpp
     src/render/ReflectionSignalPyramid.cpp
     src/render/DepthPyramid.cpp
@@ -1019,6 +1034,7 @@ add_library(AzureRenderCore STATIC
     src/render/AerialFog.cpp
     src/render/AnalyticFog.cpp
     src/render/FogVolumeData.cpp
+    src/render/GeneratedHeightFogGpu.cpp
     src/render/FogViewProjection.cpp
     src/render/ViewFogBinding.cpp
     src/render/ViewFogBindingJson.cpp
@@ -1082,6 +1098,8 @@ add_library(AzureRuntime STATIC
     src/runtime/SceneRenderSnapshot.cpp
     src/runtime/RuntimeRenderSnapshotCache.cpp
     src/runtime/Project.cpp
+    src/runtime/ProjectSaveStore.cpp
+    src/runtime/MediaLibrary.cpp
     src/runtime/ProjectReferenceViews.cpp
     src/runtime/AssetDatabase.cpp
     src/runtime/AssetSourceCache.cpp
@@ -1136,8 +1154,8 @@ target_link_libraries(AzureValidation PUBLIC AzureRuntime)
 if(WIN32)
     target_link_libraries(AzureValidation PRIVATE ws2_32)
 endif()
-add_library(AzureProjectRuntime STATIC src/app/ProjectRuntimeAssembly.cpp)
-target_link_libraries(AzureProjectRuntime PUBLIC AzureGameplay AzureLuaScripting)
+add_library(AzureProjectRuntime STATIC src/app/ProjectRuntimeAssembly.cpp src/app/LocalMediaService.cpp)
+target_link_libraries(AzureProjectRuntime PUBLIC AzureGameplay AzureLuaScripting AzurePlatform)
 if(AZURE_ENABLE_MANAGED_SCRIPT_PROTOTYPE)
     target_link_libraries(AzureProjectRuntime PUBLIC AzureManagedScripting)
     target_compile_definitions(AzureProjectRuntime PRIVATE AZURE_ENABLE_MANAGED_SCRIPT_PROTOTYPE=1)
@@ -1246,11 +1264,12 @@ set(AZURE_HOST_SOURCES
 )
 
 target_link_libraries(AzureFoundation PUBLIC AzureBuildOptions nlohmann_json::nlohmann_json)
+target_link_libraries(AzureFoundation PUBLIC Threads::Threads)
 target_link_libraries(AzureFoundation PRIVATE zstd::libzstd)
 target_compile_definitions(AzureFoundation PRIVATE AZURERENDER_DEVELOPMENT_ROOT="${CMAKE_CURRENT_SOURCE_DIR}")
 target_link_libraries(AzurePlatform PUBLIC AzureFoundation Vulkan::Vulkan glfw)
 if(WIN32)
-    target_link_libraries(AzurePlatform PRIVATE ole32 shell32 uuid)
+    target_link_libraries(AzurePlatform PRIVATE ole32 shell32 uuid comctl32)
 endif()
 target_link_libraries(AzureRenderCore PUBLIC AzureFoundation Vulkan::Vulkan nlohmann_json::nlohmann_json RmlUi::RmlUi
     GPUOpen::VulkanMemoryAllocator OpenEXR::OpenEXR)
@@ -1800,6 +1819,20 @@ if(BUILD_TESTING)
     add_dependencies(AzureFogVolumeGpuTests AzureFogVolumeTestShader)
     add_test(NAME AzureRender.FogVolumeGpu COMMAND AzureFogVolumeGpuTests "${AZURE_FOG_TEST_SHADER}")
     set_tests_properties(AzureRender.FogVolumeGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
+    add_custom_target(AzureGeneratedHeightFogShader DEPENDS "${SHADER_BINARY_DIR}/view_fog_generate.comp.spv")
+    set(AZURE_GENERATED_HEIGHT_FOG_TEST_SHADER "${CMAKE_CURRENT_BINARY_DIR}/shader-modules/generated-height-fog-test.comp.spv")
+    add_custom_command(OUTPUT "${AZURE_GENERATED_HEIGHT_FOG_TEST_SHADER}"
+        COMMAND "${CMAKE_COMMAND}" -E make_directory "${CMAKE_CURRENT_BINARY_DIR}/shader-modules"
+        COMMAND Vulkan::glslc -I "${SHADER_SOURCE_DIR}" "${CMAKE_CURRENT_SOURCE_DIR}/tests/shaders/generated_height_fog_test.comp" -o "${AZURE_GENERATED_HEIGHT_FOG_TEST_SHADER}"
+        DEPENDS tests/shaders/generated_height_fog_test.comp shaders/view_fog.glsl shaders/view_fog_medium.glsl
+            shaders/fog_analytic.glsl shaders/fog_transport.glsl shaders/fog_view_projection.glsl VERBATIM)
+    add_custom_target(AzureGeneratedHeightFogTestShader DEPENDS "${AZURE_GENERATED_HEIGHT_FOG_TEST_SHADER}")
+    add_executable(AzureGeneratedHeightFogGpuTests tests/GeneratedHeightFogGpuTests.cpp)
+    target_link_libraries(AzureGeneratedHeightFogGpuTests PRIVATE AzureRenderCore)
+    add_dependencies(AzureGeneratedHeightFogGpuTests AzureGeneratedHeightFogTestShader AzureGeneratedHeightFogShader)
+    add_test(NAME AzureRender.GeneratedHeightFogGpu COMMAND AzureGeneratedHeightFogGpuTests
+        "${SHADER_BINARY_DIR}/view_fog_generate.comp.spv" "${AZURE_GENERATED_HEIGHT_FOG_TEST_SHADER}")
+    set_tests_properties(AzureRender.GeneratedHeightFogGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
     target_link_libraries(AzureUnlitTextureLayersTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.UnlitTextureLayers COMMAND AzureUnlitTextureLayersTests)
     add_executable(AzureUnlitTextureMaterialTests tests/UnlitTextureMaterialTests.cpp)
@@ -2007,12 +2040,20 @@ if(BUILD_TESTING)
             --config "${CMAKE_CURRENT_BINARY_DIR}/shader-reload.json")
         set_tests_properties(AzureRender.ShaderCatalogCompilation PROPERTIES TIMEOUT 120 RUN_SERIAL TRUE)
     endif()
+    add_executable(AzurePathCollectionTests tests/PathCollectionTests.cpp)
+    target_link_libraries(AzurePathCollectionTests PRIVATE AzurePlatform)
+    add_test(NAME AzurePlatform.PathCollection COMMAND AzurePathCollectionTests "${CMAKE_CURRENT_BINARY_DIR}/path-collection-tests")
+    set_tests_properties(AzurePlatform.PathCollection PROPERTIES TIMEOUT 30)
     if(WIN32)
         add_test(NAME AzureRender.HotReload COMMAND AzureHotReloadTests
             "$<TARGET_FILE:Vulkan::glslc>" "${CMAKE_CURRENT_BINARY_DIR}/hot-reload-tests")
         add_executable(AzureProcessRunnerTests tests/ProcessRunnerTests.cpp)
         target_link_libraries(AzureProcessRunnerTests PRIVATE AzurePlatform)
         add_test(NAME AzurePlatform.ProcessRunner COMMAND AzureProcessRunnerTests)
+        add_executable(AzurePathSelectionTests tests/PathSelectionTests.cpp)
+        target_link_libraries(AzurePathSelectionTests PRIVATE AzurePlatform)
+        add_test(NAME AzurePlatform.PathSelection COMMAND AzurePathSelectionTests "${CMAKE_CURRENT_BINARY_DIR}/path-selection-tests")
+        set_tests_properties(AzurePlatform.PathSelection PROPERTIES LABELS "gpu;native-ui" RUN_SERIAL TRUE TIMEOUT 60)
         add_test(NAME AzureRender.PreviewHost COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_render_preview_host.py" --executable "$<TARGET_FILE:AzureRender>")
         set_tests_properties(AzureRender.PreviewHost PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 420)
         add_test(NAME AzureEditor.SelectionGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_selection.py"
@@ -2458,6 +2499,9 @@ if(BUILD_TESTING)
     set_tests_properties(AzureEngine.MaterialFixtureGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 240)
     add_test(NAME AzureEngine.PresentationGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_game_presentation.py" --executable $<TARGET_FILE:AzurePlayer> --project "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/gameplay/project.azureproject")
     set_tests_properties(AzureEngine.PresentationGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 180)
+    add_test(NAME AzureEngine.ScreenNoiseGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_screen_noise_player.py"
+        --player $<TARGET_FILE:AzurePlayer> --resource-root "${CMAKE_CURRENT_BINARY_DIR}")
+    set_tests_properties(AzureEngine.ScreenNoiseGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 420)
     add_test(NAME AzureEngine.EditorHost COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_workflow.py" --executable $<TARGET_FILE:AzureRender> --project "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/gameplay/project.azureproject")
     add_test(NAME AzureEngine.EditorPlayable COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_playable.py" --executable $<TARGET_FILE:AzureRender>)
     set_tests_properties(AzureEngine.EditorPlayable PROPERTIES LABELS "gpu" TIMEOUT 240)
@@ -2503,6 +2547,21 @@ if(BUILD_TESTING)
     add_test(NAME AzureEngine.ProjectReferenceViews COMMAND AzureProjectReferenceViewsTests)
     target_link_libraries(AzureProjectTests PRIVATE AzureRuntime)
     add_test(NAME AzureEngine.Project COMMAND AzureProjectTests)
+    add_executable(AzureProjectSaveStoreTests tests/ProjectSaveStoreTests.cpp)
+    add_executable(AzureMediaLibraryTests tests/MediaLibraryTests.cpp)
+    add_executable(AzureLocalMediaServiceTests tests/LocalMediaServiceTests.cpp)
+    target_link_libraries(AzureLocalMediaServiceTests PRIVATE AzureProjectRuntime)
+    add_test(NAME AzureEngine.LocalMediaService COMMAND AzureLocalMediaServiceTests "${CMAKE_CURRENT_BINARY_DIR}/local-media-service-tests")
+    set_tests_properties(AzureEngine.LocalMediaService PROPERTIES TIMEOUT 45)
+    target_link_libraries(AzureMediaLibraryTests PRIVATE AzureRuntime AzurePlatform)
+    add_test(NAME AzureEngine.MediaLibrary COMMAND AzureMediaLibraryTests "${CMAKE_CURRENT_BINARY_DIR}/media-library-tests")
+    set_tests_properties(AzureEngine.MediaLibrary PROPERTIES TIMEOUT 45)
+    target_link_libraries(AzureProjectSaveStoreTests PRIVATE AzureRuntime AzurePlatform)
+    add_executable(AzureFileLockTests tests/FileLockTests.cpp)
+    target_link_libraries(AzureFileLockTests PRIVATE AzureFoundation)
+    add_test(NAME AzureFoundation.FileLock COMMAND AzureFileLockTests "${CMAKE_CURRENT_BINARY_DIR}/file-lock-tests")
+    set_tests_properties(AzureFoundation.FileLock PROPERTIES TIMEOUT 30)
+    add_test(NAME AzureEngine.ProjectSaveStore COMMAND AzureProjectSaveStoreTests "${CMAKE_CURRENT_BINARY_DIR}/project-save-tests")
     add_executable(AzureRuntimeLifecycleTests tests/RuntimeLifecycleTests.cpp)
     target_link_libraries(AzureRuntimeLifecycleTests PRIVATE AzureRuntime)
     add_test(NAME AzureEngine.RuntimeLifecycle COMMAND AzureRuntimeLifecycleTests)
@@ -2582,6 +2641,17 @@ if(BUILD_TESTING)
         $<$<CXX_COMPILER_ID:MSVC>:/UNDEBUG>
         $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-UNDEBUG>)
     add_test(NAME AzureRender.IrradianceVolume COMMAND AzureRenderIrradianceVolumeTests)
+    add_executable(AzureIrradianceGridGpuDataTests tests/IrradianceGridGpuDataTests.cpp)
+    target_include_directories(AzureIrradianceGridGpuDataTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    target_compile_options(AzureIrradianceGridGpuDataTests PRIVATE
+        $<$<CXX_COMPILER_ID:MSVC>:/UNDEBUG>
+        $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-UNDEBUG>)
+    add_test(NAME AzureRender.IrradianceGridGpuData COMMAND AzureIrradianceGridGpuDataTests "${CMAKE_CURRENT_BINARY_DIR}/irradiance-grid-fixture.aziv")
+    add_executable(AzureIrradianceGridGpuTests tests/IrradianceGridGpuTests.cpp)
+    target_link_libraries(AzureIrradianceGridGpuTests PRIVATE AzureRenderCore)
+    add_dependencies(AzureIrradianceGridGpuTests AzureRenderShaders)
+    add_test(NAME AzureRender.IrradianceGridGpu COMMAND AzureIrradianceGridGpuTests "${SHADER_BINARY_DIR}/irradiance_grid_test.comp.spv")
+    set_tests_properties(AzureRender.IrradianceGridGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
     add_executable(AzureIrradianceClipmapTests tests/IrradianceClipmapTests.cpp)
     target_include_directories(AzureIrradianceClipmapTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
     add_test(NAME AzureRender.IrradianceClipmap COMMAND AzureIrradianceClipmapTests "${CMAKE_CURRENT_BINARY_DIR}/clipmap-contract/fixture.azic")
@@ -4046,7 +4116,7 @@ target_sources(AzureRenderHost PRIVATE src/app/ProjectCenterHost.cpp)
 if(WIN32)
     add_executable(AzureGameLauncher WIN32 src/launcher/main.cpp)
     set_property(TARGET AzureGameLauncher PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
-    target_link_libraries(AzureGameLauncher PRIVATE nlohmann_json::nlohmann_json shell32)
+    target_link_libraries(AzureGameLauncher PRIVATE nlohmann_json::nlohmann_json shell32 ole32 uuid)
     install(TARGETS AzureGameLauncher RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")
 endif()
 

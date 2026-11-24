@@ -1,5 +1,6 @@
 #include "render/GameUiRenderer.hpp"
 #include "assets/image/ImageCodec.hpp"
+#include "foundation/NativeFilePath.hpp"
 #include <RmlUi/Core/Matrix4.h>
 #include <stb_image.h>
 #include <algorithm>
@@ -79,25 +80,34 @@ struct GameUiRenderer::Impl {
     }
     void destroy(Texture& value){if(value.view)rhi.destroyImageView(value.view);rhi.allocator().destroyImage(value.image);if(value.set)spareSets.push_back(value.set);}
     ~Impl(){for(auto& item:geometry)destroy(item.second);for(auto& item:textures)destroy(item.second);if(pipeline)rhi.destroyPipeline(pipeline);if(layout)rhi.destroyPipelineLayout(layout);if(pool)rhi.destroyDescriptorPool(pool);if(setLayout)rhi.destroyDescriptorSetLayout(setLayout);if(sampler)rhi.destroySampler(sampler);}
-    void initialize(VkRenderPass pass,const std::filesystem::path& shaders){
+    void initialize(){
         setLayout=rhi.createDescriptorSetLayout({{0,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT}});
         pool=rhi.createDescriptorPool({{{VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,512}},512});
         rhi::PushConstantRangeDesc push{VK_SHADER_STAGE_VERTEX_BIT,sizeof(Push)};layout=rhi.createPipelineLayout(setLayout,&push);
         rhi::SamplerDesc sampling;sampling.addressU=sampling.addressV=sampling.addressW=VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;sampler=rhi.createSampler(sampling);
+    }
+    void recreatePipeline(VkRenderPass pass,const std::filesystem::path& shaders){
         const auto shader=[&](const char* file){std::ifstream input(shaders/file,std::ios::binary);if(!input)throw std::runtime_error("Game UI shader missing");return rhi.createShaderModule({std::istreambuf_iterator<char>(input),std::istreambuf_iterator<char>()});};
         const auto vertex=shader("game-ui.vert.spv");VkShaderModule fragment=VK_NULL_HANDLE;
+        VkPipeline replacement=VK_NULL_HANDLE;
         try{
             fragment=shader("game-ui.frag.spv");rhi::GraphicsPipelineDesc desc;desc.vertexShader=vertex;desc.fragmentShader=fragment;desc.vertexStride=sizeof(Rml::Vertex);
             desc.vertexAttributes={{0,VK_FORMAT_R32G32_SFLOAT,offsetof(Rml::Vertex,position)},{1,VK_FORMAT_R8G8B8A8_UNORM,offsetof(Rml::Vertex,colour)},{2,VK_FORMAT_R32G32_SFLOAT,offsetof(Rml::Vertex,tex_coord)}};
-            desc.depthTest=false;desc.depthWrite=false;desc.cullMode=VK_CULL_MODE_NONE;desc.alphaBlend=true;desc.premultipliedAlpha=true;desc.colorAttachmentCount=1;desc.renderPass=pass;desc.layout=layout;pipeline=rhi.createGraphicsPipeline(desc);
+            desc.depthTest=false;desc.depthWrite=false;desc.cullMode=VK_CULL_MODE_NONE;desc.alphaBlend=true;desc.premultipliedAlpha=true;desc.colorAttachmentCount=1;desc.renderPass=pass;desc.layout=layout;replacement=rhi.createGraphicsPipeline(desc);
         }catch(...){rhi.destroyShaderModule(vertex);if(fragment)rhi.destroyShaderModule(fragment);throw;}
         rhi.destroyShaderModule(vertex);rhi.destroyShaderModule(fragment);
+        if(pipeline)rhi.destroyPipeline(pipeline);
+        pipeline=replacement;
     }
 };
 GameUiRenderer::GameUiRenderer(rhi::IRhi& rhi,VkRenderPass pass,const std::filesystem::path& shaders):impl_(std::make_unique<Impl>(rhi)){
-    impl_->initialize(pass,shaders);const Rml::byte white[4]={255,255,255,255};impl_->white=GenerateTexture({white,4},{1,1});
+    impl_->initialize();recreatePipeline(pass,shaders);
+    const Rml::byte white[4]={255,255,255,255};impl_->white=GenerateTexture({white,4},{1,1});
 }
 GameUiRenderer::~GameUiRenderer()=default;
+void GameUiRenderer::recreatePipeline(VkRenderPass pass,const std::filesystem::path& shaders){
+    impl_->recreatePipeline(pass,shaders);
+}
 void GameUiRenderer::beginFrame(std::uint64_t serial,VkExtent2D extent){
     if(!extent.width||!extent.height||serial<impl_->serial)throw std::invalid_argument("Invalid game UI frame");
     impl_->serial=serial;impl_->extent=extent;impl_->draws.clear();impl_->clipping=false;
@@ -143,7 +153,7 @@ Rml::TextureHandle GameUiRenderer::GenerateTexture(Rml::Span<const Rml::byte> so
 }
 Rml::TextureHandle GameUiRenderer::LoadTexture(Rml::Vector2i& dimensions,const Rml::String& source){
     DecodedImage image;ImageRgba8 converted;
-    try{image=decodeImageFile(std::filesystem::u8path(source));converted=convertImageToRgba8(image);}catch(const std::exception&){return 0;}
+    try{image=decodeImageFile(nativeFilePath(std::filesystem::u8path(source)));converted=convertImageToRgba8(image);}catch(const std::exception&){return 0;}
     auto& bytes=converted.pixels;
     for(std::size_t i=0;i<bytes.size();i+=4)for(unsigned c=0;c<3;++c)bytes[i+c]=static_cast<unsigned char>(static_cast<unsigned>(bytes[i+c])*bytes[i+3]/255);
     dimensions={static_cast<int>(image.width),static_cast<int>(image.height)};

@@ -1,0 +1,95 @@
+[
+  {
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureScriptBackendContractTests.exe"
+    ],
+    "exitCode": 0,
+    "stdout": "Script entity identities, binding permissions and shared initialization transactions passed\r\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureScriptInteropTests.exe"
+    ],
+    "exitCode": 0,
+    "stdout": "Real script interop, output ownership, version, owner thread and expired session passed\r\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureGameUiTests.exe",
+      "D:/Projects/FYP/Project/AzureRender/assets_public/gameplay/assets/hud.rml",
+      "D:/Projects/FYP/Project/AzureRender/assets_public/fonts/LatoLatin-Regular.ttf"
+    ],
+    "exitCode": 0,
+    "stdout": "button: 28,61.6,90,37\r\nRmlUi document, text binding, button action, DPI resize and invalid element handling passed\r\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "D:\\Tools\\Python311\\python.exe",
+      "-B",
+      "tools/generate_script_bindings.py",
+      "--check"
+    ],
+    "exitCode": 0,
+    "stdout": "Script binding artifacts verified\r\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "D:\\Tools\\Python311\\python.exe",
+      "-B",
+      "tools/test_local_media_controller.py",
+      "--lua",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\lua.dll"
+    ],
+    "exitCode": 0,
+    "stdout": "Local media controller selection, playback, partial failure, preferences and empty lists passed\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "D:\\Tools\\Python311\\python.exe",
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools/npr_room",
+      "-p",
+      "test_*.py"
+    ],
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": "..........................................................................................................................................................................\r\n----------------------------------------------------------------------\r\nRan 170 tests in 2.171s\r\n\r\nOK\r\n"
+  },
+  {
+    "command": [
+      "D:\\Tools\\Python311\\python.exe",
+      "-B",
+      "tools/npr_room/test_pomodoro_runtime.py",
+      "--lua",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\lua.dll"
+    ],
+    "exitCode": 0,
+    "stdout": "Optional purchase cue failure preserves purchase, ambient activation and recovery\nTimer, room startup, tools, progression, story and platform fixture checks passed\r\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "D:\\Tools\\Python311\\python.exe",
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools",
+      "-p",
+      "test_script_bindings.py"
+    ],
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": "...\r\n----------------------------------------------------------------------\r\nRan 3 tests in 0.943s\r\n\r\nOK\r\n"
+  }
+]

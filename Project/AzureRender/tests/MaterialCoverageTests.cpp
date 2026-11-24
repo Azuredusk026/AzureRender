@@ -128,9 +128,13 @@ int main(){
         auto plain=MaterialData::defaults("azure.pbr");std::ofstream(root/"replacement.azurematerial")<<plain.encode();
         LoadedAsset replaced;replaced.materials={red};replaced.materials[0].slotId="coverage-slot";
         MaterialBinding binding;binding.path=(root/"replacement.azurematerial").string();
-        const auto firstMessage=RuntimeDiagnostics::instance().messages().size();applyMaterialBindings(replaced,{{"coverage-slot",binding}});
-        const auto& messages=RuntimeDiagnostics::instance().messages();require(messages.size()>firstMessage&&messages.back().find("coverageTexture")!=std::string::npos,
-            "Full replacement must name discarded coverage ownership");
+        std::size_t firstMessage=0;
+        RuntimeDiagnostics::instance().visitMessages([&](const auto& messages){firstMessage=messages.size();});
+        applyMaterialBindings(replaced,{{"coverage-slot",binding}});
+        RuntimeDiagnostics::instance().visitMessages([&](const auto& messages){
+            require(messages.size()>firstMessage&&messages.back().find("coverageTexture")!=std::string::npos,
+                "Full replacement must name discarded coverage ownership");
+        });
         std::filesystem::remove_all(root);std::cout<<"Independent coverage image size, channels, version and ownership passed\n";return 0;
     }catch(const std::exception& error){std::cerr<<error.what()<<'\n';std::filesystem::remove_all(root);return 1;}
 }

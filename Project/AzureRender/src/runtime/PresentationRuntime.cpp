@@ -12,8 +12,18 @@ void PresentationRuntime::synchronize(){
     }
     for(auto it=sounds_.begin();it!=sounds_.end();){
         auto* value=runtime_.world().tryGet<game::AudioSource>(it->first);
-        const auto key=value?value->asset+std::to_string(value->volume)+std::to_string(value->loop):"";
-        if(!value||!value->enabled||runtime_.nodeId(it->first)!=it->second.node||key!=it->second.key){audio_.release(it->second.handle);it=sounds_.erase(it);}else ++it;
+        auto& sound=it->second;
+        if(!value||!value->enabled||runtime_.nodeId(it->first)!=sound.node||
+            value->asset!=sound.asset||value->loop!=sound.loop) {
+            audio_.release(sound.handle);
+            it=sounds_.erase(it);
+        }else{
+            if(value->volume!=sound.volume) {
+                audio_.setVolume(sound.handle,value->volume);
+                sound.volume=value->volume;
+            }
+            ++it;
+        }
     }
     for(auto it=animations_.begin();it!=animations_.end();){auto* value=runtime_.world().tryGet<game::Animator>(it->first);
         if(!value||!value->enabled||value->asset!=it->second.asset||runtime_.nodeId(it->first)!=it->second.node)it=animations_.erase(it);else ++it;}
@@ -32,12 +42,50 @@ void PresentationRuntime::synchronize(){
     runtime_.world().each<game::AudioSource>([&](auto entity,const auto& value){
         const auto key=value.asset+std::to_string(value.volume)+std::to_string(value.loop);
         if(!value.enabled||value.asset.empty()||sounds_.count(entity)||failed_.count(key))return;
-        try{auto handle=audio_.load(assets_.resolveReference(value.asset),value.loop,value.volume);sounds_.emplace(entity,Sound{key,runtime_.nodeId(entity),handle});
+        try{auto handle=audio_.load(assets_.resolveReference(value.asset),value.loop,value.volume);sounds_.emplace(entity,Sound{value.asset,runtime_.nodeId(entity),handle,value.volume,value.loop});
             if(value.autoplay){audio_.play(handle);++starts_;}
         }catch(const std::exception& error){failure(key,error);}
     });
 }
-void PresentationRuntime::play(ecs::Entity entity){synchronize();auto found=sounds_.find(entity);if(found==sounds_.end())throw std::runtime_error("Entity has no playable audio source");audio_.play(found->second.handle);++starts_;}
+AudioRuntime::Handle PresentationRuntime::requireAudioSource(ecs::Entity entity) {
+    synchronize();
+    const auto found = sounds_.find(entity);
+    if (found == sounds_.end()) throw std::runtime_error("Entity has no playable audio source");
+    return found->second.handle;
+}
+void PresentationRuntime::play(ecs::Entity entity) {
+    // Explicit playback retries the current source; frame synchronization stays bounded.
+    if (const auto* source=runtime_.world().tryGet<game::AudioSource>(entity))
+        failed_.erase(source->asset+std::to_string(source->volume)+std::to_string(source->loop));
+    audio_.play(requireAudioSource(entity));
+    ++starts_;
+}
+void PresentationRuntime::stop(ecs::Entity entity) {
+    synchronize();
+    if (const auto* source=activeAudioSource(entity)) audio_.stop(source->handle);
+}
+void PresentationRuntime::pause(ecs::Entity entity, bool paused) {
+    synchronize();
+    if (const auto* source=activeAudioSource(entity)) audio_.setPaused(source->handle, paused);
+}
+const PresentationRuntime::Sound* PresentationRuntime::activeAudioSource(ecs::Entity entity) const {
+    if (revision_ != runtime_.sceneRevision()) return nullptr;
+    const auto found = sounds_.find(entity);
+    const auto* source = runtime_.world().tryGet<game::AudioSource>(entity);
+    if (found == sounds_.end() || !source || !source->enabled ||
+        source->asset != found->second.asset || source->loop != found->second.loop ||
+        runtime_.nodeId(entity) != found->second.node) return nullptr;
+    return &found->second;
+}
+bool PresentationRuntime::playing(ecs::Entity entity) const {
+    const auto* source = activeAudioSource(entity);
+    return source && audio_.playing(source->handle);
+}
+double PresentationRuntime::audioPosition(ecs::Entity entity) const {
+    const auto* source = activeAudioSource(entity);
+    if (!source) return 0;
+    return static_cast<double>(audio_.position(source->handle)) / audio_.description(source->handle).sampleRate;
+}
 void PresentationRuntime::update(double delta){
     if(!std::isfinite(delta)||delta<0)throw std::invalid_argument("Invalid presentation delta");
     synchronize();audio_.pauseAll(runtime_.state()==RuntimeLifecycle::State::Paused);frames_.clear();

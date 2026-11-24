@@ -1,0 +1,65 @@
+{
+  "baseCommit": "92ffea5",
+  "run": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-042102-runtime-media-service-903258",
+  "buildQueues": [
+    2476,
+    2478,
+    2479,
+    2480,
+    2481,
+    2482,
+    2483,
+    2485
+  ],
+  "explorationQueue": 2484,
+  "sourceSHA256": {
+    "CMakeLists.txt": "c41106030c5bb243a7ab0796703c35caff29e4ed9a649e5f716035a04be9c92a",
+    "src/runtime/AssetDatabase.hpp": "ec009baa3d21d20f643f43e8b6a89a199904aba49b9697490f58b376863a0b91",
+    "src/runtime/AssetDatabase.cpp": "98640a65ac1be67932eb18fd426474982aedac6b4df89fedff8fede505616497",
+    "src/runtime/GameUi.hpp": "8abe96327962ac89bfda41f6b6031b7980ad67914d31e551ecb49ce946b9f8ec",
+    "src/runtime/GameUi.cpp": "5d6eaacd3f89cda0960c10bbfa744ff13187cfb4bc3f5052fb785dc62e5409d0",
+    "src/render/GameUiRenderer.cpp": "398df4f24df6995950f1ee0fa41474f719f6ca154afed9e63e3910ddc6126a7a",
+    "src/assets/audio/CompressedAudioAdapter.cpp": "96f8279e0ab47bc461cd1cff2c85493fe6e906b17cafc4a60e0db0cb737e51d4",
+    "src/app/LocalMediaService.hpp": "d1e5d96c2ad5d3ee396371512c5ed2c2a4fa582d237173d629e51cc36f3a9849",
+    "src/app/LocalMediaService.cpp": "594d88ccef683cee2231a5a5db80e38e7f48617835793fca95e075555713f982",
+    "src/runtime/IMediaLibraryService.hpp": "2a9b6911bd56c67945c34c50a5010d2b7ea8acaf36906cc67f00699005dd3800",
+    "src/scripting/ScriptBindingHost.hpp": "d3a73e0ba2fcd065c5dd61ad785fedf3131faf188240657fe5fdfb0e8e9cd609",
+    "src/scripting/ScriptBindingHost.cpp": "ab84efbadc0a3fccf5ef51f66375ed04fa9535bce91ce2f94657fcb9a76a9c73",
+    "src/runtime/IScriptRuntime.hpp": "9e351a7d992dd49ffafdb1194e2b60d2957f47323d4e01ae6af03f786bf91d6d",
+    "src/runtime/ScriptRuntime.hpp": "2594f39160e23bb84b20787ec5655a86ad1a6c9d7873dea9db5f2e28506f88cb",
+    "src/scripting/lua/ScriptRuntime.cpp": "008baf1027c710e66c9afd30de4b6664d546d252dcec705040fe07963d3ed013",
+    "src/scripting/dotnet/ManagedScriptRuntime.hpp": "1ae640cf4f76900f1050bc22658d394b2674700d5e8e10d633c181bb94254946",
+    "src/scripting/dotnet/ManagedScriptRuntime.cpp": "d1dad2ba570df4b410c6799eb0e759b8d399d4931c6c05fd94e1fa8991a2521d",
+    "schemas/script_bindings.json": "139c54b4ce956101df3f96bf478aa0166eb567f708a4d26062b926bb15718640",
+    "src/scripting/GeneratedBindings.hpp": "551bb7fa9493aea7c36abbc244efa1cc1495a271a4b27a5842254876d7c17f25",
+    "managed/EngineBindings/AzureObject.g.cs": "375eed9f5fb319703ec0e5bb3db560fdcdbb476e53d390b54c66519c3f8d9029",
+    "managed/EngineBindings/BindingContract.g.cs": "178449ad58e90f097ff93b55e77c29ecf945f8debf8402dbfdfe476b3ca3b172",
+    "tests/LocalMediaServiceTests.cpp": "c6023d0a5c04d02b92c0c6d424c04285ce4fd18ef59b4158e08d276594f8a6c4",
+    "tests/GameUiTests.cpp": "49c7bcf30e004615313eb6059c4e419b634e6ae30ea86a9b69701e46524fef81",
+    "tests/ScriptBackendContractTests.cpp": "96d4d8ffa2b0fd1eff1f0b4e594b1bf393d58652e2a732bb7ce50b75664aec63"
+  },
+  "playerSHA256": "57172c72a0b22d492e6a9ba1f0ed5678abe6fca74eab0ebcd058fe7ed29c106f",
+  "configuration": "MSVC Release; Lua enabled; managed prototype disabled",
+  "checks": [
+    "self-contained worker, partial import failure and cancellation",
+    "database copy preserves controlled resolver",
+    "owned worker cancellation, join and shared store release",
+    "audio mixer and image decoder consume media references",
+    "shared script service, permissions and staged initialization rejection",
+    "native Unicode deep image path renders through RML",
+    "M4A and AAC import in 266-character cache paths",
+    "compressed audio frames, streaming, authoring and mixer regression",
+    "media library, project save, image and audio codec regression",
+    "binding artifact drift and three generator tests",
+    "two exploration Player processes save and reopen; Vulkan and resource release pass"
+  ],
+  "pending": [
+    "Player media UI selection, playback, image display and reopen",
+    "Physical audio and subjective observations pending manual retest",
+    "Formal source-room regression and Steam physical runs paused"
+  ],
+  "primaryReferences": [
+    "https://learn.microsoft.com/en-us/windows/win32/api/mfapi/nf-mfapi-mfcreatefile",
+    "https://learn.microsoft.com/en-us/windows/win32/api/mfreadwrite/nf-mfreadwrite-mfcreatesourcereaderfrombytestream"
+  ]
+}

@@ -2,7 +2,7 @@
 
 > 文档类型：使用说明
 > 适用范围：Windows x64、Release、项目 Schema v1
-> 更新日期：2026-10-12
+> 更新日期：2026-11-24
 
 ## 创建与编辑
 
@@ -85,8 +85,9 @@ Windows 目录提交遇到共享冲突时，每次重命名最多重试两秒。
 | 路径 | 内容 |
 | --- | --- |
 | `<项目名称>.exe` | 原生游戏入口，读取包内启动描述 |
+| `AzureGameLauncher.exe` | 命令脚本使用的固定名称原生入口 |
 | `game-launch.json` | 包内项目、Player 与运行参数 |
-| `start-game.cmd` | 使用包内相对路径启动 Player |
+| `start-game.cmd` | 转交参数给固定名称原生入口 |
 | `bin/` | Player 和 Release DLL |
 | `game/project.azureproject` | 独立项目配置 |
 | `game/<挂载名>/` | 关卡、脚本、模型、侧车及其他项目资源 |
@@ -99,6 +100,11 @@ Windows 目录提交遇到共享冲突时，每次重命名最多重试两秒。
 Monica 项目的入口为 `Monica.exe`。
 入口依据自身位置加载包内 Runtime 与项目。
 目录支持移动，以及中文和空格路径。
+
+命名入口和命令脚本共用启动描述及档案规则。
+命令脚本以 ASCII 保存，并转交全部调用参数。
+清单的 `launcher` 字段登记固定名称入口。
+项目名称与固定入口相同时，共用同一文件。
 
 运行时在可写目录生成缓存和诊断记录。
 启动失败的日志为 `captures/game-startup.log`。
@@ -113,6 +119,35 @@ Monica 项目的入口为 `Monica.exe`。
 项目根目录可提供 `GAME-GUIDE.md` 与 `QUALITY.json`。构建复制这两份普通文件，并登记 SHA-256。质量说明的 `width` 与 `height` 为 1 至 8192 的整数。启动脚本使用该分辨率，命令行参数可覆盖它。
 
 探索项目的操作说明包含移动、相机、交互、任务和重开。质量说明包含四级 2048 阴影、完整材质与目标帧率。公开标准项目使用 100 实体、四角色与八灯。
+
+## 原生入口的档案
+
+原生游戏入口为 Player 选择持久档案根目录。
+根目录按以下优先级确定。
+项目存档再按项目身份隔离槽与媒体副本。
+包的目录移动保持档案身份。
+
+1. 启动参数 `--save-root` 指定的目录。
+2. 环境变量 `AZURERENDER_SAVE_ROOT` 指定的绝对目录。
+3. Windows 本地应用数据目录下的 `AzureRender/GameSaves`。
+
+环境变量为空时使用系统默认目录。
+相对环境路径在启动 Player 前返回失败。
+默认目录查询与只读启动保持存档目录原状。
+首次业务写入由项目存档服务创建所属目录。
+
+本机开发和自动回放显式指定 D 盘任务档案。
+发布入口接受中文、空格及显式目录覆盖。
+直接启动 `AzurePlayer.exe` 时，通过 `--save-root` 选择持久档案。
+契约与版本见[项目存档](project-save-store.md)。
+
+```powershell
+$env:AZURERENDER_SAVE_ROOT = "D:/Games/Profiles"
+& "D:/Delivery/MyGame/MyGame.exe"
+& "D:/Delivery/MyGame/MyGame.exe" --save-root "D:/Games/AlternativeProfile"
+```
+
+[原生档案证据](../acceptance/npr-room/platform-scenarios.md#原生启动器项目档案)记录真实入口与恢复结果。
 
 ## 验收与能力边界
 

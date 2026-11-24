@@ -58,15 +58,37 @@ void from_json(const nlohmann::json& j,FogViewProjection& p){
     if(j.at("pixelOrigin")=="lower-left")result.pixelOrigin=FogViewProjection::PixelOrigin::LowerLeft;else if(j.at("pixelOrigin")!="upper-left")throw std::invalid_argument("Invalid fog pixel origin");
     result.framePhase=integer(j.at("framePhase"),7);result.pixelCenterOffset=number(j.at("pixelCenterOffset"));result.jitterRadius=number(j.at("jitterRadius"));result.depthEncoding=vector<3>(j.at("depthEncoding"));result.minimumViewDepth=number(j.at("minimumViewDepth"));result.nearFadeWidth=number(j.at("nearFadeWidth"));result.validate();p=result;
 }
-void to_json(nlohmann::json& j,const ViewFogBinding& p){p.validate();j={{"schemaVersion",1},{"asset",p.asset},{"enabled",p.enabled},{"projection",p.projection},{"captureView",p.captureView?encodeView(*p.captureView):Json(nullptr)}};if(p.analytic){j["schemaVersion"]=2;j["analytic"]=encodeAnalytic(*p.analytic);}}
+void to_json(nlohmann::json& j,const ViewFogBinding& p){
+    p.validate();
+    j={{"schemaVersion",1},{"asset",p.asset},{"enabled",p.enabled},{"projection",p.projection},
+       {"captureView",p.captureView?encodeView(*p.captureView):Json(nullptr)}};
+    if(p.analytic){j["schemaVersion"]=2;j["analytic"]=encodeAnalytic(*p.analytic);}
+    if(p.generatedHeightVolume){
+        j["schemaVersion"]=3;
+        j["generatedHeightVolume"]={{"dimensions",p.generatedHeightVolume->dimensions},
+                                    {"farViewDepth",p.generatedHeightVolume->farViewDepth}};
+    }
+}
 void from_json(const nlohmann::json& j,ViewFogBinding& p){
     if(!j.is_object()||!j.contains("schemaVersion")||!j.at("schemaVersion").is_number_integer())throw std::invalid_argument("Invalid fog binding version");
-    if(j.at("schemaVersion")!=1&&j.at("schemaVersion")!=2)throw std::invalid_argument("Unsupported view fog binding version");
-    const int revision=j.at("schemaVersion")==1?1:2;
+    if(j.at("schemaVersion")!=1&&j.at("schemaVersion")!=2&&j.at("schemaVersion")!=3)
+        throw std::invalid_argument("Unsupported view fog binding version");
+    const int revision=j.at("schemaVersion").get<int>();
     if(revision==1){fields(j,{"schemaVersion","asset","enabled","projection","captureView"});}
     else if(revision==2){fields(j,{"schemaVersion","asset","enabled","projection","captureView","analytic"});}
-    else throw std::invalid_argument("Unsupported view fog binding version");ViewFogBinding result;
-    if(revision==2)result.analytic=decodeAnalytic(j.at("analytic"));
+    else fields(j,{"schemaVersion","asset","enabled","projection","captureView","analytic","generatedHeightVolume"});
+    ViewFogBinding result;
+    if(revision>=2)result.analytic=decodeAnalytic(j.at("analytic"));
+    if(revision==3){
+        const auto& generated=j.at("generatedHeightVolume");
+        fields(generated,{"dimensions","farViewDepth"});
+        const auto& dimensions=generated.at("dimensions");
+        if(!dimensions.is_array()||dimensions.size()!=3)throw std::invalid_argument("Invalid generated height fog dimensions");
+        auto& volume=result.generatedHeightVolume.emplace();
+        for(unsigned axis=0;axis<3;++axis)
+            volume.dimensions[axis]=integer(dimensions[axis],GeneratedHeightFogSettings::maximumDimensions[axis]);
+        volume.farViewDepth=number(generated.at("farViewDepth"));
+    }
     if(!j.at("enabled").is_boolean()||!j.at("asset").is_string())throw std::invalid_argument("Invalid view fog resource or activation");
     result.asset=j.at("asset").get<std::string>();result.enabled=j.at("enabled").get<bool>();result.projection=j.at("projection").get<FogViewProjection>();
     if(!j.at("captureView").is_null())result.captureView=decodeView(j.at("captureView"));result.validate();p=std::move(result);

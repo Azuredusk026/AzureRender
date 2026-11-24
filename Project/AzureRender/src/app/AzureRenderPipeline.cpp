@@ -241,6 +241,7 @@ void AzureRenderApp::createGraphicsPipeline() {
         readBinaryFile(shaderDirectory + "/hud.vert.spv");
     const auto hudFragmentCode =
         readBinaryFile(shaderDirectory + "/hud.frag.spv");
+    const auto screenNoiseCode = readBinaryFile(shaderDirectory + "/monochrome_screen_noise.frag.spv");
     const VkShaderModule innerOutlineVertexModule =
         createShaderModule(innerOutlineVertexCode);
     const VkShaderModule innerOutlineFragmentModule =
@@ -249,6 +250,7 @@ void AzureRenderApp::createGraphicsPipeline() {
         createShaderModule(hudVertexCode);
     const VkShaderModule hudFragmentModule =
         createShaderModule(hudFragmentCode);
+    VkShaderModule screenNoiseModule = VK_NULL_HANDLE;
 
     try {
         VkPipelineShaderStageCreateInfo vertexStage{
@@ -423,7 +425,18 @@ void AzureRenderApp::createGraphicsPipeline() {
                 &hudPipeline_),
             "vkCreateGraphicsPipelines(HUD)");
         if (pipelineInspection_) pipelineInspection_->inspect(hudPipeline_,pipelineInfo.flags);
+
+        screenNoiseModule = createShaderModule(screenNoiseCode);
+        auto noiseStages = innerOutlineShaderStages;
+        noiseStages[1].module = screenNoiseModule;
+        pipelineInfo.pStages = noiseStages.data();
+        pipelineInfo.pVertexInputState = &emptyVertexInput;
+        pipelineInfo.layout = postProcessPipelineLayout_;
+        vkCheck(vkCreateGraphicsPipelines(device_, VK_NULL_HANDLE, 1, &pipelineInfo,
+            nullptr, &screenNoisePipeline_), "vkCreateGraphicsPipelines(screen noise)");
+        if (pipelineInspection_) pipelineInspection_->inspect(screenNoisePipeline_, pipelineInfo.flags);
     } catch (...) {
+        if (screenNoiseModule) vkDestroyShaderModule(device_, screenNoiseModule, nullptr);
         vkDestroyShaderModule(device_, hudFragmentModule, nullptr);
         vkDestroyShaderModule(device_, hudVertexModule, nullptr);
         vkDestroyShaderModule(
@@ -436,6 +449,7 @@ void AzureRenderApp::createGraphicsPipeline() {
             nullptr);
         throw;
     }
+    vkDestroyShaderModule(device_, screenNoiseModule, nullptr);
     vkDestroyShaderModule(device_, hudFragmentModule, nullptr);
     vkDestroyShaderModule(device_, hudVertexModule, nullptr);
     vkDestroyShaderModule(

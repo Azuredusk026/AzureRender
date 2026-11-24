@@ -1,0 +1,34 @@
+{
+  "testSHA256": "e52bc4ba372c6f0dd3fe300063bb30b89e7bbbf9b615af2a5c593469d2dda9c2",
+  "baseline": "a03f6a4",
+  "buildJob": 2353,
+  "audioDevice": false,
+  "exitCode": 0,
+  "output": "World animation, real audio, pause, entity destruction and level replacement passed\n",
+  "fixtureSHA256": {
+    "project.azureproject": "6556c21c17b516369f1f53d8170d207f5a150eb2a8abf2ef9ddcf95c1e4d706f",
+    "assets\\courtyard.azurelevel": "f2425350f521d2744fbe1865819fb1bcf1bd6dcc9da1e329c3edbbc6941bac80",
+    "assets\\courtyard.azurelevel.azmeta": "2a0da8a102f8d070b4d8f0c2f0d0235c94f5a2b63140ab5daf10c6b6f32eab23",
+    "assets\\destination.azurelevel": "2f73e52c9f227e7de3b98fe14772574394b4bb1640a7023cb9e089bd62b8cfd4",
+    "assets\\destination.azurelevel.azmeta": "7b3cc5c5da4e23c01e8bb8692dcd6e1813f72b428518d5ce55a0aa7d71688d33",
+    "assets\\hero.gltf": "bd955f3c529f45cc7ac7533d35a4f1074fd41dbd87468d3aae95d358271bc421",
+    "assets\\hero.gltf.azmeta": "ff475e394a3f48c026eb6a1393de18482d315ebb5e22ee4355d81ed3b2fccff2",
+    "assets\\hud.rml": "4f58c899fb038ebcd732264eadd5716cc9ac24e95ab0647f8dd1db78420df848",
+    "assets\\hud.rml.azmeta": "413e4a479c4cfd7b8610f1283f2be8df2aa7ea3b402279dc97ba9f21aa559a4d",
+    "assets\\motion.json": "c014bbc54e6ed536bc98aec4e2ba64f61a57d140f80991ee0faf9eb104c30812",
+    "assets\\motion.json.azmeta": "97ddd6abba23e1e87b207e24b21871b817dda233d40035febd699a302887e54f",
+    "assets\\player.lua": "d7cb64003c08a392be46976af3df8558c10e5bb6a598101a824796184cca68a7",
+    "assets\\player.lua.azmeta": "a980a88e0216d4443bec63a70bc54c443f62ee032b19e5cd32e8c5996052ea48",
+    "assets\\portal.gltf": "e51feda90b93e3608911cf01fcdf6e460ccb9abfc34659d23c41531b304adfcb",
+    "assets\\portal.gltf.azmeta": "84aa8e9d659c787224f483f8d5005c7cb6bafa64c251046ce5bf16c1a51f5ffc",
+    "assets\\portal.lua": "4f4470c2d9dbef46fac305b710168b65bfca8193b61893ab394f545b88669cbc",
+    "assets\\portal.lua.azmeta": "96ce14dce9a5087957f1d0d271fcf80f589fd82aa583d5ae49c53bb2bd8e01e8",
+    "assets\\portal.wav": "d3e6dcc52bd9f2fe7ff5ce228e70f55c4b43aac78d0042d07e8617a579fae462",
+    "assets\\portal.wav.azmeta": "179263af8ea40ef69d92c3655c58ca5876b1c45c4f17efdb16def6057ae0986f"
+  },
+  "sourceSHA256": {
+    "tests/PresentationRuntimeTests.cpp": "00181f67c7822d57ebc8ed246b792e3344444a6423137b3d6f89941e3eb7ce0a",
+    "src/runtime/PresentationRuntime.cpp": "15bb4468c01702db272a9d86f6c6c73a4fe0e3d2285cb3d074c4aa9c6f3b1888",
+    "src/runtime/AudioRuntime.cpp": "664e6e7a32b5b96fd3b0b7cbf041f0150e94e31fa35f1dfba7f500097aa16f8a"
+  }
+}

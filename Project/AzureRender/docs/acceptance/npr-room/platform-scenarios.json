@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "baseline": "Recovery Windows 1.17.3",
+  "sourceRoot": "Assets/Scripts/Assembly-CSharp",
+  "platformReference": "steam-reference.json",
+  "authorizedLiveRuns": "open",
+  "sourceSHA256": {
+    "Bulbul/Achievements/SteamAchievements.cs": "396b1a6bb6b8a0cc8e0e3cb2a5846017e0a8e2fb4216a31ea08cbcd117e98296",
+    "Bulbul/ImageContent.cs": "848cc6b39435074a5775e94d2ee7a448c44324367a4344f3e488336f6155be9f",
+    "Bulbul/LoginFlow.cs": "fc244b76732daa712b8d80bb3808299ee060799fd7a2fc4c3b9f29867087ffef",
+    "Bulbul/ScreenSleepModeExtensions.cs": "226dca8842d1375dc625c58ac08df66d18762d629b572783ffae348f9f22ead4",
+    "Bulbul/SettingService.cs": "8b3019e51eb2bf85462e4c7e39ceaac3679a9e64d4ccf28da4dc474c488d00bb",
+    "Bulbul/Web/SaveDataSync.cs": "a4ccb3a41a4ac7c63d3cf215be8bb008035e039ee7a9da3f6b5ab5cf7ab54462",
+    "NestopiSystem/FileBrowser.cs": "b704fc70514242b92f80031109d38873bafe3120d82c4b5f0ce02370ddb71b56",
+    "NestopiSystem/ScreenSystem.cs": "da6a4f88abc06e6dd249c5a474131dc19de231409961cb72c10f870a5819fe84",
+    "NestopiSystem/Steam/SteamManager.cs": "ffd26dd765ed4c3baa2ba65edb6eba128ee4b50430a2ac9aa17c8bc3fe5f9e41"
+  }
+}

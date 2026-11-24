@@ -1,0 +1,42 @@
+{
+  "codecCases": [
+    {
+      "format": "opus",
+      "frames": 48000,
+      "snrDb": 43.6022008095148
+    },
+    {
+      "format": "mp3",
+      "frames": 48000,
+      "snrDb": 25.996802732237757
+    },
+    {
+      "format": "aac",
+      "frames": 48128
+    },
+    {
+      "format": "m4a",
+      "frames": 48128
+    }
+  ],
+  "passed": true,
+  "runtimeMixing": true,
+  "workflows": [
+    {
+      "audio": "527a7bfb-18bc-4a61-ae07-6ec373c82025",
+      "audioStarts": 1,
+      "name": "opus",
+      "outputFormat": "mp3",
+      "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-042102-runtime-media-service-903258\\compressed-regression\\opus\\project.azureproject",
+      "reimportStable": true
+    },
+    {
+      "audio": "f9466051-4671-4668-9036-ccac2d97e915",
+      "audioStarts": 1,
+      "name": "m4a",
+      "outputFormat": "opus",
+      "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-042102-runtime-media-service-903258\\compressed-regression\\m4a\\project.azureproject",
+      "reimportStable": true
+    }
+  ]
+}

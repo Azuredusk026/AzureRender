@@ -47,7 +47,7 @@ void AzureRenderApp::createEditorViewportResources() {
             renderExtent_.width,
             renderExtent_.height,
             swapchainFormat_,
-            VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_SAMPLED_BIT);
+            VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_SAMPLED_BIT | VK_IMAGE_USAGE_TRANSFER_SRC_BIT);
         editorViewportImageViews_[index] = createImageView(
             editorViewportImages_[index].image,
             swapchainFormat_,

@@ -1,0 +1,41 @@
+{
+  "baseCommit": "5da3bc0",
+  "run": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-033508-local-media-library-3b96aa",
+  "configuration": "MSVC Release; Lua enabled; managed prototype disabled",
+  "buildQueue": 2467,
+  "playerQueues": [
+    2468,
+    2469
+  ],
+  "playerSHA256": "a15701ff2ce2c35ddb12965f3b99336be25cfc441077621fd041f94178683639",
+  "sourceSHA256": {
+    "CMakeLists.txt": "f641b4d1fdf7ca9f414e01defd96a191f1c52a9370ae7ec74dc1045e184b084b",
+    "src/foundation/FileLock.hpp": "8a42daaff58f5cdead2a2e1e39b05d93950cc105f29aa495a128a928a14f04c4",
+    "src/foundation/FileLock.cpp": "992c15f5c7659472c02795b00afeb5ffc9249359b05dc680961fa11f4419556a",
+    "src/runtime/ProjectSaveStore.hpp": "aa3867a6dbec32d87d51cbdaf2a3ea1356339a604c3f0543999e28dc47f2fc02",
+    "src/runtime/ProjectSaveStore.cpp": "d67bcf8cde78a29ff718ca77ce4e984142215e326d232ae5e96f717c0423b998",
+    "tests/FileLockTests.cpp": "91c96cb0cd3c326d8bfc6e464dc90d9274d65d9c1e880691d2635e4b9bab65a5",
+    "tests/ProjectSaveStoreTests.cpp": "e45d96bb34f35c6db63b3d608ebd4946b3f51dcb9cd0810b311cbc3bb6e71384",
+    "tools/test_project_save_player.py": "c3180d8e212cb05c28549bc7c5cc107bf81b9f42efab3139e5def355cbb0c267"
+  },
+  "checks": {
+    "exclusiveSharedDeadlineCancellationRelease": true,
+    "sessionPersistentConditionalCommit": true,
+    "scopedPublishedStagingReadonlyPaths": true,
+    "staleSnapshotRejected": true,
+    "futureEnvelopePreserved": true,
+    "twoProcessesMergedIncrements": 50,
+    "concurrentSnapshotBytes": 131072,
+    "snapshotReplacements": 20,
+    "explorationPlayerProcesses": 2,
+    "originalTodoPlayerProcesses": 5,
+    "liveAllocationsAfterExit": 0,
+    "pythonTests": 170,
+    "productionLuaSuite": true
+  },
+  "limitations": [
+    "Windows 11 native evidence; POSIX implementation has no execution evidence in this batch.",
+    "Physical audio, subjective listening and physical input remain pending manual retest.",
+    "Formal source room and Steam runs remain paused."
+  ]
+}

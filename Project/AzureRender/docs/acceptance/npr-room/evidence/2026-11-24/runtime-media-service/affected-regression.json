@@ -1,0 +1,54 @@
+[
+  {
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureMediaLibraryTests.exe",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-042102-runtime-media-service-903258\\library-regression"
+    ],
+    "exitCode": 0,
+    "stdout": "Media library audio/image decode, persistence, deduplication, budgets, versions, rollback and concurrency passed\r\n",
+    "stderr": "",
+    "exeSHA256": "087060d33bc965a2235bc616a6fb5cdb472a92c35d21c6e3e5aaa9d8c9917388"
+  },
+  {
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureProjectSaveStoreTests.exe",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-042102-runtime-media-service-903258\\save-regression"
+    ],
+    "exitCode": 0,
+    "stdout": "Project save scope, replacement, fallback and repeat open passed\r\n",
+    "stderr": "",
+    "exeSHA256": "f7a37045cb818632252d1e4340cd61a4a19eca1c8e4e11a75a0c3021b43bc9e8"
+  },
+  {
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureAudioCodecTests.exe",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-042102-runtime-media-service-903258\\audio-regression"
+    ],
+    "exitCode": 0,
+    "stdout": "Four audio readers, PCM, rate, channels, loop, stream and ownership passed\r\n",
+    "stderr": "[1795466202686][info][audio][code=0] Decoded source: D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-042102-runtime-media-service-903258\\tmp\\regression\\azure-audio-codec-270223860373700\\tone.wav\r\n[1795466202699][info][audio][code=0] Decoded source: D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-042102-runtime-media-service-903258\\tmp\\regression\\azure-audio-codec-270223860373700\\tone.flac\r\n[1795466202712][info][audio][code=0] Decoded source: D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-042102-runtime-media-service-903258\\tmp\\regression\\azure-audio-codec-270223860373700\\tone.mp3\r\n[1795466202729][info][audio][code=0] Decoded source: D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-042102-runtime-media-service-903258\\tmp\\regression\\azure-audio-codec-270223860373700\\tone.ogg\r\n[1795466202978][info][audio][code=0] Streaming source: D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-042102-runtime-media-service-903258\\tmp\\regression\\azure-audio-codec-270223860373700\\long.ogg\r\n[1795466202981][info][audio][code=0] Streaming source: D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-042102-runtime-media-service-903258\\tmp\\regression\\azure-audio-codec-270223860373700\\long.wav\r\n[1795466202986][info][audio][code=0] Decoded source: D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-042102-runtime-media-service-903258\\tmp\\regression\\azure-audio-codec-270223860373700\\\ud83c\udfb5 \u97f3\u9891 \u6837\u672c.FLAC\r\n",
+    "exeSHA256": "01ae5ae3a0549a7381a73bc7a9e591527860ac4354f8e93cc673c5e14adb69dc"
+  },
+  {
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureImageCodecTests.exe",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-042102-runtime-media-service-903258\\image-regression"
+    ],
+    "exitCode": 0,
+    "stdout": "Image readers, precision, orientation, transfer, material and environment passed\r\n",
+    "stderr": "",
+    "exeSHA256": "77a09af1c03915151cd12183a98df31ba5a3bcede74fd619503b36b79ec6464d"
+  },
+  {
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureCompressedAudioFormatsTests.exe",
+      "D:/Projects/FYP/Project/AzureRender/docs/acceptance/g23/evidence/2026-10-12/audio-fixtures",
+      "D:/Projects/FYP/Project/AzureRender/assets_public/test_model.gltf",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-042102-runtime-media-service-903258\\compressed-regression"
+    ],
+    "exitCode": 0,
+    "stdout": "Public compressed audio: exact delay, stereo waveform, conversion, budget, cancellation and mixer passed\r\n",
+    "stderr": "[1795466205310][info][audio][code=0] Decoded source: D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-042102-runtime-media-service-903258\\compressed-regression\\opus-output\\\u7acb\u4f53\u58f0 \ud83c\udfb5.opus\r\n[1795466205360][info][audio][code=0] Decoded source: D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-042102-runtime-media-service-903258\\compressed-regression\\mp3-output\\\u7acb\u4f53\u58f0 \ud83c\udfb5.mp3\r\n[1795466205420][info][audio][code=0] Decoded source: D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-042102-runtime-media-service-903258\\compressed-regression\\\u5e73\u53f0\u97f3\u9891 \ud83c\udfb5.aac\r\n[1795466205517][info][audio][code=0] Decoded source: D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-042102-runtime-media-service-903258\\compressed-regression\\\u5e73\u53f0\u97f3\u9891 \ud83c\udfb5.m4a\r\n[1795466206147][info][audio][code=0] Streaming source: D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-042102-runtime-media-service-903258\\compressed-regression\\long\\opus-output\\long.opus\r\n[1795466206445][info][audio][code=0] Streaming source: D:/Projects/FYP/Project/AzureRender/docs/acceptance/g23/evidence/2026-10-12/audio-fixtures\\long.m4a\r\n[1795466206585][info][editor][code=0] Opened scene: opus\r\n[1795466206636][info][editor][code=0] Imported asset: test_model.gltf\r\n[1795466206637][info][editor][code=0] Opened scene: opus\r\n[1795466206637][info][editor][code=0] Selected node: Placed Object\r\n[1795466206687][info][editor][code=0] Imported asset: \u7acb\u4f53\u58f0 \ud83c\udfb5.opus\r\n[1795466206688][info][editor][code=0] Opened scene: opus\r\n[1795466206689][info][editor][code=0] Selected node: Empty0\r\n[1795466206690][info][editor][code=0] Opened scene: opus\r\n[1795466206692][info][editor][code=0] Opened scene: opus\r\n[1795466206695][info][editor][code=0] Opened scene: opus\r\n[1795466206698][info][editor][code=0] Undo\r\n[1795466206699][info][editor][code=0] Redo\r\n[1795466206729][info][editor][code=0] Saved scene: D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-042102-runtime-media-service-903258\\compressed-regression\\opus\\assets\\creation.azurelevel\r\n[1795466206788][info][editor][code=0] Opened scene: opus\r\n[1795466206804][info][editor][code=0] Saved scene: D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-042102-runtime-media-service-903258\\compressed-regression\\opus\\assets\\creation.azurelevel\r\n[1795466206810][info][editor][code=0] Opened scene: opus\r\n[1795466206818][info][audio][code=0] Decoded source: D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-042102-runtime-media-service-903258\\compressed-regression\\opus\\assets\\imports\\asset-270227846522000-2\\\u7acb\u4f53\u58f0 \ud83c\udfb5.opus\r\n[1795466206918][info][editor][code=0] Opened scene: m4a\r\n[1795466206994][info][editor][code=0] Imported asset: test_model.gltf\r\n[1795466206995][info][editor][code=0] Opened scene: m4a\r\n[1795466206996][info][editor][code=0] Selected node: Placed Object\r\n[1795466207080][info][editor][code=0] Imported asset: \u5e73\u53f0\u97f3\u9891 \ud83c\udfb5.m4a\r\n[1795466207080][info][editor][code=0] Opened scene: m4a\r\n[1795466207081][info][editor][code=0] Selected node: Empty0\r\n[1795466207083][info][editor][code=0] Opened scene: m4a\r\n[1795466207085][info][editor][code=0] Opened scene: m4a\r\n[1795466207088][info][editor][code=0] Opened scene: m4a\r\n[1795466207091][info][editor][code=0] Undo\r\n[1795466207091][info][editor][code=0] Redo\r\n[1795466207126][info][editor][code=0] Saved scene: D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-042102-runtime-media-service-903258\\compressed-regression\\m4a\\assets\\creation.azurelevel\r\n[1795466207197][info][editor][code=0] Opened scene: m4a\r\n[1795466207214][info][editor][code=0] Saved scene: D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-042102-runtime-media-service-903258\\compressed-regression\\m4a\\assets\\creation.azurelevel\r\n[1795466207220][info][editor][code=0] Opened scene: m4a\r\n[1795466207280][info][audio][code=0] Decoded source: D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-042102-runtime-media-service-903258\\compressed-regression\\m4a\\assets\\imports\\asset-270228206542600-4\\\u5e73\u53f0\u97f3\u9891 \ud83c\udfb5.m4a\r\n",
+    "exeSHA256": "22873d78d2b509180d26525ec5a53a5f89ae1a46f4d0660a5ee9cfd0bfe4bcc2"
+  }
+]

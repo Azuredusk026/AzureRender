@@ -1,0 +1,40 @@
+{
+  "formatVersion": 1,
+  "implementationReference": "Recovery 1.17.3",
+  "steam": {
+    "appId": 3548580,
+    "buildId": 26586283,
+    "version": "1.18.1",
+    "unityVersion": "2022.3.62f2",
+    "playerSHA256": "c9138f0e56fc81410b21ca32fd869f0eb1259db2e7f6adc3d1d0750ddbb07f7c",
+    "assemblySHA256": "aac617c4a9186748675587c8c9325523a8e160aef2f66cd3225b832832bda420",
+    "catalogSHA256": "f7441e7730c839b51d2f94e8050ea698c4fc9518be31e9c20dcb3c2d317aee38",
+    "keys": 3713,
+    "locations": 1858,
+    "internalIds": 1845
+  },
+  "comparison": {
+    "baselineOriginalAssemblySHA256": "2daf4eb479a910d9bcb7a4a33c2ab7cdf8f6831d9841fbfe61ccfd9494fc9e7f",
+    "catalogAddedIds": 20,
+    "catalogRemovedIds": 7,
+    "equalDecompiledTypes": [
+      "NestopiSystem.Steam.SteamManager",
+      "Bulbul.LoginFlow",
+      "Bulbul.Web.SaveDataSync",
+      "Bulbul.Achievements.SteamAchievements",
+      "Bulbul.PomodoroService"
+    ],
+    "changedDecompiledTypes": [
+      "Bulbul.ScenarioReader"
+    ],
+    "livePlatformEvidence": false
+  },
+  "rea": {
+    "version": "6.4.0",
+    "coverage": "partial",
+    "inspectionEvidence": "ev_622839d8f2783ccaceec93f0e69e84cf48322adb7d3fc6927f1fc6e8b8e578e3",
+    "comparisonEvidence": "ev_b5651548ede29fbad5a95d0e27e0376488f6f478904c2db444cd959daedc3b83",
+    "inspectionSHA256": "c281782e63f6be0a5dcce520aa3e5ab15f770a44991dfb1e4499f4fec87888f4",
+    "comparisonSHA256": "f09a63a069568babc70d701b62f29e30628a0ebdbc6122c65c4c1d3515a2015a"
+  }
+}

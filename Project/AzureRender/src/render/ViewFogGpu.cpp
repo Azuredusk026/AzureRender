@@ -1,5 +1,6 @@
 #include "render/ViewFogGpu.hpp"
 #include "render/FogVolumeGpu.hpp"
+#include "render/GeneratedHeightFogGpu.hpp"
 #include "render/CameraProjection.hpp"
 #include <cstring>
 #include <stdexcept>
@@ -9,15 +10,22 @@ struct ViewFogGpu::State {
     rhi::IRhi& backend;
     ViewFogBinding binding;
     std::unique_ptr<FogVolumeGpu> volume;
+    std::unique_ptr<GeneratedHeightFogGpu> generated;
     std::vector<rhi::GpuBuffer> frames;
     explicit State(rhi::IRhi& rhi,const ViewFogBinding& source):backend(rhi),binding(source){}
-    ~State(){for(auto& buffer:frames)backend.allocator().destroyBuffer(buffer);}
+    ~State(){
+        generated.reset();
+        for(auto& buffer:frames)backend.allocator().destroyBuffer(buffer);
+    }
 };
-ViewFogGpu::ViewFogGpu(rhi::IRhi& backend,const ViewFogBinding& binding,const FogVolumeData& data,unsigned frames){
+ViewFogGpu::ViewFogGpu(rhi::IRhi& backend,const ViewFogBinding& binding,const FogVolumeData& data,unsigned frames,
+    const std::vector<char>& generatorProgram){
     binding.validate();data.validate();
     if(!binding.enabled||frames==0||frames>8)throw std::invalid_argument("View fog requires an enabled binding and one to eight frame buffers");
+    if(binding.generatedHeightVolume&&generatorProgram.empty())
+        throw std::invalid_argument("Generated height fog requires a compute shader");
     auto state=std::make_unique<State>(backend,binding);
-    state->volume=std::make_unique<FogVolumeGpu>(backend,data);
+    if(!binding.generatedHeightVolume)state->volume=std::make_unique<FogVolumeGpu>(backend,data);
     state->frames.resize(frames);
     for(auto& buffer:state->frames){
         buffer=backend.allocator().createBuffer(sizeof(PackedViewFogFrame),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
@@ -25,6 +33,10 @@ ViewFogGpu::ViewFogGpu(rhi::IRhi& backend,const ViewFogBinding& binding,const Fo
         const auto projection=binding.projection.pack();
         for(unsigned row=0;row<3;++row)initial.rows[row]=projection.rows[row];
         std::memcpy(buffer.mapped,&initial,sizeof(initial));backend.allocator().flush(buffer,0,sizeof(initial));
+    }
+    if(binding.generatedHeightVolume){
+        state->generated=std::make_unique<GeneratedHeightFogGpu>(backend,binding.generatedHeightVolume->dimensions,
+            state->frames,generatorProgram);
     }
     state_=std::move(state);
 }
@@ -53,13 +65,23 @@ FogViewMatch ViewFogGpu::updateFrame(unsigned frame,const CameraViewDescriptor& 
         }
         if(analytic.aerial){packed.rows[13][1]=1;const auto p=analytic.aerial->pack();for(unsigned i=0;i<6;++i)packed.rows[15+i]=p.rows[i];}
     }
+    if(match==FogViewMatch::GeneratedHeight){
+        packed.rows[13][2]=1.F;
+        packed.rows[13][3]=state_->binding.generatedHeightVolume->farViewDepth;
+    }
     std::memcpy(buffer.mapped,&packed,sizeof(packed));state_->backend.allocator().flush(buffer,0,sizeof(packed));
     return match;
 }
 const rhi::GpuBuffer& ViewFogGpu::parameters(unsigned frame) const{return state_->frames.at(frame);}
+std::optional<RenderGraph::ResourceId> ViewFogGpu::addGenerationPass(RenderGraph& graph,unsigned frame,
+    RenderGraph::ResourceId frameParameters) const{
+    if(!state_->generated)return std::nullopt;
+    return state_->generated->addPass(graph,frame,frameParameters);
+}
 void ViewFogGpu::writeDescriptors(VkDescriptorSet set,unsigned frame,unsigned parameterBinding,unsigned textureBinding) const{
     const auto& buffer=parameters(frame);
     state_->backend.writeDescriptorBuffer({set,parameterBinding,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,buffer.buffer,buffer.size});
-    state_->volume->writeTexture(set,textureBinding);
+    if(state_->generated)state_->generated->writeTexture(set,textureBinding,frame);
+    else state_->volume->writeTexture(set,textureBinding);
 }
 }

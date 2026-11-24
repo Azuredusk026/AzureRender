@@ -1,0 +1,12 @@
+{
+  "command": [
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureAudioCodecTests.exe",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-033508-local-media-library-3b96aa\\audio-codecs-captured"
+  ],
+  "exitCode": 0,
+  "stdout": "Four audio readers, PCM, rate, channels, loop, stream and ownership passed\r\n",
+  "stderr": "[1795465035101][info][audio][code=0] Decoded source: D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-033508-local-media-library-3b96aa\\tmp\\codec-capture\\azure-audio-codec-269056275440400\\tone.wav\r\n[1795465035113][info][audio][code=0] Decoded source: D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-033508-local-media-library-3b96aa\\tmp\\codec-capture\\azure-audio-codec-269056275440400\\tone.flac\r\n[1795465035125][info][audio][code=0] Decoded source: D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-033508-local-media-library-3b96aa\\tmp\\codec-capture\\azure-audio-codec-269056275440400\\tone.mp3\r\n[1795465035139][info][audio][code=0] Decoded source: D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-033508-local-media-library-3b96aa\\tmp\\codec-capture\\azure-audio-codec-269056275440400\\tone.ogg\r\n[1795465035344][info][audio][code=0] Streaming source: D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-033508-local-media-library-3b96aa\\tmp\\codec-capture\\azure-audio-codec-269056275440400\\long.ogg\r\n[1795465035347][info][audio][code=0] Streaming source: D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-033508-local-media-library-3b96aa\\tmp\\codec-capture\\azure-audio-codec-269056275440400\\long.wav\r\n[1795465035351][info][audio][code=0] Decoded source: D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-033508-local-media-library-3b96aa\\tmp\\codec-capture\\azure-audio-codec-269056275440400\\\ud83c\udfb5 \u97f3\u9891 \u6837\u672c.FLAC\r\n",
+  "stdoutSHA256": "3e4882fd0e9557278bb7e35385c4dfd51858d9d180398feed8d7b2db7454063f",
+  "stderrSHA256": "c1a87a012c1ca89d14b5b46fcfa20fc49eccfed91d267acade7c9bd107b3ba29",
+  "exeSHA256": "a29b9375516b7c988ffc8d87e8b8483fdbc43d2c6f42dc470e55b938d1150423"
+}

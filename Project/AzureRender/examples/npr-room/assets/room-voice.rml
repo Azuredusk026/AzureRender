@@ -1,0 +1,5 @@
+#room-voice-talk { position: absolute; left: 46%; bottom: 16dp; padding: 6dp 10dp; color: white; background-color: #34434f; }
+#room-voice-caption { position: absolute; left: 25%; width: 50%; bottom: 56dp; padding: 10dp 12dp; background-color: #19232c; text-align: center; font-size: 17dp; }
+</style>
+<button id="room-voice-talk" data-action="room-voice-talk">Talk</button>
+<div id="room-voice-caption" style="display: none;"><span id="room-voice-line"></span></div>

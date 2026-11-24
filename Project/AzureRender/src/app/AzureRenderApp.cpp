@@ -2,6 +2,8 @@
 #include "rhi/VulkanPipelineCache.hpp"
 #include "runtime/InputPreferences.hpp"
 #include "runtime/ProjectReferenceViews.hpp"
+#include "runtime/ProjectSaveStore.hpp"
+#include "app/LocalMediaService.hpp"
 #include "foundation/FramePacing.hpp"
 #include "assets/AssetDeformation.hpp"
 #include "AzureRenderApp.hpp"
@@ -98,8 +100,11 @@ AzureRenderApp::~AzureRenderApp() {
     cleanup();
 }
 
-void AzureRenderApp::run(
-    const AzureRenderOptions& options) {
+void AzureRenderApp::run(const AzureRenderOptions& options) {
+    run(options, {});
+}
+
+void AzureRenderApp::run(const AzureRenderOptions& options, const std::filesystem::path& saveRoot) {
     runOptions_ = options;
     azurerender::ProjectReferenceViews referenceConfiguration;
 #if AZURE_WITH_EDITOR
@@ -122,7 +127,7 @@ void AzureRenderApp::run(
     runtime_.start();
     }, [this] { runtime_.stop(); });
     if(!options.projectFile.empty() && !options.editorMode)
-    runtimeModules_.add({"runtime.project",1,{}, {"runtime.world"}}, [this,&options,views=std::move(referenceConfiguration.views)](auto&) {
+    runtimeModules_.add({"runtime.project",1,{}, {"runtime.world"}}, [this,&options,&saveRoot,views=std::move(referenceConfiguration.views)](auto&) {
     if (options.projectStartup) {
         if (std::filesystem::weakly_canonical(std::filesystem::u8path(options.projectFile)) != options.projectStartup->project().file)
             throw std::invalid_argument("Prepared startup does not match the project entry");
@@ -136,12 +141,19 @@ void AzureRenderApp::run(
         gameRuntime_->physics().setMeshResolver(azurerender::collisionMeshAssets(levelSession_->assets()));
         gameRuntime_->physics().validateScene(runtime_);
         scriptRuntime_ = azurerender::application::scripts(levelSession_->project(),runtime_,*gameRuntime_,levelSession_->assets());
-        scriptRuntime_->setLevelHandler([this](std::string reference) { levelSession_->request(std::move(reference)); });
+        if (!saveRoot.empty()) {
+            auto store=std::make_shared<azurerender::ProjectSaveStore>(saveRoot, levelSession_->project().id);
+            auto media=std::make_shared<azurerender::LocalMediaService>(store);
+            scriptRuntime_->setSaveStore(std::move(store));
+            scriptRuntime_->setMediaService(media);
+            levelSession_->assets().setReferenceResolver([media](const std::string& reference){return media->resolve(reference);});
+        }
+        scriptRuntime_->setLevelSession(*levelSession_);
         gameRuntime_->setBeforeStep([this](double delta) { scriptRuntime_->fixedStep(delta); });
         gameRuntime_->setEventHandler([this](const auto& event) { scriptRuntime_->dispatch(event); });
         gameRuntime_->setInteractionHandler([this](const auto& event){scriptRuntime_->dispatchInteraction(event);});
     }
-    if(levelSession_){presentationRuntime_=std::make_unique<azurerender::PresentationRuntime>(runtime_,levelSession_->assets());scriptRuntime_->setAudioHandler([this](auto entity){presentationRuntime_->play(entity);});}
+    if(levelSession_){presentationRuntime_=std::make_unique<azurerender::PresentationRuntime>(runtime_,levelSession_->assets());scriptRuntime_->setAudioTransport(*presentationRuntime_);}
     }, [this] {
         scriptRuntime_.reset(); gameRuntime_.reset(); presentationRuntime_.reset(); levelSession_.reset();
     });
@@ -273,6 +285,12 @@ void AzureRenderApp::initWindow() {
     config.scrollCallback = scrollCallback;
     config.dropCallback = fileDropCallback;
     frontend_ = std::make_unique<azurerender::GlfwFrontend>(config);
+    if (!fixedSimulation_) {
+        frontend_->applyWindowPresentation(
+            static_cast<azurerender::WindowMode>(engineSettings_->get("runtime.windowMode").get<int>()),
+            static_cast<azurerender::WindowResolution>(engineSettings_->get("runtime.windowResolution").get<int>()),
+            engineSettings_->get("runtime.alwaysOnTop").get<bool>());
+    }
     lastRotationTime_ = frontend_->timeSeconds();
     azurerender::RuntimeDiagnostics::instance().print(
         "input",
@@ -431,7 +449,7 @@ void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
         if(validation_)validation_->pump(gameplayFrame_);
         drawFrame();
         const double elapsed = std::chrono::duration<double>(std::chrono::steady_clock::now() - hostFrameStart).count();
-        const auto maximumRate = engineSettings_->get("runtime.maxFrameRate").get<unsigned>();
+        const auto maximumRate = effectiveFrameRateLimit();
         const double waitSeconds = azurerender::framePacingWaitSeconds(elapsed, maximumRate);
         if (waitSeconds > 0) {
             const auto waitStart = std::chrono::steady_clock::now();
@@ -549,6 +567,7 @@ void AzureRenderApp::createMultisampleResources(){
     }
 }
 void AzureRenderApp::createSceneRenderer() {
+    clearRoomGlitch();
     sceneResourcePaths_.reset();
     playerSceneSnapshots_.clear();playerRenderSceneCache_.clear();
     azurerender::RenderContext context;
@@ -1235,6 +1254,8 @@ void AzureRenderApp::cleanup() {
     runtimeModules_.stop();
     if (device_ != VK_NULL_HANDLE) {
         vkDeviceWaitIdle(device_);
+        clearRoomGlitch();
+        releasePreparedGlitchView();
 #if AZURE_WITH_EDITOR
         shaderReloader_.reset();
         if(runOptions_.editorSession)runOptions_.editorSession->setDeveloperServices({});
@@ -1627,8 +1648,9 @@ void AzureRenderApp::createLogicalDevice() {
 void AzureRenderApp::createSwapchain() {
     const SwapchainSupport support = querySwapchainSupport(physicalDevice_);
     const VkSurfaceFormatKHR surfaceFormat = chooseSurfaceFormat(support.formats);
-    const VkPresentModeKHR presentMode = choosePresentMode(support.presentModes,
-        engineSettings_->get("runtime.vsync").get<bool>());
+    const bool synchronized = effectiveVsync();
+    const VkPresentModeKHR presentMode = choosePresentMode(support.presentModes, synchronized);
+    frontend_->updatePresentationSync(synchronized);
     selectedPresentMode_ = presentMode;
     const VkExtent2D extent = chooseExtent(support.capabilities);
 

@@ -12,6 +12,7 @@ class GameUiRenderer final: public Rml::RenderInterface {
 public:
     GameUiRenderer(rhi::IRhi& rhi,VkRenderPass renderPass,const std::filesystem::path& shaders);
     ~GameUiRenderer();
+    void recreatePipeline(VkRenderPass renderPass,const std::filesystem::path& shaders);
     void beginFrame(std::uint64_t serial,VkExtent2D extent);
     void record(rhi::ICommandRecorder& commands);
     std::uint64_t drawCalls() const;

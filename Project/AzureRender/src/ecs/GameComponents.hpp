@@ -207,4 +207,117 @@ struct GameUiDocument {
     AZURE_FIELD("Enabled", 0, 1)
     bool enabled = true;
 };
+AZURE_TYPE("azure.screen-noise", 1)
+struct ScreenNoise {
+    AZURE_FIELD("Opacity", 0, 1)
+    float opacity = 0;
+};
+AZURE_TYPE("azure.screen-blackout", 1)
+struct ScreenBlackout {
+    AZURE_FIELD("Ratio", 0, 1)
+    float ratio = 0;
+    AZURE_FIELD("Blind", 0, 1)
+    bool blind = false;
+    AZURE_FIELD("Ramp image", 0, 0)
+    AZURE_FIELD_REFERENCE("asset", "texture", "")
+    std::string ramp;
+    AZURE_FIELD("Timeline image", 0, 0)
+    AZURE_FIELD_REFERENCE("asset", "texture", "")
+    std::string timeline;
+    AZURE_FIELD("Instability", 0, 1)
+    float unstable = 0;
+    AZURE_FIELD("Length", 0, 1)
+    float length = .2F;
+    AZURE_FIELD("Dot scale", 1, 128)
+    float dotScale = 15.F;
+    AZURE_FIELD("Speed", 0, 128)
+    float speed = 5.F;
+    AZURE_FIELD("Blind top", 0, 128)
+    float blindTop = 15.3F;
+    AZURE_FIELD("Blind bottom", 0, 128)
+    float blindBottom = 6.3F;
+};
+AZURE_TYPE("azure.screen-chromatic", 1)
+struct ScreenChromatic {
+    AZURE_FIELD("Ratio", 0, 1)
+    float ratio = 0;
+    AZURE_FIELD("Noise texture", 0, 0)
+    std::string noise;
+    AZURE_FIELD("Timeline texture", 0, 0)
+    std::string timeline;
+    AZURE_FIELD("Instability", 0, 1)
+    float unstable = 0;
+    AZURE_FIELD("Filament scale", 1, 128)
+    float filamentScale = 5.F;
+    AZURE_FIELD("Displacement", 0, 1)
+    float rage = .075F;
+};
+AZURE_TYPE("azure.screen-move", 1)
+struct ScreenMove {
+    AZURE_FIELD("Ratio", 0, 1)
+    float ratio = 0;
+    AZURE_FIELD("Bands texture", 0, 0)
+    AZURE_FIELD_REFERENCE("asset", "texture", "")
+    std::string bands;
+    AZURE_FIELD("Instability texture", 0, 0)
+    AZURE_FIELD_REFERENCE("asset", "texture", "")
+    std::string instability;
+    AZURE_FIELD("Flow texture", 0, 0)
+    AZURE_FIELD_REFERENCE("asset", "texture", "")
+    std::string flow;
+    AZURE_FIELD("Timeline texture", 0, 0)
+    AZURE_FIELD_REFERENCE("asset", "texture", "")
+    std::string timeline;
+    AZURE_FIELD("Speed", 0, 128)
+    float speed = .5F;
+    AZURE_FIELD("Instability", 0, 1)
+    float unstable = 0;
+};
+AZURE_TYPE("azure.screen-glitch", 1)
+struct ScreenGlitch {
+    AZURE_FIELD("Ratio", 0, 1)
+    float ratio = 0;
+    AZURE_FIELD("Camera active", 0, 1)
+    bool cameraActive = false;
+    AZURE_FIELD("Timeline texture", 0, 0)
+    AZURE_FIELD_REFERENCE("asset", "texture", "")
+    std::string timeline;
+    AZURE_FIELD("Length", -1, 1)
+    float length = -.2F;
+    AZURE_FIELD("Dot scale", 1, 128)
+    float dotScale = 18.27F;
+    AZURE_FIELD("Speed", 0, 128)
+    float speed = 12.F;
+    AZURE_FIELD("Instability", 0, 1)
+    float unstable = 0;
+    AZURE_FIELD("Field of view", 1, 179)
+    float fieldOfView = 35.F;
+    AZURE_FIELD("Near plane", 0.001, 100)
+    float nearPlane = .05F;
+    AZURE_FIELD("Far plane", 1, 10000)
+    float farPlane = 1000.F;
+};
+AZURE_TYPE("azure.window-presentation", 1)
+struct WindowPresentation {
+    AZURE_FIELD("Window mode", 0, 1)
+    std::uint32_t mode = 0;
+    AZURE_FIELD("Window resolution", 0, 3)
+    std::uint32_t resolution = 3;
+    AZURE_FIELD("Always on top", 0, 1)
+    bool alwaysOnTop = false;
+    AZURE_FIELD("Apply requested settings", 0, 1)
+    bool pending = false;
+    AZURE_FIELD("Room language", 0, 7)
+    std::uint32_t locale = 0;
+    AZURE_FIELD("System menu title", 0, 0)
+    std::string menuCaption;
+    AZURE_FIELD("Focused frame rate", 10, 250)
+    std::uint32_t activeFrameRate = 60;
+    AZURE_FIELD("Unfocused frame rate", 10, 250)
+    std::uint32_t inactiveFrameRate = 24;
+    AZURE_FIELD("Screen sleep mode", 0, 1)
+    std::uint32_t screenSleepMode = 0;
+    AZURE_FIELD("Vertical sync", 0, 1)
+    bool vsync = false;
+};
 } // namespace azurerender::game

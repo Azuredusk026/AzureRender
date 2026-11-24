@@ -3,9 +3,15 @@
 #include "scripting/BindingDescriptor.hpp"
 #include <functional>
 #include <map>
+#include <memory>
 #include <set>
 #include <thread>
 namespace azurerender {
+class ProjectSaveStore;
+class IMediaLibraryService;
+class LevelSession;
+class GameUi;
+class PresentationRuntime;
 struct ScriptObject {
     ecs::EntityHandle identity;
     std::string node;
@@ -15,7 +21,7 @@ struct ScriptObject {
 // Callbacks execute on the owner thread; deferred effects retain lifecycle IDs.
 class ScriptBindingHost final {
 public:
-    ScriptBindingHost(RuntimeLifecycle& runtime,GameRuntime& game):runtime_(runtime),game_(game) {}
+    ScriptBindingHost(RuntimeLifecycle& runtime,GameRuntime& game);
     ScriptObject object(const std::string& node);
     bool valid(const ScriptObject& object);
     nlohmann::json invoke(const ScriptObject&,const std::string&,const nlohmann::json&);
@@ -25,8 +31,13 @@ public:
     void cancelInitialization() noexcept;
     void close() noexcept;
     void setLevelHandler(std::function<void(std::string)> handler);
+    void setLevelSession(LevelSession&);
     void setAudioHandler(std::function<void(ecs::Entity)> handler);
+    void setAudioTransport(PresentationRuntime& presentation);
     void setUiHandler(std::function<void(std::string,std::string)> handler);
+    void setUiProvider(std::function<GameUi*()> provider);
+    void setSaveStore(std::shared_ptr<ProjectSaveStore>);
+    void setMediaService(std::shared_ptr<IMediaLibraryService>);
     static nlohmann::json encode(const ScriptObject&);
     static ScriptObject decode(const nlohmann::json&);
 private:
@@ -42,8 +53,13 @@ private:
     std::vector<std::function<void()>> stagedEffects_;
     std::vector<std::function<void()>> stagedStructural_;
     std::set<std::string> stagedSpawns_;
+    LevelSession* levels_=nullptr;
     std::function<void(std::string)> level_;
     std::function<void(ecs::Entity)> audio_;
+    PresentationRuntime* transport_=nullptr;
     std::function<void(std::string,std::string)> ui_;
+    std::function<GameUi*()> uiDocument_;
+    std::shared_ptr<ProjectSaveStore> saveStore_;
+    std::shared_ptr<IMediaLibraryService> media_;
 };
 }

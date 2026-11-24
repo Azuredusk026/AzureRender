@@ -12,7 +12,11 @@ public:
     ~GameUi();
     void resize(int width, int height, float density);
     void setText(const std::string& id, const std::string& text);
+    void setImage(const std::string& id, const std::filesystem::path& image);
     std::string text(const std::string& id) const;
+    std::string formValue(const std::string& id) const;
+    void setFormValue(const std::string& id, const std::string& value);
+    void setVisible(const std::string& id, bool visible);
     std::array<float,4> bounds(const std::string& id) const;
     void setActionHandler(std::function<void(std::string)> handler);
     bool pointer(int x, int y, bool down);

@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "D:\Projects\FYP-worktrees\npr-room-reproduction\Project\AzureRender\tools\test_local_media_player.py", line 230, in <module>
+    verify(args.player, args.resources, args.audio_fixtures, args.image_fixtures, args.native_fixtures, args.output)
+  File "D:\Projects\FYP-worktrees\npr-room-reproduction\Project\AzureRender\tools\test_local_media_player.py", line 156, in verify
+    choose(click, "media-import-images", "images", sorted(images.iterdir()))
+  File "D:\Projects\FYP-worktrees\npr-room-reproduction\Project\AzureRender\tools\test_local_media_player.py", line 135, in choose
+    native_selection(control["pid"], "导入本地音乐" if kind == "music" else "导入本地图片",
+  File "D:\Projects\FYP-worktrees\npr-room-reproduction\Project\AzureRender\tools\test_local_media_player.py", line 82, in native_selection
+    click()
+  File "D:\Projects\FYP-worktrees\npr-room-reproduction\Project\AzureRender\tools\test_local_media_player.py", line 136, in <lambda>
+    names, lambda: click(action))
+                   ^^^^^^^^^^^^^
+  File "D:\Projects\FYP-worktrees\npr-room-reproduction\Project\AzureRender\tools\npr_room\test_notes_player.py", line 77, in click
+    assert (reply.get("code") == "InvalidRequest"
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'code': 'InvalidRequest', 'elapsedMs': 15.8011, 'message': 'Game UI target is outside the viewport', 'passed': False, 'schemaVersion': 1}

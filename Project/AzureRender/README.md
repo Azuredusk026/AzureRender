@@ -10,6 +10,51 @@
 
 [层级搜索与节点引用集成](docs/acceptance/p0/2026-11-19-editor-hierarchy-integration.md)记录两项目回放及关联检查。
 
+[房间游戏移植](docs/plans/2026-11-16-npr-room-reproduction.md)登记五场景、原资产及独立运行验收。
+[移植基线](docs/acceptance/npr-room/baseline.md)记录 Recovery 参考身份与核验范围。
+[功能矩阵](docs/acceptance/npr-room/feature-matrix.md)登记源条目与对应的运行证据。
+[二阶环境光资源](docs/runtime/irradiance-volumes.md)提供版本化网格与共享 GPU 求值。
+原版夜晚和多云的方向响应通过双设备契约检查。
+房间雾体积按原版相机的投影与裁剪范围生成。
+[天气全局值](docs/acceptance/npr-room/windows-atmosphere.md#原版天气全局值)登记云层与雾的同帧参数诊断。
+原版云层与雾采样读取同帧天气参数及天气网格变换。
+[大气程序全局字段](docs/acceptance/npr-room/windows-atmosphere.md#大气程序全局字段)登记五个原程序的类型绑定与元数据采集。
+[原版天空参数消费](docs/acceptance/npr-room/windows-atmosphere.md#原版天空参数消费)记录夜晚、多云的重复采样与 HDR 资产。
+[完整程序参数序列](docs/acceptance/npr-room/windows-atmosphere.md#完整程序参数序列)登记逐帧发布的二十四帧原版参照。
+[引用模型姿态文件](docs/acceptance/npr-room/windows-atmosphere.md#引用模型姿态文件)登记七部件的外部缓冲配准和原生画面对照。
+[角色姿态序列](docs/acceptance/npr-room/windows-atmosphere.md#角色姿态序列)登记夜晚、多云十二帧骨骼及表情的原生回放。
+[同帧大气合成](docs/acceptance/npr-room/windows-atmosphere.md#同帧大气合成)登记天空、云层和原相机雾体积的配对核验。
+[同帧大气房间装配](docs/acceptance/npr-room/windows-atmosphere.md#同帧大气房间装配)登记原机位、静态角色、五盏灯及原生雾开关。
+[原版刚性附件](docs/acceptance/npr-room/character-assets.md#原版刚性附件)登记猫耳耳机装配、静态对照及十二帧回放。
+[运行时主贴图与底色](docs/acceptance/npr-room/room-base-surfaces.md#运行时主贴图与底色)登记杯子图案、逐物件材质变体及原生重复回放。
+[原版变形道具](docs/acceptance/npr-room/character-assets.md#原版变形道具)登记漫画书、课本的骨骼装配及原生回放。
+[房间计时回放](docs/acceptance/npr-room/room-probe.md)记录原音效、计时输入和本地存档。
+[待办退出恢复](docs/acceptance/npr-room/todo.md#待办退出恢复)覆盖草稿提交、重开及版本保护。
+[习惯名称退出恢复](docs/acceptance/npr-room/work-calendar.md#习惯名称退出恢复)覆盖未失焦输入和日历装配。
+[整合日历工时退出恢复](docs/acceptance/npr-room/work-calendar.md#整合日历工时退出恢复)验证生成宿主的保存生命周期。
+[房间人工复验](docs/acceptance/npr-room/manual-retest.md)登记设备、实体输入及屏幕待机的版本与步骤。
+[本机路径选择](docs/runtime/path-selection.md)提供单文件、多文件、目录和取消契约。
+[本地媒体目录筛选](docs/acceptance/npr-room/platform-scenarios.md#本地媒体目录筛选)验证递归、去重、取消及预算。
+[项目存档与内容目录](docs/runtime/project-save-store.md)提供条件提交、并发协调及项目内容定位。
+[本地媒体库](docs/runtime/media-library.md)共享音频与图片的导入、清单及重开契约。
+[运行时媒体任务](docs/runtime/local-media-service.md)提供后台导入、取消、状态及受控资产引用。
+[本地媒体工作间](examples/local-media/README.md)验证原生选择、音乐播放、图片浏览与项目档案恢复。
+[原生入口档案](docs/runtime/game-publishing.md#原生入口的档案)提供系统默认目录、环境配置及启动参数覆盖。
+[原创媒体目录包](docs/acceptance/npr-room/platform-scenarios.md#原创媒体独立目录包)通过搬移、两种启动入口及媒体档案恢复。
+[房间曲库](docs/acceptance/npr-room/music-playlist.md)与[环境声](docs/acceptance/npr-room/ambient-sound.md)记录原资产、播放控制和独立 Player 恢复。
+[开场书本布置](docs/acceptance/npr-room/opening-book-layout.md)记录房间道具、剧情临时状态和读档。
+[开场身体动作](docs/acceptance/npr-room/opening-body.md)记录原角色动作、转场和剧情入口。
+[开场桌面姿态](docs/acceptance/npr-room/opening-desk.md)记录桌面道具状态和原生回放。
+[开场全屏特效](docs/acceptance/npr-room/opening-effects.md)记录色差、黑屏和单色噪声的原程序、Vulkan 实现及常规房间回放。
+[画面偏移](docs/acceptance/npr-room/opening-effects.md#画面偏移硬件参照)记录两种显卡的四帧对照和教学房间的组合回放。
+[故障特效](docs/acceptance/npr-room/opening-effects.md#故障硬件参照)记录原相机、输出目标及 Direct3D 11 与 Vulkan 同设备对照。
+[房间故障相机与时序](docs/acceptance/npr-room/opening-effects.md#房间故障相机与时序)记录独立视图、暂停画面和开场两章的回放。
+[Windows 窗景大气](docs/acceptance/npr-room/windows-atmosphere.md)记录四个时段的原版天空参照，以及夜晚和多云的原版云层、雾与固定镜头房间回放。
+[房间成就记录](docs/acceptance/npr-room/platform-scenarios.md#房间成就记录)记录四种房间操作的本地成就与存档恢复。
+[房间显示面板](docs/acceptance/npr-room/platform-scenarios.md#房间显示面板)与[系统菜单置顶](docs/acceptance/npr-room/platform-scenarios.md#windows-系统菜单置顶)记录窗口选项和存档恢复。
+[显示设置语言](docs/acceptance/npr-room/platform-scenarios.md#显示设置语言)记录面板和系统菜单的原文本与语言恢复。
+[Windows 前后台帧率](docs/acceptance/npr-room/platform-scenarios.md#windows-前后台帧率)、[屏幕休眠](docs/acceptance/npr-room/platform-scenarios.md#windows-屏幕休眠)和[垂直同步](docs/acceptance/npr-room/platform-scenarios.md#windows-垂直同步)记录房间运行时的平台设置。
+
 [编辑器场景管线准备验收](docs/acceptance/p0/2026-11-16-editor-background-preparation.md)记录驱动首次编译、预览缓存及两条原生工作流。
 [编辑器与渲染组合验收](docs/acceptance/p0/2026-11-16-editor-and-transparency-integration.md)记录画面、原生交互和托管工作流。
 
@@ -495,6 +540,7 @@ Lit 法线阈值、重建下限及实际材质见[解码验收](docs/acceptance/
 光谱大气、远端片元与公共数值见[解析雾验收](docs/acceptance/nr/analytic-fog.md)。
 
 场景支持[解析雾配置](docs/runtime/scene-fog.md)及独立解析介质。
+光谱大气在[起始距离](docs/runtime/aerial-fog.md#高度积分)附近连续评价有效路径。
 双配置、真实片元与完整候选见[合成验收](docs/acceptance/nr/scene-fog.md)。
 阶段截图、机位和待验差异见[画面记录](docs/acceptance/nr/visual-history.md)。
 物流彩色环带的源实例及采样见[还原验收](docs/acceptance/nr/opaque-logistics-rings.md)。
@@ -1142,3 +1188,7 @@ Intel 实际 Player 的完整可见量附件逐字节匹配固定输入的 `Prof
 [体表接收法线纹理](docs/acceptance/nr/native-body-normal-source.md)记录原生和夹具的法线层级内容。
 
 [投影头发主纹理层级](docs/acceptance/nr/projected-hair-point-mip.md)记录可选材质路径及双设备生产回归。
+
+[原创曲库设置恢复](docs/acceptance/npr-room/music-playlist.md#原创曲库设置恢复)记录循环、音量及静音重开和保存失败重试。
+
+[原创交互恢复检查点](docs/plans/2026-11-18-npr-room-execution.md#2026-年-11-月-24-日检查点)记录可选语音、交谈、音乐及设置恢复。
