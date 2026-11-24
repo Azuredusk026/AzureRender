@@ -90,8 +90,9 @@ class BudgetTests(unittest.TestCase):
 
     def test_budget_boundaries_and_diagnostic_reserve(self):
         from artifact_budget import evaluate
-        self.assertFalse(evaluate(total=1000*2**30, free=101*2**30, used=0, planned=2*2**30)['allowed'])
-        self.assertTrue(evaluate(total=1000*2**30, free=102*2**30, used=0, planned=2*2**30)['allowed'])
+        self.assertFalse(evaluate(total=1000*2**30, free=202*2**30-1, used=0, planned=2*2**30)['allowed'])
+        self.assertTrue(evaluate(total=1000*2**30, free=202*2**30, used=0, planned=2*2**30)['allowed'])
+        self.assertFalse(evaluate(total=4000*2**30, free=399*2**30, used=0, planned=0)['allowed'])
         self.assertFalse(evaluate(total=1000*2**30, free=100*2**30, used=2*2**30, planned=1)['allowed'])
         self.assertTrue(evaluate(total=1000*2**30, free=32*2**30, used=0, planned=64*2**20, diagnostic=True)['allowed'])
         self.assertFalse(evaluate(total=1000*2**30, free=32*2**30, used=0, planned=65*2**20, diagnostic=True)['allowed'])
@@ -129,11 +130,11 @@ class BudgetTests(unittest.TestCase):
                               used=64*2**20, planned=1, diagnostic=True)
         self.assertFalse(next_write['allowed'])
 
-    def test_normal_budget_keeps_two_gibibyte_contract(self):
+    def test_normal_budget_uses_volume_space_for_large_outputs(self):
         from artifact_budget import evaluate
-        result = evaluate(total=1000*2**30, free=500*2**30,
-                          used=64*2**20, planned=64*2**20)
-        self.assertTrue(result['allowed'])
+        result = evaluate(total=1000*2**30, free=204*2**30,
+                          used=3*2**30, planned=4*2**30)
+        self.assertTrue(result['allowed'], result['reasons'])
 
 
 if __name__ == '__main__':

@@ -1,4 +1,4 @@
-"""Read-only preflight for task quotas and filesystem reserve (bytes)."""
+"""Check the filesystem reserve and record expected task output (bytes)."""
 import argparse
 import json
 from pathlib import Path
@@ -6,15 +6,23 @@ import shutil
 
 GIB = 2**30
 MIB = 2**20
-RUN_QUOTA = 2 * GIB
+DEFAULT_PLANNED_BYTES = 2 * GIB
+VOLUME_MIN_FREE = 200 * GIB
+VOLUME_TARGET_FREE = 300 * GIB
 
 
-def evaluate(*, total, free, used, planned, quota=RUN_QUOTA, diagnostic=False):
-    if any(type(value) is not int or value < 0 for value in (total, free, used, planned, quota)) or total == 0 or free > total:
+def volume_reserve(total):
+    return max(VOLUME_MIN_FREE, (total + 9) // 10)
+
+
+def evaluate(*, total, free, used, planned, quota=None, diagnostic=False):
+    if any(type(value) is not int or value < 0 for value in (total, free, used, planned)) or total == 0 or free > total:
         raise ValueError('Budget values must be nonnegative integer bytes with free <= total')
-    reserve = 5 * GIB if diagnostic else max(50 * GIB, (total + 9) // 10)
+    reserve = 5 * GIB if diagnostic else volume_reserve(total)
     reasons = []
-    if used + planned > quota:
+    if quota is not None and (type(quota) is not int or quota < 0):
+        raise ValueError('Explicit quota must be nonnegative integer bytes')
+    if quota is not None and used + planned > quota:
         reasons.append('run-quota')
     if diagnostic and used + planned > 64 * MIB:
         reasons.append('diagnostic-output-limit')
@@ -25,8 +33,8 @@ def evaluate(*, total, free, used, planned, quota=RUN_QUOTA, diagnostic=False):
                 reserveBytes=reserve, diagnostic=diagnostic)
 
 
-def check(build, *, run=None, planned=RUN_QUOTA, quota=RUN_QUOTA, diagnostic=False):
-    from artifact_cleanup import inspect_tree, is_link
+def check(build, *, run=None, planned=DEFAULT_PLANNED_BYTES, quota=None, diagnostic=False):
+    from artifact_cleanup import is_link
     build = Path(build).absolute()
     if is_link(build) or any(is_link(p) for p in build.parents):
         raise ValueError('Link in build path')
@@ -60,7 +68,7 @@ def main():
     parser = argparse.ArgumentParser(__doc__)
     parser.add_argument('--build', type=Path, default=Path(__file__).resolve().parents[1]/'build')
     parser.add_argument('--run', type=Path)
-    parser.add_argument('--planned-bytes', type=int, default=RUN_QUOTA)
+    parser.add_argument('--planned-bytes', type=int, default=DEFAULT_PLANNED_BYTES)
     parser.add_argument('--diagnostic', action='store_true')
     args = parser.parse_args()
     try:

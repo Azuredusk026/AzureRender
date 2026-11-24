@@ -27,7 +27,7 @@ std::shared_ptr<azurerender::EditorContext> AzureRenderApp::showProjectCenter(co
             if(language==1)azurerender::ui::setLanguage(azurerender::ui::Language::English);}
     }catch(const std::exception&){/* The editor settings loader reports malformed preferences. */}
     runOptions_=options; runOptions_.captureDirectory=(azurerender::EditorWorkspace::configDirectory()/"logs").u8string();
-    azurerender::GlfwFrontendConfig config;config.width=options.width;config.height=options.height;config.title="AzureRender - Project Center";
+    azurerender::GlfwFrontendConfig config;config.width=options.width;config.height=options.height;
     frontend_=std::make_unique<azurerender::GlfwFrontend>(config);
     azurerender::setWindowIcon(frontend_->nativeHandle(),64,azurerender::ui::brandPixels(64));
     createInstance();setupDebugMessenger();createSurface();pickPhysicalDevice();createLogicalDevice();

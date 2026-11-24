@@ -5,17 +5,20 @@ from ctypes import wintypes as w
 u=c.windll.user32
 u.IsWindowVisible.argtypes=[w.HWND]
 u.GetWindowThreadProcessId.argtypes=[w.HWND,c.POINTER(w.DWORD)]
+u.GetWindowTextW.argtypes=[w.HWND,w.LPWSTR,c.c_int]
 u.ShowWindow.argtypes=[w.HWND,c.c_int]
 u.MoveWindow.argtypes=[w.HWND,c.c_int,c.c_int,c.c_int,c.c_int,w.BOOL]
 u.PostMessageW.argtypes=[w.HWND,w.UINT,w.WPARAM,w.LPARAM]
 callback=c.WINFUNCTYPE(w.BOOL,w.HWND,w.LPARAM)
 parser=argparse.ArgumentParser()
 parser.add_argument('--executable', default='build/ninja-msvc-debug/AzureRender.exe')
+parser.add_argument('--log-dir', type=pathlib.Path)
 args=parser.parse_args()
 root=pathlib.Path(__file__).resolve().parents[1]
 executable=pathlib.Path(args.executable).resolve()
+log_dir=args.log_dir if args.log_dir is not None else root/'build'
 for mode in ('restore','close-minimized'):
-    log=root/'build'/f'r1-window-{mode}.log'
+    log=log_dir/f'r1-window-{mode}.log'
     with log.open('w') as f:
         p=subprocess.Popen([str(executable),'--scene-type','sample'],stdout=f,stderr=f,cwd=root)
         try:
@@ -29,7 +32,11 @@ for mode in ('restore','close-minimized'):
             while not windows and time.monotonic()<deadline:
                 u.EnumWindows(visit,0); time.sleep(.1)
             assert windows,'no renderer window'
-            hwnd=windows[0]; time.sleep(2)
+            hwnd=windows[0]
+            title=c.create_unicode_buffer(256)
+            u.GetWindowTextW(hwnd,title,len(title))
+            assert title.value == 'AzureRender', f'unexpected renderer window title: {title.value!r}'
+            time.sleep(2)
             u.MoveWindow(hwnd,50,50,900,650,True); time.sleep(1)
             u.ShowWindow(hwnd,6); time.sleep(1)
             if mode=='restore':

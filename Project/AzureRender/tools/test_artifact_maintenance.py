@@ -57,15 +57,6 @@ class MaintenanceTests(unittest.TestCase):
     def test_measure_rejects_a_missing_task_root(self):
         with self.assertRaises(FileNotFoundError):maintenance.measure(self.build/'runs'/'absent')
 
-    def test_measure_enforces_file_count_and_byte_limits(self):
-        path=self.build/'runs'/'quota-scan';path.mkdir()
-        for index in range(3):(path/str(index)).write_bytes(b'1234')
-        with patch.dict(maintenance.POLICY,maximumFiles=2):
-            with self.assertRaises(ValueError):maintenance.measure(path)
-        with patch.dict(maintenance.POLICY,runBytes=11):
-            with self.assertRaises(ValueError):maintenance.measure(path)
-        self.assertEqual(maintenance.measure(path),12)
-
     def test_measure_rejects_nested_git_and_unreadable_directories(self):
         path=self.build/'runs'/'protected-scan';path.mkdir();(path/'.git').mkdir()
         with self.assertRaises(ValueError):maintenance.measure(path)
@@ -121,18 +112,6 @@ class MaintenanceTests(unittest.TestCase):
         self.assertEqual(Path(actual['path']).read_bytes(),b'temporary-payload')
         self.assertGreaterEqual(maintenance.measure(path),len(b'temporary-payload'))
         self.assertEqual(list(outside.iterdir()),[])
-
-    def test_foreground_temporary_payload_cannot_escape_the_byte_budget(self):
-        path=self.create(recovery=False)
-        command=[sys.executable,'-c','import tempfile,pathlib; '
-                 'p=pathlib.Path(tempfile.mkdtemp())/"payload.bin"; '
-                 'p.write_bytes(bytes(131072))']
-        with patch.dict(maintenance.POLICY,runBytes=65536):
-            result=maintenance.guarded_run(self.build,path.name,command,timeout=5)
-        self.assertEqual(result['status'],'budget-stopped')
-        self.assertIn('byte/file-count',result['reason'])
-        with maintenance.database(self.build) as db:
-            self.assertIsNone(maintenance.rows(db)[path.name]['processPid'])
 
     def test_invalid_temporary_directory_prevents_launch_and_releases_process_claim(self):
         path=self.create(recovery=False);(path/'tmp').write_bytes(b'file')
@@ -246,13 +225,14 @@ class MaintenanceTests(unittest.TestCase):
         self.assertEqual(result['managed']['stopReason'],'time-budget')
         self.assertIsNone(result['pipelineCaches'])
 
-    def test_daily_reports_blocked_batch_without_continuing(self):
+    def test_daily_protects_blocked_run_and_continues_with_other_runs(self):
         paths=self.expired_generated_tasks(5);(paths[0]/'nested/payload.bin').write_bytes(b'changed after sealing')
         with self.daily_fixture():result=maintenance.daily(self.build,apply=True)
-        self.assertEqual(result['status'],'blocked')
-        self.assertTrue(paths[0].exists());self.assertTrue(paths[2].exists())
-        self.assertEqual(result['managed']['stopReason'],'blocked')
-        self.assertIsNone(result['pipelineCaches'])
+        self.assertEqual(result['status'],'completed-with-blocked-items')
+        self.assertTrue(paths[0].exists())
+        self.assertTrue(all(not path.exists() for path in paths[1:]))
+        self.assertEqual(result['managed']['stopReason'],'drained')
+        self.assertEqual(result['pipelineCaches'],{'status':'idle'})
 
     def test_shared_deadline_protects_expired_compact_evidence(self):
         path=self.create(recovery=False);self.close(path);released=self.apply()['items'][0];evidence=Path(released['evidence'])
@@ -362,24 +342,29 @@ class MaintenanceTests(unittest.TestCase):
         self.assertEqual(result['historicalTasks'],1)
         self.assertEqual(result['rootKeepMarkers'],0)
 
+
     def test_status_preserves_real_lstat_errors(self):
         path=self.build/'runs'/'permission-error';path.mkdir();(path/'.keep').touch()
         with patch.object(Path,'is_symlink',side_effect=PermissionError('access denied')):
             with self.assertRaises(PermissionError):
                 maintenance.status(self.build)
 
-    def test_pool_cap_blocks_creation_before_directory_exists(self):
-        self.create('first')
-        with patch.dict(maintenance.POLICY,poolBytes=64*2**20):
-            with self.assertRaises(ValueError):self.create('second')
-        self.assertFalse((self.build/'runs'/'second').exists())
-
-    def test_append_reservation_is_atomic_and_consumes_pool(self):
-        path=self.create('first')
-        other=self.create('second')
-        with patch.dict(maintenance.POLICY,poolBytes=150*2**20):
-            self.assertTrue(maintenance.reserve_write(self.build,path,0,80*2**20)['allowed'])
-            self.assertFalse(maintenance.reserve_write(self.build,other,0,80*2**20)['allowed'])
+    def test_large_existing_reservations_do_not_block_build_preflight_or_creation(self):
+        from artifact_budget import check
+        first = self.create('first')
+        with maintenance.database(self.build, True) as db:
+            record = maintenance.rows(db)[first.name]
+            record['reservedBytes'] = 16 * 2**30
+            maintenance.save(db, first.name, record)
+        with patch('shutil.disk_usage', return_value=(1000*2**30, 500*2**30, 500*2**30)):
+            result = check(self.build, planned=3*2**30)
+        self.assertTrue(result['allowed'], result['reasons'])
+        second = self.build/'runs'/'second'
+        maintenance.create_run(self.build, second, result)
+        self.assertTrue(second.is_dir())
+        self.assertTrue(maintenance.reserve_write(self.build, second, 0, 4*2**30)['allowed'])
+        with maintenance.database(self.build) as db:
+            self.assertEqual(maintenance.rows(db)[second.name]['reservedBytes'], 4*2**30)
 
     def test_expired_managed_recovery_has_finite_retention(self):
         path=self.create();self.close(path);self.apply()
@@ -480,13 +465,23 @@ class MaintenanceTests(unittest.TestCase):
         self.assertEqual(record['status'],'blocked-restore');self.assertGreater(record['reservedBytes'],0)
         self.assertTrue(path.exists());self.assertFalse(self.apply()['candidates'])
 
-    def test_guard_stops_only_owned_over_budget_child(self):
-        path=self.create()
-        command=[sys.executable,'-c',"from pathlib import Path;import time;Path(r'"+str(path/'too-large.bin')+"').write_bytes(b'x'*2000000);time.sleep(10)"]
-        with patch.dict(maintenance.POLICY,runBytes=1000000):
-            result=maintenance.guarded_run(self.build,path.name,command,timeout=5)
-        self.assertEqual(result['status'],'budget-stopped');self.assertLess(result['seconds'],8)
-        self.assertTrue(path.exists())
+    def test_guard_stops_only_owned_child_at_volume_reserve(self):
+        path = self.create()
+        output = path/'write-completed'
+        command = [sys.executable, '-c',
+                   'from pathlib import Path; import sys, time; '
+                   'Path(sys.argv[1]).touch(); time.sleep(10)', str(output)]
+        total = 1000 * 2**30
+
+        def disk_usage(_):
+            free = (199 if output.exists() else 201) * 2**30
+            return total, total-free, free
+
+        with patch('shutil.disk_usage', side_effect=disk_usage):
+            result = maintenance.guarded_run(self.build, path.name, command, timeout=5)
+        self.assertEqual(result['status'], 'budget-stopped')
+        self.assertEqual(result['reason'], 'volume-reserve')
+        self.assertTrue(output.is_file())
 
     @unittest.skipUnless(os.name == 'nt', 'Windows process tree ownership')
     def test_guard_timeout_reaps_process_tree_when_taskkill_is_unavailable(self):

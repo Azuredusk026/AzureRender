@@ -7,9 +7,6 @@
       3,
       7
     ],
-    "maximumTaskBytes": 2147483648,
-    "maximumTaskFiles": 10000,
-    "maximumReservedPoolBytes": 17179869184,
     "evidenceMaximumTaskBytes": 8388608,
     "evidenceMaximumPoolBytes": 2147483648,
     "evidenceRetentionDays": 30,
@@ -41,9 +38,9 @@
   },
   "storageBudget": {
     "policy": "artifact-retention.md#空间门禁",
-    "runQuotaBytes": 2147483648,
-    "minimumFreeBytes": 53687091200,
+    "minimumFreeBytes": 214748364800,
     "minimumFreeFraction": 0.1,
+    "maintenanceTargetFreeBytes": 322122547200,
     "diagnosticOutputLimitBytes": 67108864,
     "diagnosticMinimumFreeBytes": 5368709120,
     "deletionBatchLimit": 10,
