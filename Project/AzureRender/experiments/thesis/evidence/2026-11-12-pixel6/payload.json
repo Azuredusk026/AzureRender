@@ -1,0 +1,13 @@
+{
+  "totalPushedBytes": 2607260,
+  "benchmarkSha256": "3c6754e05e6e5b9a17a2a516a2b72973f879831233e444cd23f3ad0e308cb4a8",
+  "shaders": {
+    "contour.frag.spv": "516ffc439e8cc0b9228833ebb8fc6d27ccf7ddc75ab6ac0d826c03d14013be40",
+    "fullscreen.vert.spv": "1345c7260b14a71cdeede15fa9da351d8671f6826d382324bc50483de0e87ad1",
+    "geometry.frag.spv": "d2bcd13084e74da0adadbaef58021ab496de02701f016712101aecbdb35fae15",
+    "geometry.vert.spv": "b8fec9dc75e0f0cc2388f4a1b86776d536afae60438ef12756de1947cb535b16",
+    "toon-dynamic.frag.spv": "5216ae516c9ac0e385c56611c2a0351c8c0a3c81276980e11088127b8699b503",
+    "toon-local.frag.spv": "70b0d9960d230fe01a172068c69d73b029e07266d50cbcb1193e7055de36cd52",
+    "toon.frag.spv": "798a18334efb71216d84ded32ad1f5c4bcd0b61aac09eda95efcc118e4e6a4ac"
+  }
+}

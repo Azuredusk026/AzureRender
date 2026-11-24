@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "devices": [
+    {
+      "name": "Mali-G78",
+      "traditional": true,
+      "subpasses": true,
+      "drlr": true,
+      "queueFamily": 0,
+      "reasons": [],
+      "extent": [
+        2560,
+        1440
+      ],
+      "scope": "capability-only; execution and visual qualification pending"
+    }
+  ]
+}

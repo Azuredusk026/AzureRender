@@ -1,0 +1,12 @@
+{
+  "status": "paused",
+  "reason": "user-requested device pause",
+  "pausedUtc": "2026-11-12T14:27:37.347152+00:00",
+  "planSha256": "140dfd0ced619d03b4d00ceccb9b9b67afe2961c21d8e8083e9ff98d2fa1c827",
+  "acceptedRuns": 90,
+  "completedBlocks": 30,
+  "measuredFrames": 90000,
+  "rejectedBlocks": 0,
+  "nextBlock": 31,
+  "remainingRuns": 30
+}

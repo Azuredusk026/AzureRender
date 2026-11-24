@@ -1,0 +1,1877 @@
+{
+  "cases": [
+    {
+      "device": "pixel6",
+      "path": "traditional",
+      "width": 1920,
+      "height": 1080,
+      "complexity": "low",
+      "imageSha256": "79a324f85ed8968e5c68199fdb43ffd8c5f067263c7c608f9c1820d9bcce6821",
+      "startedUtc": "2026-11-12T14:05:50.442299+00:00",
+      "wallSeconds": 2.0929999999934807,
+      "deviceName": "Mali-G78",
+      "apiVersion": 4210993,
+      "driverVersion": 226500608,
+      "gpuMeanMs": 3.940217543922334,
+      "raw": "pilot/pixel6-1920-low-traditional.json",
+      "rawSha256": "261cae3b3209930757004049b72db08410c6184ab1a6b17d6984a0e2890f942a",
+      "before": {
+        "thermalStatus": 0,
+        "batteryTemperatureC": 28.7,
+        "batteryPercent": 100,
+        "batteryStatus": "2",
+        "supply": {
+          "AC powered": "true",
+          "USB powered": "false",
+          "Wireless powered": "false"
+        },
+        "sensors": {
+          "LITTLE": {
+            "temperatureC": 34.0,
+            "type": 0,
+            "status": 0
+          },
+          "battery": {
+            "temperatureC": 28.7,
+            "type": 2,
+            "status": 0
+          },
+          "BIG": {
+            "temperatureC": 33.0,
+            "type": 0,
+            "status": 0
+          },
+          "G3D": {
+            "temperatureC": 32.0,
+            "type": 1,
+            "status": 0
+          },
+          "MID": {
+            "temperatureC": 34.0,
+            "type": 0,
+            "status": 0
+          },
+          "VIRTUAL-SKIN": {
+            "temperatureC": 30.99904,
+            "type": 3,
+            "status": 0
+          }
+        }
+      },
+      "after": {
+        "thermalStatus": 0,
+        "batteryTemperatureC": 28.7,
+        "batteryPercent": 100,
+        "batteryStatus": "2",
+        "supply": {
+          "AC powered": "true",
+          "USB powered": "false",
+          "Wireless powered": "false"
+        },
+        "sensors": {
+          "LITTLE": {
+            "temperatureC": 36.0,
+            "type": 0,
+            "status": 0
+          },
+          "battery": {
+            "temperatureC": 28.7,
+            "type": 2,
+            "status": 0
+          },
+          "BIG": {
+            "temperatureC": 36.0,
+            "type": 0,
+            "status": 0
+          },
+          "G3D": {
+            "temperatureC": 33.0,
+            "type": 1,
+            "status": 0
+          },
+          "MID": {
+            "temperatureC": 36.0,
+            "type": 0,
+            "status": 0
+          },
+          "VIRTUAL-SKIN": {
+            "temperatureC": 30.99904,
+            "type": 3,
+            "status": 0
+          }
+        }
+      },
+      "environmentPass": true
+    },
+    {
+      "device": "pixel6",
+      "path": "subpasses",
+      "width": 1920,
+      "height": 1080,
+      "complexity": "low",
+      "imageSha256": "79a324f85ed8968e5c68199fdb43ffd8c5f067263c7c608f9c1820d9bcce6821",
+      "startedUtc": "2026-11-12T14:05:52.805403+00:00",
+      "wallSeconds": 1.8439999999245629,
+      "deviceName": "Mali-G78",
+      "apiVersion": 4210993,
+      "driverVersion": 226500608,
+      "gpuMeanMs": 3.433808836690667,
+      "raw": "pilot/pixel6-1920-low-subpasses.json",
+      "rawSha256": "9026bcbf301e2d4e68fa35177dd6f423615b080a11bb703880fe9f639c5d4f7f",
+      "before": {
+        "thermalStatus": 0,
+        "batteryTemperatureC": 28.7,
+        "batteryPercent": 100,
+        "batteryStatus": "2",
+        "supply": {
+          "AC powered": "true",
+          "USB powered": "false",
+          "Wireless powered": "false"
+        },
+        "sensors": {
+          "LITTLE": {
+            "temperatureC": 36.0,
+            "type": 0,
+            "status": 0
+          },
+          "battery": {
+            "temperatureC": 28.7,
+            "type": 2,
+            "status": 0
+          },
+          "BIG": {
+            "temperatureC": 36.0,
+            "type": 0,
+            "status": 0
+          },
+          "G3D": {
+            "temperatureC": 33.0,
+            "type": 1,
+            "status": 0
+          },
+          "MID": {
+            "temperatureC": 36.0,
+            "type": 0,
+            "status": 0
+          },
+          "VIRTUAL-SKIN": {
+            "temperatureC": 30.99904,
+            "type": 3,
+            "status": 0
+          }
+        }
+      },
+      "after": {
+        "thermalStatus": 0,
+        "batteryTemperatureC": 28.7,
+        "batteryPercent": 100,
+        "batteryStatus": "2",
+        "supply": {
+          "AC powered": "true",
+          "USB powered": "false",
+          "Wireless powered": "false"
+        },
+        "sensors": {
+          "LITTLE": {
+            "temperatureC": 37.0,
+            "type": 0,
+            "status": 0
+          },
+          "battery": {
+            "temperatureC": 28.7,
+            "type": 2,
+            "status": 0
+          },
+          "BIG": {
+            "temperatureC": 36.0,
+            "type": 0,
+            "status": 0
+          },
+          "G3D": {
+            "temperatureC": 33.0,
+            "type": 1,
+            "status": 0
+          },
+          "MID": {
+            "temperatureC": 37.0,
+            "type": 0,
+            "status": 0
+          },
+          "VIRTUAL-SKIN": {
+            "temperatureC": 31.01752,
+            "type": 3,
+            "status": 0
+          }
+        }
+      },
+      "environmentPass": true
+    },
+    {
+      "device": "pixel6",
+      "path": "drlr",
+      "width": 1920,
+      "height": 1080,
+      "complexity": "low",
+      "imageSha256": "79a324f85ed8968e5c68199fdb43ffd8c5f067263c7c608f9c1820d9bcce6821",
+      "startedUtc": "2026-11-12T14:05:54.913410+00:00",
+      "wallSeconds": 1.922000000020489,
+      "deviceName": "Mali-G78",
+      "apiVersion": 4210993,
+      "driverVersion": 226500608,
+      "gpuMeanMs": 3.164368452835833,
+      "raw": "pilot/pixel6-1920-low-drlr.json",
+      "rawSha256": "649f5dbb1e34b464e2e74e40d058ecfce05f51443039704d32c4e14234d46f89",
+      "before": {
+        "thermalStatus": 0,
+        "batteryTemperatureC": 28.7,
+        "batteryPercent": 100,
+        "batteryStatus": "2",
+        "supply": {
+          "AC powered": "true",
+          "USB powered": "false",
+          "Wireless powered": "false"
+        },
+        "sensors": {
+          "LITTLE": {
+            "temperatureC": 37.0,
+            "type": 0,
+            "status": 0
+          },
+          "battery": {
+            "temperatureC": 28.7,
+            "type": 2,
+            "status": 0
+          },
+          "BIG": {
+            "temperatureC": 36.0,
+            "type": 0,
+            "status": 0
+          },
+          "G3D": {
+            "temperatureC": 33.0,
+            "type": 1,
+            "status": 0
+          },
+          "MID": {
+            "temperatureC": 37.0,
+            "type": 0,
+            "status": 0
+          },
+          "VIRTUAL-SKIN": {
+            "temperatureC": 31.01752,
+            "type": 3,
+            "status": 0
+          }
+        }
+      },
+      "after": {
+        "thermalStatus": 0,
+        "batteryTemperatureC": 28.7,
+        "batteryPercent": 100,
+        "batteryStatus": "2",
+        "supply": {
+          "AC powered": "true",
+          "USB powered": "false",
+          "Wireless powered": "false"
+        },
+        "sensors": {
+          "LITTLE": {
+            "temperatureC": 37.0,
+            "type": 0,
+            "status": 0
+          },
+          "battery": {
+            "temperatureC": 28.7,
+            "type": 2,
+            "status": 0
+          },
+          "BIG": {
+            "temperatureC": 37.0,
+            "type": 0,
+            "status": 0
+          },
+          "G3D": {
+            "temperatureC": 34.0,
+            "type": 1,
+            "status": 0
+          },
+          "MID": {
+            "temperatureC": 37.0,
+            "type": 0,
+            "status": 0
+          },
+          "VIRTUAL-SKIN": {
+            "temperatureC": 31.01752,
+            "type": 3,
+            "status": 0
+          }
+        }
+      },
+      "environmentPass": true
+    },
+    {
+      "device": "pixel6",
+      "path": "traditional",
+      "width": 1920,
+      "height": 1080,
+      "complexity": "high",
+      "imageSha256": "fea969ede2fa01f3d0b12f1f1344a51429b97a649b24aa9ade6035db0224f46a",
+      "startedUtc": "2026-11-12T14:05:57.132228+00:00",
+      "wallSeconds": 1.75,
+      "deviceName": "Mali-G78",
+      "apiVersion": 4210993,
+      "driverVersion": 226500608,
+      "gpuMeanMs": 3.7879029504029997,
+      "raw": "pilot/pixel6-1920-high-traditional.json",
+      "rawSha256": "729423cf45f88bb619b4f24e4062699c9a41ffc79d554510bb55f6a05aa7dfd8",
+      "before": {
+        "thermalStatus": 0,
+        "batteryTemperatureC": 28.7,
+        "batteryPercent": 100,
+        "batteryStatus": "2",
+        "supply": {
+          "AC powered": "true",
+          "USB powered": "false",
+          "Wireless powered": "false"
+        },
+        "sensors": {
+          "LITTLE": {
+            "temperatureC": 37.0,
+            "type": 0,
+            "status": 0
+          },
+          "battery": {
+            "temperatureC": 28.7,
+            "type": 2,
+            "status": 0
+          },
+          "BIG": {
+            "temperatureC": 37.0,
+            "type": 0,
+            "status": 0
+          },
+          "G3D": {
+            "temperatureC": 34.0,
+            "type": 1,
+            "status": 0
+          },
+          "MID": {
+            "temperatureC": 37.0,
+            "type": 0,
+            "status": 0
+          },
+          "VIRTUAL-SKIN": {
+            "temperatureC": 31.01752,
+            "type": 3,
+            "status": 0
+          }
+        }
+      },
+      "after": {
+        "thermalStatus": 0,
+        "batteryTemperatureC": 28.7,
+        "batteryPercent": 100,
+        "batteryStatus": "2",
+        "supply": {
+          "AC powered": "true",
+          "USB powered": "false",
+          "Wireless powered": "false"
+        },
+        "sensors": {
+          "LITTLE": {
+            "temperatureC": 38.0,
+            "type": 0,
+            "status": 0
+          },
+          "battery": {
+            "temperatureC": 28.800001,
+            "type": 2,
+            "status": 0
+          },
+          "BIG": {
+            "temperatureC": 42.000004,
+            "type": 0,
+            "status": 0
+          },
+          "G3D": {
+            "temperatureC": 35.0,
+            "type": 1,
+            "status": 0
+          },
+          "MID": {
+            "temperatureC": 38.0,
+            "type": 0,
+            "status": 0
+          },
+          "VIRTUAL-SKIN": {
+            "temperatureC": 31.01752,
+            "type": 3,
+            "status": 0
+          }
+        }
+      },
+      "environmentPass": true
+    },
+    {
+      "device": "pixel6",
+      "path": "subpasses",
+      "width": 1920,
+      "height": 1080,
+      "complexity": "high",
+      "imageSha256": "fea969ede2fa01f3d0b12f1f1344a51429b97a649b24aa9ade6035db0224f46a",
+      "startedUtc": "2026-11-12T14:05:59.090073+00:00",
+      "wallSeconds": 1.812999999965541,
+      "deviceName": "Mali-G78",
+      "apiVersion": 4210993,
+      "driverVersion": 226500608,
+      "gpuMeanMs": 3.9999574003881677,
+      "raw": "pilot/pixel6-1920-high-subpasses.json",
+      "rawSha256": "87484a8358392d693f621a61d86fae4be3410ff5ef22c33a397cb64ccfd2d458",
+      "before": {
+        "thermalStatus": 0,
+        "batteryTemperatureC": 28.7,
+        "batteryPercent": 100,
+        "batteryStatus": "2",
+        "supply": {
+          "AC powered": "true",
+          "USB powered": "false",
+          "Wireless powered": "false"
+        },
+        "sensors": {
+          "LITTLE": {
+            "temperatureC": 38.0,
+            "type": 0,
+            "status": 0
+          },
+          "battery": {
+            "temperatureC": 28.800001,
+            "type": 2,
+            "status": 0
+          },
+          "BIG": {
+            "temperatureC": 42.000004,
+            "type": 0,
+            "status": 0
+          },
+          "G3D": {
+            "temperatureC": 35.0,
+            "type": 1,
+            "status": 0
+          },
+          "MID": {
+            "temperatureC": 38.0,
+            "type": 0,
+            "status": 0
+          },
+          "VIRTUAL-SKIN": {
+            "temperatureC": 31.01752,
+            "type": 3,
+            "status": 0
+          }
+        }
+      },
+      "after": {
+        "thermalStatus": 0,
+        "batteryTemperatureC": 28.7,
+        "batteryPercent": 100,
+        "batteryStatus": "2",
+        "supply": {
+          "AC powered": "true",
+          "USB powered": "false",
+          "Wireless powered": "false"
+        },
+        "sensors": {
+          "LITTLE": {
+            "temperatureC": 37.0,
+            "type": 0,
+            "status": 0
+          },
+          "battery": {
+            "temperatureC": 28.800001,
+            "type": 2,
+            "status": 0
+          },
+          "BIG": {
+            "temperatureC": 37.0,
+            "type": 0,
+            "status": 0
+          },
+          "G3D": {
+            "temperatureC": 35.0,
+            "type": 1,
+            "status": 0
+          },
+          "MID": {
+            "temperatureC": 37.0,
+            "type": 0,
+            "status": 0
+          },
+          "VIRTUAL-SKIN": {
+            "temperatureC": 30.99904,
+            "type": 3,
+            "status": 0
+          }
+        }
+      },
+      "environmentPass": true
+    },
+    {
+      "device": "pixel6",
+      "path": "drlr",
+      "width": 1920,
+      "height": 1080,
+      "complexity": "high",
+      "imageSha256": "fea969ede2fa01f3d0b12f1f1344a51429b97a649b24aa9ade6035db0224f46a",
+      "startedUtc": "2026-11-12T14:06:01.183631+00:00",
+      "wallSeconds": 2.030999999959022,
+      "deviceName": "Mali-G78",
+      "apiVersion": 4210993,
+      "driverVersion": 226500608,
+      "gpuMeanMs": 4.2002544444089995,
+      "raw": "pilot/pixel6-1920-high-drlr.json",
+      "rawSha256": "93aef272587aaa7ea3dabe9eea1803aed0f94f1b0e123faf81727ecad62f1bd7",
+      "before": {
+        "thermalStatus": 0,
+        "batteryTemperatureC": 28.7,
+        "batteryPercent": 100,
+        "batteryStatus": "2",
+        "supply": {
+          "AC powered": "true",
+          "USB powered": "false",
+          "Wireless powered": "false"
+        },
+        "sensors": {
+          "LITTLE": {
+            "temperatureC": 37.0,
+            "type": 0,
+            "status": 0
+          },
+          "battery": {
+            "temperatureC": 28.800001,
+            "type": 2,
+            "status": 0
+          },
+          "BIG": {
+            "temperatureC": 37.0,
+            "type": 0,
+            "status": 0
+          },
+          "G3D": {
+            "temperatureC": 35.0,
+            "type": 1,
+            "status": 0
+          },
+          "MID": {
+            "temperatureC": 37.0,
+            "type": 0,
+            "status": 0
+          },
+          "VIRTUAL-SKIN": {
+            "temperatureC": 30.99904,
+            "type": 3,
+            "status": 0
+          }
+        }
+      },
+      "after": {
+        "thermalStatus": 0,
+        "batteryTemperatureC": 28.7,
+        "batteryPercent": 100,
+        "batteryStatus": "2",
+        "supply": {
+          "AC powered": "true",
+          "USB powered": "false",
+          "Wireless powered": "false"
+        },
+        "sensors": {
+          "LITTLE": {
+            "temperatureC": 38.0,
+            "type": 0,
+            "status": 0
+          },
+          "battery": {
+            "temperatureC": 28.800001,
+            "type": 2,
+            "status": 0
+          },
+          "BIG": {
+            "temperatureC": 40.0,
+            "type": 0,
+            "status": 0
+          },
+          "G3D": {
+            "temperatureC": 35.0,
+            "type": 1,
+            "status": 0
+          },
+          "MID": {
+            "temperatureC": 38.0,
+            "type": 0,
+            "status": 0
+          },
+          "VIRTUAL-SKIN": {
+            "temperatureC": 30.99904,
+            "type": 3,
+            "status": 0
+          }
+        }
+      },
+      "environmentPass": true
+    },
+    {
+      "device": "pixel6",
+      "path": "traditional",
+      "width": 2560,
+      "height": 1440,
+      "complexity": "low",
+      "imageSha256": "f61c6ba9d39ec60567ab88b5cbe869762cfa8df2dc9615e9366a439ccd6fdf3a",
+      "startedUtc": "2026-11-12T14:06:03.453877+00:00",
+      "wallSeconds": 3.0,
+      "deviceName": "Mali-G78",
+      "apiVersion": 4210993,
+      "driverVersion": 226500608,
+      "gpuMeanMs": 5.904665304963833,
+      "raw": "pilot/pixel6-2560-low-traditional.json",
+      "rawSha256": "964b26b38890061cfebc2c08f4e5f0351a26a4425e638b8e7a2226e9b9c3f68f",
+      "before": {
+        "thermalStatus": 0,
+        "batteryTemperatureC": 28.7,
+        "batteryPercent": 100,
+        "batteryStatus": "2",
+        "supply": {
+          "AC powered": "true",
+          "USB powered": "false",
+          "Wireless powered": "false"
+        },
+        "sensors": {
+          "LITTLE": {
+            "temperatureC": 38.0,
+            "type": 0,
+            "status": 0
+          },
+          "battery": {
+            "temperatureC": 28.800001,
+            "type": 2,
+            "status": 0
+          },
+          "BIG": {
+            "temperatureC": 40.0,
+            "type": 0,
+            "status": 0
+          },
+          "G3D": {
+            "temperatureC": 35.0,
+            "type": 1,
+            "status": 0
+          },
+          "MID": {
+            "temperatureC": 38.0,
+            "type": 0,
+            "status": 0
+          },
+          "VIRTUAL-SKIN": {
+            "temperatureC": 30.99904,
+            "type": 3,
+            "status": 0
+          }
+        }
+      },
+      "after": {
+        "thermalStatus": 0,
+        "batteryTemperatureC": 28.7,
+        "batteryPercent": 100,
+        "batteryStatus": "2",
+        "supply": {
+          "AC powered": "true",
+          "USB powered": "false",
+          "Wireless powered": "false"
+        },
+        "sensors": {
+          "LITTLE": {
+            "temperatureC": 39.0,
+            "type": 0,
+            "status": 0
+          },
+          "battery": {
+            "temperatureC": 28.800001,
+            "type": 2,
+            "status": 0
+          },
+          "BIG": {
+            "temperatureC": 42.000004,
+            "type": 0,
+            "status": 0
+          },
+          "G3D": {
+            "temperatureC": 36.0,
+            "type": 1,
+            "status": 0
+          },
+          "MID": {
+            "temperatureC": 38.0,
+            "type": 0,
+            "status": 0
+          },
+          "VIRTUAL-SKIN": {
+            "temperatureC": 30.99904,
+            "type": 3,
+            "status": 0
+          }
+        }
+      },
+      "environmentPass": true
+    },
+    {
+      "device": "pixel6",
+      "path": "subpasses",
+      "width": 2560,
+      "height": 1440,
+      "complexity": "low",
+      "imageSha256": "f61c6ba9d39ec60567ab88b5cbe869762cfa8df2dc9615e9366a439ccd6fdf3a",
+      "startedUtc": "2026-11-12T14:06:06.681991+00:00",
+      "wallSeconds": 2.6719999999040738,
+      "deviceName": "Mali-G78",
+      "apiVersion": 4210993,
+      "driverVersion": 226500608,
+      "gpuMeanMs": 5.216442355939333,
+      "raw": "pilot/pixel6-2560-low-subpasses.json",
+      "rawSha256": "0141deb92cd3e338ab877a86c69b912ced5f8a5edebf67b489677bfc5f466570",
+      "before": {
+        "thermalStatus": 0,
+        "batteryTemperatureC": 28.7,
+        "batteryPercent": 100,
+        "batteryStatus": "2",
+        "supply": {
+          "AC powered": "true",
+          "USB powered": "false",
+          "Wireless powered": "false"
+        },
+        "sensors": {
+          "LITTLE": {
+            "temperatureC": 39.0,
+            "type": 0,
+            "status": 0
+          },
+          "battery": {
+            "temperatureC": 28.800001,
+            "type": 2,
+            "status": 0
+          },
+          "BIG": {
+            "temperatureC": 42.000004,
+            "type": 0,
+            "status": 0
+          },
+          "G3D": {
+            "temperatureC": 36.0,
+            "type": 1,
+            "status": 0
+          },
+          "MID": {
+            "temperatureC": 38.0,
+            "type": 0,
+            "status": 0
+          },
+          "VIRTUAL-SKIN": {
+            "temperatureC": 30.99904,
+            "type": 3,
+            "status": 0
+          }
+        }
+      },
+      "after": {
+        "thermalStatus": 0,
+        "batteryTemperatureC": 28.7,
+        "batteryPercent": 100,
+        "batteryStatus": "2",
+        "supply": {
+          "AC powered": "true",
+          "USB powered": "false",
+          "Wireless powered": "false"
+        },
+        "sensors": {
+          "LITTLE": {
+            "temperatureC": 39.0,
+            "type": 0,
+            "status": 0
+          },
+          "battery": {
+            "temperatureC": 28.800001,
+            "type": 2,
+            "status": 0
+          },
+          "BIG": {
+            "temperatureC": 38.0,
+            "type": 0,
+            "status": 0
+          },
+          "G3D": {
+            "temperatureC": 36.0,
+            "type": 1,
+            "status": 0
+          },
+          "MID": {
+            "temperatureC": 39.0,
+            "type": 0,
+            "status": 0
+          },
+          "VIRTUAL-SKIN": {
+            "temperatureC": 30.968441,
+            "type": 3,
+            "status": 0
+          }
+        }
+      },
+      "environmentPass": true
+    },
+    {
+      "device": "pixel6",
+      "path": "drlr",
+      "width": 2560,
+      "height": 1440,
+      "complexity": "low",
+      "imageSha256": "f61c6ba9d39ec60567ab88b5cbe869762cfa8df2dc9615e9366a439ccd6fdf3a",
+      "startedUtc": "2026-11-12T14:06:09.645365+00:00",
+      "wallSeconds": 3.172000000020489,
+      "deviceName": "Mali-G78",
+      "apiVersion": 4210993,
+      "driverVersion": 226500608,
+      "gpuMeanMs": 5.237032905627999,
+      "raw": "pilot/pixel6-2560-low-drlr.json",
+      "rawSha256": "e77a8e097520a67946767bf02a0a5a5aea0c09a9f2068e3297b0103a14064827",
+      "before": {
+        "thermalStatus": 0,
+        "batteryTemperatureC": 28.7,
+        "batteryPercent": 100,
+        "batteryStatus": "2",
+        "supply": {
+          "AC powered": "true",
+          "USB powered": "false",
+          "Wireless powered": "false"
+        },
+        "sensors": {
+          "LITTLE": {
+            "temperatureC": 39.0,
+            "type": 0,
+            "status": 0
+          },
+          "battery": {
+            "temperatureC": 28.800001,
+            "type": 2,
+            "status": 0
+          },
+          "BIG": {
+            "temperatureC": 38.0,
+            "type": 0,
+            "status": 0
+          },
+          "G3D": {
+            "temperatureC": 36.0,
+            "type": 1,
+            "status": 0
+          },
+          "MID": {
+            "temperatureC": 39.0,
+            "type": 0,
+            "status": 0
+          },
+          "VIRTUAL-SKIN": {
+            "temperatureC": 30.968441,
+            "type": 3,
+            "status": 0
+          }
+        }
+      },
+      "after": {
+        "thermalStatus": 0,
+        "batteryTemperatureC": 28.7,
+        "batteryPercent": 100,
+        "batteryStatus": "2",
+        "supply": {
+          "AC powered": "true",
+          "USB powered": "false",
+          "Wireless powered": "false"
+        },
+        "sensors": {
+          "LITTLE": {
+            "temperatureC": 40.0,
+            "type": 0,
+            "status": 0
+          },
+          "battery": {
+            "temperatureC": 28.800001,
+            "type": 2,
+            "status": 0
+          },
+          "BIG": {
+            "temperatureC": 39.0,
+            "type": 0,
+            "status": 0
+          },
+          "G3D": {
+            "temperatureC": 36.0,
+            "type": 1,
+            "status": 0
+          },
+          "MID": {
+            "temperatureC": 40.0,
+            "type": 0,
+            "status": 0
+          },
+          "VIRTUAL-SKIN": {
+            "temperatureC": 30.968441,
+            "type": 3,
+            "status": 0
+          }
+        }
+      },
+      "environmentPass": true
+    },
+    {
+      "device": "pixel6",
+      "path": "traditional",
+      "width": 2560,
+      "height": 1440,
+      "complexity": "high",
+      "imageSha256": "48255965a5faa01769915ccfa6fc4932d8f2f10959a976e50090e63fa2a2c27e",
+      "startedUtc": "2026-11-12T14:06:13.047053+00:00",
+      "wallSeconds": 3.094000000040978,
+      "deviceName": "Mali-G78",
+      "apiVersion": 4210993,
+      "driverVersion": 226500608,
+      "gpuMeanMs": 6.796230952398832,
+      "raw": "pilot/pixel6-2560-high-traditional.json",
+      "rawSha256": "2b59b2ca8a39c44baf0dfdb9f0a04d5e489d57bd6847a3ae1216e0dfe4291196",
+      "before": {
+        "thermalStatus": 0,
+        "batteryTemperatureC": 28.7,
+        "batteryPercent": 100,
+        "batteryStatus": "2",
+        "supply": {
+          "AC powered": "true",
+          "USB powered": "false",
+          "Wireless powered": "false"
+        },
+        "sensors": {
+          "LITTLE": {
+            "temperatureC": 40.0,
+            "type": 0,
+            "status": 0
+          },
+          "battery": {
+            "temperatureC": 28.800001,
+            "type": 2,
+            "status": 0
+          },
+          "BIG": {
+            "temperatureC": 39.0,
+            "type": 0,
+            "status": 0
+          },
+          "G3D": {
+            "temperatureC": 36.0,
+            "type": 1,
+            "status": 0
+          },
+          "MID": {
+            "temperatureC": 40.0,
+            "type": 0,
+            "status": 0
+          },
+          "VIRTUAL-SKIN": {
+            "temperatureC": 30.968441,
+            "type": 3,
+            "status": 0
+          }
+        }
+      },
+      "after": {
+        "thermalStatus": 0,
+        "batteryTemperatureC": 28.7,
+        "batteryPercent": 100,
+        "batteryStatus": "2",
+        "supply": {
+          "AC powered": "true",
+          "USB powered": "false",
+          "Wireless powered": "false"
+        },
+        "sensors": {
+          "LITTLE": {
+            "temperatureC": 40.0,
+            "type": 0,
+            "status": 0
+          },
+          "battery": {
+            "temperatureC": 28.800001,
+            "type": 2,
+            "status": 0
+          },
+          "BIG": {
+            "temperatureC": 39.0,
+            "type": 0,
+            "status": 0
+          },
+          "G3D": {
+            "temperatureC": 36.0,
+            "type": 1,
+            "status": 0
+          },
+          "MID": {
+            "temperatureC": 39.0,
+            "type": 0,
+            "status": 0
+          },
+          "VIRTUAL-SKIN": {
+            "temperatureC": 31.036001,
+            "type": 3,
+            "status": 0
+          }
+        }
+      },
+      "environmentPass": true
+    },
+    {
+      "device": "pixel6",
+      "path": "subpasses",
+      "width": 2560,
+      "height": 1440,
+      "complexity": "high",
+      "imageSha256": "48255965a5faa01769915ccfa6fc4932d8f2f10959a976e50090e63fa2a2c27e",
+      "startedUtc": "2026-11-12T14:06:16.385765+00:00",
+      "wallSeconds": 2.422000000020489,
+      "deviceName": "Mali-G78",
+      "apiVersion": 4210993,
+      "driverVersion": 226500608,
+      "gpuMeanMs": 5.4699681613881665,
+      "raw": "pilot/pixel6-2560-high-subpasses.json",
+      "rawSha256": "55b42c6e0f663a7f11fd2105c9ee776c8f2709076f765031a8fea6607de3976e",
+      "before": {
+        "thermalStatus": 0,
+        "batteryTemperatureC": 28.7,
+        "batteryPercent": 100,
+        "batteryStatus": "2",
+        "supply": {
+          "AC powered": "true",
+          "USB powered": "false",
+          "Wireless powered": "false"
+        },
+        "sensors": {
+          "LITTLE": {
+            "temperatureC": 40.0,
+            "type": 0,
+            "status": 0
+          },
+          "battery": {
+            "temperatureC": 28.800001,
+            "type": 2,
+            "status": 0
+          },
+          "BIG": {
+            "temperatureC": 39.0,
+            "type": 0,
+            "status": 0
+          },
+          "G3D": {
+            "temperatureC": 36.0,
+            "type": 1,
+            "status": 0
+          },
+          "MID": {
+            "temperatureC": 39.0,
+            "type": 0,
+            "status": 0
+          },
+          "VIRTUAL-SKIN": {
+            "temperatureC": 31.036001,
+            "type": 3,
+            "status": 0
+          }
+        }
+      },
+      "after": {
+        "thermalStatus": 0,
+        "batteryTemperatureC": 28.7,
+        "batteryPercent": 100,
+        "batteryStatus": "2",
+        "supply": {
+          "AC powered": "true",
+          "USB powered": "false",
+          "Wireless powered": "false"
+        },
+        "sensors": {
+          "LITTLE": {
+            "temperatureC": 40.0,
+            "type": 0,
+            "status": 0
+          },
+          "battery": {
+            "temperatureC": 28.800001,
+            "type": 2,
+            "status": 0
+          },
+          "BIG": {
+            "temperatureC": 39.0,
+            "type": 0,
+            "status": 0
+          },
+          "G3D": {
+            "temperatureC": 37.0,
+            "type": 1,
+            "status": 0
+          },
+          "MID": {
+            "temperatureC": 40.0,
+            "type": 0,
+            "status": 0
+          },
+          "VIRTUAL-SKIN": {
+            "temperatureC": 31.036001,
+            "type": 3,
+            "status": 0
+          }
+        }
+      },
+      "environmentPass": true
+    },
+    {
+      "device": "pixel6",
+      "path": "drlr",
+      "width": 2560,
+      "height": 1440,
+      "complexity": "high",
+      "imageSha256": "48255965a5faa01769915ccfa6fc4932d8f2f10959a976e50090e63fa2a2c27e",
+      "startedUtc": "2026-11-12T14:06:19.026638+00:00",
+      "wallSeconds": 2.906000000075437,
+      "deviceName": "Mali-G78",
+      "apiVersion": 4210993,
+      "driverVersion": 226500608,
+      "gpuMeanMs": 6.243463329873834,
+      "raw": "pilot/pixel6-2560-high-drlr.json",
+      "rawSha256": "ecec2f8ca2e83fc2b867722f71f0e124ad420a31cef3b7e585fdde195778ef18",
+      "before": {
+        "thermalStatus": 0,
+        "batteryTemperatureC": 28.7,
+        "batteryPercent": 100,
+        "batteryStatus": "2",
+        "supply": {
+          "AC powered": "true",
+          "USB powered": "false",
+          "Wireless powered": "false"
+        },
+        "sensors": {
+          "LITTLE": {
+            "temperatureC": 40.0,
+            "type": 0,
+            "status": 0
+          },
+          "battery": {
+            "temperatureC": 28.800001,
+            "type": 2,
+            "status": 0
+          },
+          "BIG": {
+            "temperatureC": 39.0,
+            "type": 0,
+            "status": 0
+          },
+          "G3D": {
+            "temperatureC": 37.0,
+            "type": 1,
+            "status": 0
+          },
+          "MID": {
+            "temperatureC": 40.0,
+            "type": 0,
+            "status": 0
+          },
+          "VIRTUAL-SKIN": {
+            "temperatureC": 31.036001,
+            "type": 3,
+            "status": 0
+          }
+        }
+      },
+      "after": {
+        "thermalStatus": 0,
+        "batteryTemperatureC": 28.8,
+        "batteryPercent": 100,
+        "batteryStatus": "2",
+        "supply": {
+          "AC powered": "true",
+          "USB powered": "false",
+          "Wireless powered": "false"
+        },
+        "sensors": {
+          "LITTLE": {
+            "temperatureC": 40.0,
+            "type": 0,
+            "status": 0
+          },
+          "battery": {
+            "temperatureC": 28.800001,
+            "type": 2,
+            "status": 0
+          },
+          "BIG": {
+            "temperatureC": 40.0,
+            "type": 0,
+            "status": 0
+          },
+          "G3D": {
+            "temperatureC": 37.0,
+            "type": 1,
+            "status": 0
+          },
+          "MID": {
+            "temperatureC": 40.0,
+            "type": 0,
+            "status": 0
+          },
+          "VIRTUAL-SKIN": {
+            "temperatureC": 31.06604,
+            "type": 3,
+            "status": 0
+          }
+        }
+      },
+      "environmentPass": true
+    },
+    {
+      "device": "rtx4060",
+      "path": "traditional",
+      "width": 1920,
+      "height": 1080,
+      "complexity": "low",
+      "imageSha256": "0449c02b35deab518deb57a121686082d8b9693e92c3e26b72f9db18c93569d4",
+      "startedUtc": "2026-11-12T14:06:22.112107+00:00",
+      "wallSeconds": 1.625,
+      "deviceName": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "apiVersion": 4211013,
+      "driverVersion": 2484371456,
+      "gpuMeanMs": 0.12730666666666668,
+      "raw": "pilot/rtx4060-1920-low-traditional.json",
+      "rawSha256": "8213690a9f234e4f6b4f1e5ea093b5debba137a3bc03347933d21302eb51beab",
+      "before": {
+        "supply": {
+          "ac": 1,
+          "saver": 0
+        },
+        "batteryPercent": 100,
+        "gpu": {
+          "temperature.gpu": "59",
+          "temperature.gpu.tlimit": "28",
+          "power.draw": "2.10",
+          "clocks.current.graphics": "210",
+          "clocks.current.memory": "405",
+          "pstate": "P8",
+          "utilization.gpu": "0",
+          "clocks_event_reasons.sw_thermal_slowdown": "Not Active",
+          "clocks_event_reasons.hw_thermal_slowdown": "Not Active"
+        }
+      },
+      "after": {
+        "supply": {
+          "ac": 1,
+          "saver": 0
+        },
+        "batteryPercent": 100,
+        "gpu": {
+          "temperature.gpu": "62",
+          "temperature.gpu.tlimit": "25",
+          "power.draw": "20.98",
+          "clocks.current.graphics": "2250",
+          "clocks.current.memory": "8001",
+          "pstate": "P0",
+          "utilization.gpu": "0",
+          "clocks_event_reasons.sw_thermal_slowdown": "Not Active",
+          "clocks_event_reasons.hw_thermal_slowdown": "Not Active"
+        }
+      },
+      "environmentPass": true
+    },
+    {
+      "device": "rtx4060",
+      "path": "subpasses",
+      "width": 1920,
+      "height": 1080,
+      "complexity": "low",
+      "imageSha256": "0449c02b35deab518deb57a121686082d8b9693e92c3e26b72f9db18c93569d4",
+      "startedUtc": "2026-11-12T14:06:23.830347+00:00",
+      "wallSeconds": 0.6870000000344589,
+      "deviceName": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "apiVersion": 4211013,
+      "driverVersion": 2484371456,
+      "gpuMeanMs": 0.12838453333333333,
+      "raw": "pilot/rtx4060-1920-low-subpasses.json",
+      "rawSha256": "be456541d7f2407b9e9df4db5aeee025aad58e8946273b7ee3acebac4d2d5b6f",
+      "before": {
+        "supply": {
+          "ac": 1,
+          "saver": 0
+        },
+        "batteryPercent": 100,
+        "gpu": {
+          "temperature.gpu": "62",
+          "temperature.gpu.tlimit": "25",
+          "power.draw": "20.98",
+          "clocks.current.graphics": "2250",
+          "clocks.current.memory": "8001",
+          "pstate": "P0",
+          "utilization.gpu": "0",
+          "clocks_event_reasons.sw_thermal_slowdown": "Not Active",
+          "clocks_event_reasons.hw_thermal_slowdown": "Not Active"
+        }
+      },
+      "after": {
+        "supply": {
+          "ac": 1,
+          "saver": 0
+        },
+        "batteryPercent": 100,
+        "gpu": {
+          "temperature.gpu": "63",
+          "temperature.gpu.tlimit": "24",
+          "power.draw": "20.93",
+          "clocks.current.graphics": "2250",
+          "clocks.current.memory": "8001",
+          "pstate": "P0",
+          "utilization.gpu": "0",
+          "clocks_event_reasons.sw_thermal_slowdown": "Not Active",
+          "clocks_event_reasons.hw_thermal_slowdown": "Not Active"
+        }
+      },
+      "environmentPass": true
+    },
+    {
+      "device": "rtx4060",
+      "path": "drlr",
+      "width": 1920,
+      "height": 1080,
+      "complexity": "low",
+      "imageSha256": "0449c02b35deab518deb57a121686082d8b9693e92c3e26b72f9db18c93569d4",
+      "startedUtc": "2026-11-12T14:06:24.588935+00:00",
+      "wallSeconds": 0.6879999999655411,
+      "deviceName": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "apiVersion": 4211013,
+      "driverVersion": 2484371456,
+      "gpuMeanMs": 0.13181653333333335,
+      "raw": "pilot/rtx4060-1920-low-drlr.json",
+      "rawSha256": "0d5dc58ee8ec483f6890e3242e2a4a6f5e38661949575ebe530dd7fabfd81869",
+      "before": {
+        "supply": {
+          "ac": 1,
+          "saver": 0
+        },
+        "batteryPercent": 100,
+        "gpu": {
+          "temperature.gpu": "63",
+          "temperature.gpu.tlimit": "24",
+          "power.draw": "20.93",
+          "clocks.current.graphics": "2250",
+          "clocks.current.memory": "8001",
+          "pstate": "P0",
+          "utilization.gpu": "0",
+          "clocks_event_reasons.sw_thermal_slowdown": "Not Active",
+          "clocks_event_reasons.hw_thermal_slowdown": "Not Active"
+        }
+      },
+      "after": {
+        "supply": {
+          "ac": 1,
+          "saver": 0
+        },
+        "batteryPercent": 100,
+        "gpu": {
+          "temperature.gpu": "64",
+          "temperature.gpu.tlimit": "23",
+          "power.draw": "21.27",
+          "clocks.current.graphics": "2250",
+          "clocks.current.memory": "8001",
+          "pstate": "P0",
+          "utilization.gpu": "0",
+          "clocks_event_reasons.sw_thermal_slowdown": "Not Active",
+          "clocks_event_reasons.hw_thermal_slowdown": "Not Active"
+        }
+      },
+      "environmentPass": true
+    },
+    {
+      "device": "rtx4060",
+      "path": "traditional",
+      "width": 1920,
+      "height": 1080,
+      "complexity": "high",
+      "imageSha256": "6ccb47e09f1d86fa6a6a2df38e7949f78b99d00cc94a488fbc9b0bfaf5b4569f",
+      "startedUtc": "2026-11-12T14:06:25.359638+00:00",
+      "wallSeconds": 0.6400000000139698,
+      "deviceName": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "apiVersion": 4211013,
+      "driverVersion": 2484371456,
+      "gpuMeanMs": 0.1735253333333334,
+      "raw": "pilot/rtx4060-1920-high-traditional.json",
+      "rawSha256": "d4b78ccc993bae6c67b75d81bce97533ea11717565469c1f9dc763983c7d1f0c",
+      "before": {
+        "supply": {
+          "ac": 1,
+          "saver": 0
+        },
+        "batteryPercent": 100,
+        "gpu": {
+          "temperature.gpu": "64",
+          "temperature.gpu.tlimit": "23",
+          "power.draw": "21.27",
+          "clocks.current.graphics": "2250",
+          "clocks.current.memory": "8001",
+          "pstate": "P0",
+          "utilization.gpu": "0",
+          "clocks_event_reasons.sw_thermal_slowdown": "Not Active",
+          "clocks_event_reasons.hw_thermal_slowdown": "Not Active"
+        }
+      },
+      "after": {
+        "supply": {
+          "ac": 1,
+          "saver": 0
+        },
+        "batteryPercent": 100,
+        "gpu": {
+          "temperature.gpu": "64",
+          "temperature.gpu.tlimit": "23",
+          "power.draw": "22.23",
+          "clocks.current.graphics": "2250",
+          "clocks.current.memory": "8001",
+          "pstate": "P0",
+          "utilization.gpu": "0",
+          "clocks_event_reasons.sw_thermal_slowdown": "Not Active",
+          "clocks_event_reasons.hw_thermal_slowdown": "Not Active"
+        }
+      },
+      "environmentPass": true
+    },
+    {
+      "device": "rtx4060",
+      "path": "subpasses",
+      "width": 1920,
+      "height": 1080,
+      "complexity": "high",
+      "imageSha256": "6ccb47e09f1d86fa6a6a2df38e7949f78b99d00cc94a488fbc9b0bfaf5b4569f",
+      "startedUtc": "2026-11-12T14:06:26.074150+00:00",
+      "wallSeconds": 0.6400000000139698,
+      "deviceName": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "apiVersion": 4211013,
+      "driverVersion": 2484371456,
+      "gpuMeanMs": 0.17161600000000002,
+      "raw": "pilot/rtx4060-1920-high-subpasses.json",
+      "rawSha256": "1d1645babcc996f5faf7f73d483797cc6db11a56f1170652fe5d61d0ca5b2163",
+      "before": {
+        "supply": {
+          "ac": 1,
+          "saver": 0
+        },
+        "batteryPercent": 100,
+        "gpu": {
+          "temperature.gpu": "64",
+          "temperature.gpu.tlimit": "23",
+          "power.draw": "22.23",
+          "clocks.current.graphics": "2250",
+          "clocks.current.memory": "8001",
+          "pstate": "P0",
+          "utilization.gpu": "0",
+          "clocks_event_reasons.sw_thermal_slowdown": "Not Active",
+          "clocks_event_reasons.hw_thermal_slowdown": "Not Active"
+        }
+      },
+      "after": {
+        "supply": {
+          "ac": 1,
+          "saver": 0
+        },
+        "batteryPercent": 100,
+        "gpu": {
+          "temperature.gpu": "64",
+          "temperature.gpu.tlimit": "23",
+          "power.draw": "21.30",
+          "clocks.current.graphics": "2250",
+          "clocks.current.memory": "8001",
+          "pstate": "P0",
+          "utilization.gpu": "4",
+          "clocks_event_reasons.sw_thermal_slowdown": "Not Active",
+          "clocks_event_reasons.hw_thermal_slowdown": "Not Active"
+        }
+      },
+      "environmentPass": true
+    },
+    {
+      "device": "rtx4060",
+      "path": "drlr",
+      "width": 1920,
+      "height": 1080,
+      "complexity": "high",
+      "imageSha256": "6ccb47e09f1d86fa6a6a2df38e7949f78b99d00cc94a488fbc9b0bfaf5b4569f",
+      "startedUtc": "2026-11-12T14:06:26.807721+00:00",
+      "wallSeconds": 0.6559999999590218,
+      "deviceName": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "apiVersion": 4211013,
+      "driverVersion": 2484371456,
+      "gpuMeanMs": 0.17130346666666668,
+      "raw": "pilot/rtx4060-1920-high-drlr.json",
+      "rawSha256": "06b8095d1736f34350fc6af7a1d723733541c6b0c28c72f47be34885de335b24",
+      "before": {
+        "supply": {
+          "ac": 1,
+          "saver": 0
+        },
+        "batteryPercent": 100,
+        "gpu": {
+          "temperature.gpu": "64",
+          "temperature.gpu.tlimit": "23",
+          "power.draw": "21.11",
+          "clocks.current.graphics": "2250",
+          "clocks.current.memory": "8001",
+          "pstate": "P0",
+          "utilization.gpu": "0",
+          "clocks_event_reasons.sw_thermal_slowdown": "Not Active",
+          "clocks_event_reasons.hw_thermal_slowdown": "Not Active"
+        }
+      },
+      "after": {
+        "supply": {
+          "ac": 1,
+          "saver": 0
+        },
+        "batteryPercent": 100,
+        "gpu": {
+          "temperature.gpu": "64",
+          "temperature.gpu.tlimit": "23",
+          "power.draw": "21.10",
+          "clocks.current.graphics": "2250",
+          "clocks.current.memory": "8001",
+          "pstate": "P0",
+          "utilization.gpu": "0",
+          "clocks_event_reasons.sw_thermal_slowdown": "Not Active",
+          "clocks_event_reasons.hw_thermal_slowdown": "Not Active"
+        }
+      },
+      "environmentPass": true
+    },
+    {
+      "device": "rtx4060",
+      "path": "traditional",
+      "width": 2560,
+      "height": 1440,
+      "complexity": "low",
+      "imageSha256": "e44ebb41c2ef62f27d123142e6b13a6add02cc6ba0f74d9a88164e4424144d26",
+      "startedUtc": "2026-11-12T14:06:27.544809+00:00",
+      "wallSeconds": 0.9849999999860302,
+      "deviceName": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "apiVersion": 4211013,
+      "driverVersion": 2484371456,
+      "gpuMeanMs": 0.21648533333333342,
+      "raw": "pilot/rtx4060-2560-low-traditional.json",
+      "rawSha256": "949cec44e67502b12f8e94dfcbc1b552f086866fb7d58305c83c89483f51b264",
+      "before": {
+        "supply": {
+          "ac": 1,
+          "saver": 0
+        },
+        "batteryPercent": 100,
+        "gpu": {
+          "temperature.gpu": "64",
+          "temperature.gpu.tlimit": "23",
+          "power.draw": "21.10",
+          "clocks.current.graphics": "2250",
+          "clocks.current.memory": "8001",
+          "pstate": "P0",
+          "utilization.gpu": "0",
+          "clocks_event_reasons.sw_thermal_slowdown": "Not Active",
+          "clocks_event_reasons.hw_thermal_slowdown": "Not Active"
+        }
+      },
+      "after": {
+        "supply": {
+          "ac": 1,
+          "saver": 0
+        },
+        "batteryPercent": 100,
+        "gpu": {
+          "temperature.gpu": "64",
+          "temperature.gpu.tlimit": "23",
+          "power.draw": "21.10",
+          "clocks.current.graphics": "2250",
+          "clocks.current.memory": "8001",
+          "pstate": "P0",
+          "utilization.gpu": "0",
+          "clocks_event_reasons.sw_thermal_slowdown": "Not Active",
+          "clocks_event_reasons.hw_thermal_slowdown": "Not Active"
+        }
+      },
+      "environmentPass": true
+    },
+    {
+      "device": "rtx4060",
+      "path": "subpasses",
+      "width": 2560,
+      "height": 1440,
+      "complexity": "low",
+      "imageSha256": "e44ebb41c2ef62f27d123142e6b13a6add02cc6ba0f74d9a88164e4424144d26",
+      "startedUtc": "2026-11-12T14:06:28.596893+00:00",
+      "wallSeconds": 1.015999999945052,
+      "deviceName": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "apiVersion": 4211013,
+      "driverVersion": 2484371456,
+      "gpuMeanMs": 0.2184538666666667,
+      "raw": "pilot/rtx4060-2560-low-subpasses.json",
+      "rawSha256": "058ee15ee08f45bdd58de1f409fdd6358c4a38f9e52937a9acf413b993f027bd",
+      "before": {
+        "supply": {
+          "ac": 1,
+          "saver": 0
+        },
+        "batteryPercent": 100,
+        "gpu": {
+          "temperature.gpu": "64",
+          "temperature.gpu.tlimit": "23",
+          "power.draw": "21.10",
+          "clocks.current.graphics": "2250",
+          "clocks.current.memory": "8001",
+          "pstate": "P0",
+          "utilization.gpu": "0",
+          "clocks_event_reasons.sw_thermal_slowdown": "Not Active",
+          "clocks_event_reasons.hw_thermal_slowdown": "Not Active"
+        }
+      },
+      "after": {
+        "supply": {
+          "ac": 1,
+          "saver": 0
+        },
+        "batteryPercent": 100,
+        "gpu": {
+          "temperature.gpu": "65",
+          "temperature.gpu.tlimit": "22",
+          "power.draw": "21.11",
+          "clocks.current.graphics": "2250",
+          "clocks.current.memory": "8001",
+          "pstate": "P0",
+          "utilization.gpu": "0",
+          "clocks_event_reasons.sw_thermal_slowdown": "Not Active",
+          "clocks_event_reasons.hw_thermal_slowdown": "Not Active"
+        }
+      },
+      "environmentPass": true
+    },
+    {
+      "device": "rtx4060",
+      "path": "drlr",
+      "width": 2560,
+      "height": 1440,
+      "complexity": "low",
+      "imageSha256": "e44ebb41c2ef62f27d123142e6b13a6add02cc6ba0f74d9a88164e4424144d26",
+      "startedUtc": "2026-11-12T14:06:29.708012+00:00",
+      "wallSeconds": 0.9849999999860302,
+      "deviceName": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "apiVersion": 4211013,
+      "driverVersion": 2484371456,
+      "gpuMeanMs": 0.2219258666666666,
+      "raw": "pilot/rtx4060-2560-low-drlr.json",
+      "rawSha256": "8ccd96276652358383be632140f675b14f6e71a2f97565df8d7f4c1460da3c1f",
+      "before": {
+        "supply": {
+          "ac": 1,
+          "saver": 0
+        },
+        "batteryPercent": 100,
+        "gpu": {
+          "temperature.gpu": "65",
+          "temperature.gpu.tlimit": "22",
+          "power.draw": "21.11",
+          "clocks.current.graphics": "2250",
+          "clocks.current.memory": "8001",
+          "pstate": "P0",
+          "utilization.gpu": "0",
+          "clocks_event_reasons.sw_thermal_slowdown": "Not Active",
+          "clocks_event_reasons.hw_thermal_slowdown": "Not Active"
+        }
+      },
+      "after": {
+        "supply": {
+          "ac": 1,
+          "saver": 0
+        },
+        "batteryPercent": 100,
+        "gpu": {
+          "temperature.gpu": "65",
+          "temperature.gpu.tlimit": "22",
+          "power.draw": "22.02",
+          "clocks.current.graphics": "2250",
+          "clocks.current.memory": "8001",
+          "pstate": "P0",
+          "utilization.gpu": "0",
+          "clocks_event_reasons.sw_thermal_slowdown": "Not Active",
+          "clocks_event_reasons.hw_thermal_slowdown": "Not Active"
+        }
+      },
+      "environmentPass": true
+    },
+    {
+      "device": "rtx4060",
+      "path": "traditional",
+      "width": 2560,
+      "height": 1440,
+      "complexity": "high",
+      "imageSha256": "67c2ce41a815a03df7ca2602ba4bd006dc4115b269a6c16167c1c0ccb3e44213",
+      "startedUtc": "2026-11-12T14:06:30.774702+00:00",
+      "wallSeconds": 1.0,
+      "deviceName": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "apiVersion": 4211013,
+      "driverVersion": 2484371456,
+      "gpuMeanMs": 0.26095306666666657,
+      "raw": "pilot/rtx4060-2560-high-traditional.json",
+      "rawSha256": "6cd5fe0c4ec616b307939f85ab74f402108bcf80bcf3e8eb1c95566bfa48bdbb",
+      "before": {
+        "supply": {
+          "ac": 1,
+          "saver": 0
+        },
+        "batteryPercent": 100,
+        "gpu": {
+          "temperature.gpu": "65",
+          "temperature.gpu.tlimit": "22",
+          "power.draw": "22.03",
+          "clocks.current.graphics": "2250",
+          "clocks.current.memory": "8001",
+          "pstate": "P0",
+          "utilization.gpu": "0",
+          "clocks_event_reasons.sw_thermal_slowdown": "Not Active",
+          "clocks_event_reasons.hw_thermal_slowdown": "Not Active"
+        }
+      },
+      "after": {
+        "supply": {
+          "ac": 1,
+          "saver": 0
+        },
+        "batteryPercent": 100,
+        "gpu": {
+          "temperature.gpu": "65",
+          "temperature.gpu.tlimit": "22",
+          "power.draw": "22.66",
+          "clocks.current.graphics": "2250",
+          "clocks.current.memory": "8001",
+          "pstate": "P0",
+          "utilization.gpu": "0",
+          "clocks_event_reasons.sw_thermal_slowdown": "Not Active",
+          "clocks_event_reasons.hw_thermal_slowdown": "Not Active"
+        }
+      },
+      "environmentPass": true
+    },
+    {
+      "device": "rtx4060",
+      "path": "subpasses",
+      "width": 2560,
+      "height": 1440,
+      "complexity": "high",
+      "imageSha256": "67c2ce41a815a03df7ca2602ba4bd006dc4115b269a6c16167c1c0ccb3e44213",
+      "startedUtc": "2026-11-12T14:06:31.854850+00:00",
+      "wallSeconds": 0.984000000054948,
+      "deviceName": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "apiVersion": 4211013,
+      "driverVersion": 2484371456,
+      "gpuMeanMs": 0.2571962666666667,
+      "raw": "pilot/rtx4060-2560-high-subpasses.json",
+      "rawSha256": "a616ea23b2b9cf9c4f0b896e5a43cd5da2c3b2892969c1abd2d4b2ef5f2a57a6",
+      "before": {
+        "supply": {
+          "ac": 1,
+          "saver": 0
+        },
+        "batteryPercent": 100,
+        "gpu": {
+          "temperature.gpu": "65",
+          "temperature.gpu.tlimit": "22",
+          "power.draw": "22.66",
+          "clocks.current.graphics": "2250",
+          "clocks.current.memory": "8001",
+          "pstate": "P0",
+          "utilization.gpu": "0",
+          "clocks_event_reasons.sw_thermal_slowdown": "Not Active",
+          "clocks_event_reasons.hw_thermal_slowdown": "Not Active"
+        }
+      },
+      "after": {
+        "supply": {
+          "ac": 1,
+          "saver": 0
+        },
+        "batteryPercent": 100,
+        "gpu": {
+          "temperature.gpu": "65",
+          "temperature.gpu.tlimit": "22",
+          "power.draw": "22.26",
+          "clocks.current.graphics": "2250",
+          "clocks.current.memory": "8001",
+          "pstate": "P0",
+          "utilization.gpu": "0",
+          "clocks_event_reasons.sw_thermal_slowdown": "Not Active",
+          "clocks_event_reasons.hw_thermal_slowdown": "Not Active"
+        }
+      },
+      "environmentPass": true
+    },
+    {
+      "device": "rtx4060",
+      "path": "drlr",
+      "width": 2560,
+      "height": 1440,
+      "complexity": "high",
+      "imageSha256": "67c2ce41a815a03df7ca2602ba4bd006dc4115b269a6c16167c1c0ccb3e44213",
+      "startedUtc": "2026-11-12T14:06:32.921047+00:00",
+      "wallSeconds": 1.0,
+      "deviceName": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "apiVersion": 4211013,
+      "driverVersion": 2484371456,
+      "gpuMeanMs": 0.2621205333333333,
+      "raw": "pilot/rtx4060-2560-high-drlr.json",
+      "rawSha256": "bc7fe3f2cd1df5fa24b25804bdb7167cff19a20e43945672957e8261ec189b7f",
+      "before": {
+        "supply": {
+          "ac": 1,
+          "saver": 0
+        },
+        "batteryPercent": 100,
+        "gpu": {
+          "temperature.gpu": "65",
+          "temperature.gpu.tlimit": "22",
+          "power.draw": "22.26",
+          "clocks.current.graphics": "2250",
+          "clocks.current.memory": "8001",
+          "pstate": "P0",
+          "utilization.gpu": "0",
+          "clocks_event_reasons.sw_thermal_slowdown": "Not Active",
+          "clocks_event_reasons.hw_thermal_slowdown": "Not Active"
+        }
+      },
+      "after": {
+        "supply": {
+          "ac": 1,
+          "saver": 0
+        },
+        "batteryPercent": 100,
+        "gpu": {
+          "temperature.gpu": "65",
+          "temperature.gpu.tlimit": "22",
+          "power.draw": "21.48",
+          "clocks.current.graphics": "2250",
+          "clocks.current.memory": "8001",
+          "pstate": "P0",
+          "utilization.gpu": "0",
+          "clocks_event_reasons.sw_thermal_slowdown": "Not Active",
+          "clocks_event_reasons.hw_thermal_slowdown": "Not Active"
+        }
+      },
+      "environmentPass": true
+    }
+  ],
+  "status": "passed"
+}

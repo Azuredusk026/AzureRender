@@ -1,0 +1,68 @@
+{
+  "label": "流程核对示例，已接受 90/120 次运行",
+  "dataScope": "paused-checkpoint",
+  "completedBlocks": 30,
+  "acceptedRuns": 90,
+  "measuredFrames": 90000,
+  "conditionRows": 24,
+  "metricFields": [
+    "cpuMedianRunMeanMs",
+    "cpuMedianRunMedianMs",
+    "cpuMedianRunP95Ms",
+    "cpuMedianRunP99Ms",
+    "cpuMedianRunVarianceMs2",
+    "gpuMedianRunMeanMs",
+    "gpuMedianRunMedianMs",
+    "gpuMedianRunP95Ms",
+    "gpuMedianRunP99Ms",
+    "gpuMedianRunVarianceMs2"
+  ],
+  "pairedFields": [
+    "pairedGpuMeanChangeMaxPct",
+    "pairedGpuMeanChangeMedianPct",
+    "pairedGpuMeanChangeMinPct",
+    "pairedGpuMeanChangeVsSubpassesMaxPct",
+    "pairedGpuMeanChangeVsSubpassesMedianPct",
+    "pairedGpuMeanChangeVsSubpassesMinPct"
+  ],
+  "environmentFields": [
+    "gpu.clocks.current.graphics",
+    "gpu.clocks.current.memory",
+    "gpu.clocks_event_reasons.hw_thermal_slowdown",
+    "gpu.clocks_event_reasons.sw_thermal_slowdown",
+    "gpu.power.draw",
+    "gpu.temperature.gpu",
+    "sensors.*.temperatureC",
+    "supply",
+    "thermalStatus"
+  ],
+  "checks": [
+    "all condition medians",
+    "all block-paired percentage ranges",
+    "all paired variance counts",
+    "all model units and values",
+    "all environment joins"
+  ],
+  "sources": [
+    {
+      "path": "D:/Projects/FYP/Project/AzureRender/build/runs/20261112-215615-thesis-pixel6-experiment-b05cd7/results-template-checkpoint/checkpoint-run-summary.json",
+      "sha256": "f2e9b414ac66524cc71cdacc320a56bf4ee10a1b25bdfc0792b5078bad7a01ce"
+    },
+    {
+      "path": "D:/Projects/FYP/Project/AzureRender/build/runs/20261112-215615-thesis-pixel6-experiment-b05cd7/results-template-checkpoint/checkpoint-condition-summary.csv",
+      "sha256": "5dc854966bed15cef24f9421ac24da204a8ce9ce695cf652c4905440fde56298"
+    },
+    {
+      "path": "D:/Projects/FYP/Project/AzureRender/build/runs/20261112-215615-thesis-pixel6-experiment-b05cd7/formal-index.json",
+      "sha256": "189e9c8f827e9d9ebc27df52512107b32d48fb9e7b0195ffb32eea17ba934d27"
+    },
+    {
+      "path": "D:/Projects/FYP/Project/AzureRender/build/runs/20261112-215615-thesis-pixel6-experiment-b05cd7/formal-plan.json",
+      "sha256": "140dfd0ced619d03b4d00ceccb9b9b67afe2961c21d8e8083e9ff98d2fa1c827"
+    },
+    {
+      "path": "D:/Projects/FYP-worktrees/thesis-paths/Project/AzureRender/experiments/thesis/evidence/2026-11-19-results-template/verify_mapping.py",
+      "sha256": "f9fce6312349e81f3c674b4ae7c2d2187c3cdaea1b2b6b5282eb014ad7b1c2c4"
+    }
+  ]
+}

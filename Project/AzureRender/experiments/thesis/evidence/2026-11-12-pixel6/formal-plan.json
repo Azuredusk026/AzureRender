@@ -1,0 +1,585 @@
+{
+  "schemaVersion": 1,
+  "frozenUtc": "2026-11-12T14:06:43.198993+00:00",
+  "seed": 20261112,
+  "warmup": 300,
+  "frames": 1000,
+  "repeatCount": 5,
+  "devices": {
+    "pixel6": {
+      "deviceName": "Mali-G78",
+      "apiVersion": 4210993,
+      "driverVersion": 226500608,
+      "supply": {
+        "AC powered": "true",
+        "USB powered": "false",
+        "Wireless powered": "false"
+      }
+    },
+    "rtx4060": {
+      "deviceName": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "apiVersion": 4211013,
+      "driverVersion": 2484371456,
+      "supply": {
+        "ac": 1,
+        "saver": 0
+      }
+    }
+  },
+  "blocks": [
+    {
+      "block": 1,
+      "repeat": 1,
+      "device": "pixel6",
+      "width": 2560,
+      "height": 1440,
+      "complexity": "high",
+      "paths": [
+        "subpasses",
+        "drlr",
+        "traditional"
+      ]
+    },
+    {
+      "block": 2,
+      "repeat": 1,
+      "device": "pixel6",
+      "width": 2560,
+      "height": 1440,
+      "complexity": "low",
+      "paths": [
+        "traditional",
+        "drlr",
+        "subpasses"
+      ]
+    },
+    {
+      "block": 3,
+      "repeat": 1,
+      "device": "rtx4060",
+      "width": 2560,
+      "height": 1440,
+      "complexity": "low",
+      "paths": [
+        "traditional",
+        "drlr",
+        "subpasses"
+      ]
+    },
+    {
+      "block": 4,
+      "repeat": 1,
+      "device": "pixel6",
+      "width": 1920,
+      "height": 1080,
+      "complexity": "low",
+      "paths": [
+        "traditional",
+        "drlr",
+        "subpasses"
+      ]
+    },
+    {
+      "block": 5,
+      "repeat": 1,
+      "device": "rtx4060",
+      "width": 1920,
+      "height": 1080,
+      "complexity": "low",
+      "paths": [
+        "traditional",
+        "subpasses",
+        "drlr"
+      ]
+    },
+    {
+      "block": 6,
+      "repeat": 1,
+      "device": "rtx4060",
+      "width": 1920,
+      "height": 1080,
+      "complexity": "high",
+      "paths": [
+        "subpasses",
+        "traditional",
+        "drlr"
+      ]
+    },
+    {
+      "block": 7,
+      "repeat": 1,
+      "device": "rtx4060",
+      "width": 2560,
+      "height": 1440,
+      "complexity": "high",
+      "paths": [
+        "traditional",
+        "subpasses",
+        "drlr"
+      ]
+    },
+    {
+      "block": 8,
+      "repeat": 1,
+      "device": "pixel6",
+      "width": 1920,
+      "height": 1080,
+      "complexity": "high",
+      "paths": [
+        "drlr",
+        "traditional",
+        "subpasses"
+      ]
+    },
+    {
+      "block": 9,
+      "repeat": 2,
+      "device": "pixel6",
+      "width": 2560,
+      "height": 1440,
+      "complexity": "high",
+      "paths": [
+        "drlr",
+        "subpasses",
+        "traditional"
+      ]
+    },
+    {
+      "block": 10,
+      "repeat": 2,
+      "device": "pixel6",
+      "width": 1920,
+      "height": 1080,
+      "complexity": "low",
+      "paths": [
+        "drlr",
+        "traditional",
+        "subpasses"
+      ]
+    },
+    {
+      "block": 11,
+      "repeat": 2,
+      "device": "rtx4060",
+      "width": 1920,
+      "height": 1080,
+      "complexity": "high",
+      "paths": [
+        "drlr",
+        "traditional",
+        "subpasses"
+      ]
+    },
+    {
+      "block": 12,
+      "repeat": 2,
+      "device": "rtx4060",
+      "width": 2560,
+      "height": 1440,
+      "complexity": "high",
+      "paths": [
+        "subpasses",
+        "drlr",
+        "traditional"
+      ]
+    },
+    {
+      "block": 13,
+      "repeat": 2,
+      "device": "rtx4060",
+      "width": 2560,
+      "height": 1440,
+      "complexity": "low",
+      "paths": [
+        "subpasses",
+        "drlr",
+        "traditional"
+      ]
+    },
+    {
+      "block": 14,
+      "repeat": 2,
+      "device": "pixel6",
+      "width": 2560,
+      "height": 1440,
+      "complexity": "low",
+      "paths": [
+        "subpasses",
+        "drlr",
+        "traditional"
+      ]
+    },
+    {
+      "block": 15,
+      "repeat": 2,
+      "device": "pixel6",
+      "width": 1920,
+      "height": 1080,
+      "complexity": "high",
+      "paths": [
+        "traditional",
+        "subpasses",
+        "drlr"
+      ]
+    },
+    {
+      "block": 16,
+      "repeat": 2,
+      "device": "rtx4060",
+      "width": 1920,
+      "height": 1080,
+      "complexity": "low",
+      "paths": [
+        "drlr",
+        "traditional",
+        "subpasses"
+      ]
+    },
+    {
+      "block": 17,
+      "repeat": 3,
+      "device": "pixel6",
+      "width": 1920,
+      "height": 1080,
+      "complexity": "low",
+      "paths": [
+        "drlr",
+        "subpasses",
+        "traditional"
+      ]
+    },
+    {
+      "block": 18,
+      "repeat": 3,
+      "device": "pixel6",
+      "width": 2560,
+      "height": 1440,
+      "complexity": "low",
+      "paths": [
+        "drlr",
+        "subpasses",
+        "traditional"
+      ]
+    },
+    {
+      "block": 19,
+      "repeat": 3,
+      "device": "rtx4060",
+      "width": 1920,
+      "height": 1080,
+      "complexity": "high",
+      "paths": [
+        "traditional",
+        "subpasses",
+        "drlr"
+      ]
+    },
+    {
+      "block": 20,
+      "repeat": 3,
+      "device": "pixel6",
+      "width": 2560,
+      "height": 1440,
+      "complexity": "high",
+      "paths": [
+        "traditional",
+        "subpasses",
+        "drlr"
+      ]
+    },
+    {
+      "block": 21,
+      "repeat": 3,
+      "device": "rtx4060",
+      "width": 2560,
+      "height": 1440,
+      "complexity": "high",
+      "paths": [
+        "subpasses",
+        "traditional",
+        "drlr"
+      ]
+    },
+    {
+      "block": 22,
+      "repeat": 3,
+      "device": "rtx4060",
+      "width": 2560,
+      "height": 1440,
+      "complexity": "low",
+      "paths": [
+        "drlr",
+        "traditional",
+        "subpasses"
+      ]
+    },
+    {
+      "block": 23,
+      "repeat": 3,
+      "device": "rtx4060",
+      "width": 1920,
+      "height": 1080,
+      "complexity": "low",
+      "paths": [
+        "traditional",
+        "drlr",
+        "subpasses"
+      ]
+    },
+    {
+      "block": 24,
+      "repeat": 3,
+      "device": "pixel6",
+      "width": 1920,
+      "height": 1080,
+      "complexity": "high",
+      "paths": [
+        "traditional",
+        "drlr",
+        "subpasses"
+      ]
+    },
+    {
+      "block": 25,
+      "repeat": 4,
+      "device": "rtx4060",
+      "width": 1920,
+      "height": 1080,
+      "complexity": "low",
+      "paths": [
+        "subpasses",
+        "traditional",
+        "drlr"
+      ]
+    },
+    {
+      "block": 26,
+      "repeat": 4,
+      "device": "rtx4060",
+      "width": 2560,
+      "height": 1440,
+      "complexity": "high",
+      "paths": [
+        "drlr",
+        "subpasses",
+        "traditional"
+      ]
+    },
+    {
+      "block": 27,
+      "repeat": 4,
+      "device": "rtx4060",
+      "width": 2560,
+      "height": 1440,
+      "complexity": "low",
+      "paths": [
+        "drlr",
+        "subpasses",
+        "traditional"
+      ]
+    },
+    {
+      "block": 28,
+      "repeat": 4,
+      "device": "pixel6",
+      "width": 2560,
+      "height": 1440,
+      "complexity": "low",
+      "paths": [
+        "traditional",
+        "subpasses",
+        "drlr"
+      ]
+    },
+    {
+      "block": 29,
+      "repeat": 4,
+      "device": "pixel6",
+      "width": 1920,
+      "height": 1080,
+      "complexity": "high",
+      "paths": [
+        "subpasses",
+        "drlr",
+        "traditional"
+      ]
+    },
+    {
+      "block": 30,
+      "repeat": 4,
+      "device": "rtx4060",
+      "width": 1920,
+      "height": 1080,
+      "complexity": "high",
+      "paths": [
+        "subpasses",
+        "drlr",
+        "traditional"
+      ]
+    },
+    {
+      "block": 31,
+      "repeat": 4,
+      "device": "pixel6",
+      "width": 2560,
+      "height": 1440,
+      "complexity": "high",
+      "paths": [
+        "subpasses",
+        "traditional",
+        "drlr"
+      ]
+    },
+    {
+      "block": 32,
+      "repeat": 4,
+      "device": "pixel6",
+      "width": 1920,
+      "height": 1080,
+      "complexity": "low",
+      "paths": [
+        "subpasses",
+        "drlr",
+        "traditional"
+      ]
+    },
+    {
+      "block": 33,
+      "repeat": 5,
+      "device": "pixel6",
+      "width": 2560,
+      "height": 1440,
+      "complexity": "low",
+      "paths": [
+        "drlr",
+        "traditional",
+        "subpasses"
+      ]
+    },
+    {
+      "block": 34,
+      "repeat": 5,
+      "device": "rtx4060",
+      "width": 1920,
+      "height": 1080,
+      "complexity": "low",
+      "paths": [
+        "drlr",
+        "subpasses",
+        "traditional"
+      ]
+    },
+    {
+      "block": 35,
+      "repeat": 5,
+      "device": "pixel6",
+      "width": 1920,
+      "height": 1080,
+      "complexity": "low",
+      "paths": [
+        "traditional",
+        "subpasses",
+        "drlr"
+      ]
+    },
+    {
+      "block": 36,
+      "repeat": 5,
+      "device": "rtx4060",
+      "width": 1920,
+      "height": 1080,
+      "complexity": "high",
+      "paths": [
+        "traditional",
+        "drlr",
+        "subpasses"
+      ]
+    },
+    {
+      "block": 37,
+      "repeat": 5,
+      "device": "rtx4060",
+      "width": 2560,
+      "height": 1440,
+      "complexity": "low",
+      "paths": [
+        "traditional",
+        "subpasses",
+        "drlr"
+      ]
+    },
+    {
+      "block": 38,
+      "repeat": 5,
+      "device": "rtx4060",
+      "width": 2560,
+      "height": 1440,
+      "complexity": "high",
+      "paths": [
+        "traditional",
+        "drlr",
+        "subpasses"
+      ]
+    },
+    {
+      "block": 39,
+      "repeat": 5,
+      "device": "pixel6",
+      "width": 2560,
+      "height": 1440,
+      "complexity": "high",
+      "paths": [
+        "traditional",
+        "drlr",
+        "subpasses"
+      ]
+    },
+    {
+      "block": 40,
+      "repeat": 5,
+      "device": "pixel6",
+      "width": 1920,
+      "height": 1080,
+      "complexity": "high",
+      "paths": [
+        "subpasses",
+        "traditional",
+        "drlr"
+      ]
+    }
+  ],
+  "artifacts": {
+    "binaries": {
+      "pixel6": "3c6754e05e6e5b9a17a2a516a2b72973f879831233e444cd23f3ad0e308cb4a8",
+      "rtx4060": "c7f7e830aaa6840c89508f445e15dde0047c99a57d0c7833ef0151640f2b8a9d"
+    },
+    "shaders": {
+      "contour.frag.spv": "516ffc439e8cc0b9228833ebb8fc6d27ccf7ddc75ab6ac0d826c03d14013be40",
+      "fullscreen.vert.spv": "1345c7260b14a71cdeede15fa9da351d8671f6826d382324bc50483de0e87ad1",
+      "geometry.frag.spv": "d2bcd13084e74da0adadbaef58021ab496de02701f016712101aecbdb35fae15",
+      "geometry.vert.spv": "b8fec9dc75e0f0cc2388f4a1b86776d536afae60438ef12756de1947cb535b16",
+      "toon-dynamic.frag.spv": "5216ae516c9ac0e385c56611c2a0351c8c0a3c81276980e11088127b8699b503",
+      "toon-local.frag.spv": "70b0d9960d230fe01a172068c69d73b029e07266d50cbcb1193e7055de36cd52",
+      "toon.frag.spv": "798a18334efb71216d84ded32ad1f5c4bcd0b61aac09eda95efcc118e4e6a4ac"
+    },
+    "sourceDigestsUseLf": true,
+    "androidBuildManifestSha256": "8d6b21fbe80c11c52f60359ab552fc107a6db0657188e03b27eb50ef4dcd777a",
+    "windowsBuildManifestSha256": "cb254d201ce008afe8b716731cfe40f88eede598be9a330d58fc140aea0b9d16",
+    "pilotIndexSha256": "a5d097036258b8a43c93d70a8ad1b3ce063b217efabcbfd55da94245d2dc6ddc",
+    "pixel6CapabilitySha256": "1db1579043632959a7b81eb1b3e705d8bbaa7d9b2f7ecde7c41faf240109fc34",
+    "runnerSha256": "a41dac7c50aeea97a5059ac9c0a1a7f1407d8ae434f1a497edea7d6d0be3487c"
+  },
+  "settings": {
+    "capture": false,
+    "validation": false,
+    "present": false,
+    "processesPerBlock": 3
+  },
+  "gates": {
+    "pixel6": "Android Thermal Status = 0 at run boundaries",
+    "rtx4060": "NVIDIA software/hardware thermal slowdown inactive at run boundaries",
+    "power": "same reported supply at each run boundary as qualified pilot",
+    "image": "RGBA SHA-256 matches the corresponding qualified pilot",
+    "retry": "Preserve rejected observations. Retry one entire block for a thermal gate after recovery. Stop for repeated thermal gate or other failure."
+  }
+}
